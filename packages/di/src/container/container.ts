@@ -29,23 +29,51 @@ export class Container {
     return this;
   }
 
+  bindTransient<T>(constructor: { new (...args: any[]): T }): this;
   bindTransient<T>(
     serviceIdentifier: interfaces.ServiceIdentifier<T>,
-    constructor: {
+    constructor: { new (...args: any[]): T }
+  ): this;
+  bindTransient<T>(
+    serviceIdentifierOrConstructor:
+      | interfaces.ServiceIdentifier<T>
+      | { new (...args: any[]): T },
+    constructor?: {
       new (...args: any[]): T;
     }
   ): this {
-    this.container.bind(serviceIdentifier).to(constructor).inTransientScope();
+    this.container
+      .bind(serviceIdentifierOrConstructor)
+      .to(
+        constructor != null
+          ? constructor
+          : (serviceIdentifierOrConstructor as { new (...args: any[]): T })
+      )
+      .inTransientScope();
     return this;
   }
 
+  bindSingleton<T>(constructor: { new (...args: any[]): T }): this;
   bindSingleton<T>(
     serviceIdentifier: interfaces.ServiceIdentifier<T>,
-    constructor: {
+    constructor: { new (...args: any[]): T }
+  ): this;
+  bindSingleton<T>(
+    serviceIdentifierOrConstructor:
+      | interfaces.ServiceIdentifier<T>
+      | { new (...args: any[]): T },
+    constructor?: {
       new (...args: any[]): T;
     }
   ): this {
-    this.container.bind(serviceIdentifier).to(constructor).inSingletonScope();
+    this.container
+      .bind(serviceIdentifierOrConstructor)
+      .to(
+        constructor != null
+          ? constructor
+          : (serviceIdentifierOrConstructor as { new (...args: any[]): T })
+      )
+      .inSingletonScope();
     return this;
   }
 

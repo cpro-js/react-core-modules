@@ -55,8 +55,8 @@ class App extends Component<{}> {
 
 // setup dependency injection container
 const container = new Container();
-container.addSingleton(Store);
-container.addSingleton(Service);
+container.addSingleton(Store); // alias for container.addSingleton(Store, Store);
+container.addSingleton(Service); // alias for container.addSingleton(Service, Service);
 
 // render react app
 ReactDOM.render(

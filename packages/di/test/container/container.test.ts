@@ -40,6 +40,12 @@ describe("Container", () => {
       expect(container.get("singleton")).toBe(container.get("singleton"));
     });
 
+    it("singleton instance - omitting identifier", () => {
+      const container: Container = new Container().bindSingleton(TestClass);
+      expect(container.get(TestClass)).toBeInstanceOf(TestClass);
+      expect(container.get(TestClass)).toBe(container.get(TestClass));
+    });
+
     it("transient instance", () => {
       const container: Container = new Container().bindTransient(
         "transient",
@@ -47,6 +53,12 @@ describe("Container", () => {
       );
       expect(container.get("transient")).toBeInstanceOf(TestClass);
       expect(container.get("transient")).not.toBe(container.get("transient"));
+    });
+
+    it("transient instance - omitting identifier", () => {
+      const container: Container = new Container().bindTransient(TestClass);
+      expect(container.get(TestClass)).toBeInstanceOf(TestClass);
+      expect(container.get(TestClass)).not.toBe(container.get(TestClass));
     });
   });
 
