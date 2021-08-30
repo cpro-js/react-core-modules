@@ -1,6 +1,11 @@
-import { runInAction } from "mobx";
-
-import { computed, makeObservable, observable, toJS, when } from "../../src";
+import {
+  computed,
+  makeObservable,
+  observable,
+  runInAction,
+  toJS,
+  when,
+} from "../../src";
 
 describe("decorator", () => {
   it("simple property", async () => {

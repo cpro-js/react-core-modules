@@ -3,9 +3,8 @@ import {
   makeObservable,
   observable,
   runInAction,
-} from "mobx";
-
-import { when } from "../../src";
+  when,
+} from "../../src";
 
 describe("without decorator", () => {
   describe("makeObservable", () => {

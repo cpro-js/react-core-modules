@@ -4,7 +4,7 @@ import { IPromiseBasedObservable } from "mobx-utils";
 export { configure } from "mobx";
 
 // Creating observables
-export { makeObservable, observable, computed } from "mobx";
+export { makeAutoObservable, makeObservable, observable, computed } from "mobx";
 
 // Actions
 export { action, runInAction } from "mobx";
