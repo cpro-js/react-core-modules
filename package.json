@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "yarn workspaces foreach -pt run build",
-    "postinstall": "husky install",
+    "postinstall": "is-ci || husky install",
     "postversion": "lerna publish from-git",
     "release": "env-cmd -f .env.local --no-override lerna version",
     "test": "yarn workspaces foreach -pt run test",
