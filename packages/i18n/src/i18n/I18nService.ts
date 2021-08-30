@@ -1,12 +1,10 @@
 import { injectable } from "@cpro-js/di";
-import numbro from "numbro";
 
 import { Locales, Translate } from "./translation/TranslationService";
 
 export interface LocaleModule {
   locale: string;
   date: Locale;
-  number: numbro.NumbroLanguage;
 }
 
 @injectable()

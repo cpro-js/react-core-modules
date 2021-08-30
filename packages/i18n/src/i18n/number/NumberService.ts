@@ -1,11 +1,7 @@
-import numbro from "numbro";
-
 export abstract class NumberService {
   abstract getLanguage(): string;
 
   abstract useLanguage(language: string): void;
-
-  abstract registerLanguage(languageData: numbro.NumbroLanguage): void;
 
   abstract formatNumber(
     value: number,

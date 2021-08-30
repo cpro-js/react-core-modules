@@ -144,7 +144,6 @@ export class I18nServiceImpl extends I18nService {
     this.translationService.setTranslations(language, translations);
     await this.translationService.useLanguage(language);
 
-    this.numberService.registerLanguage(localeModule.number);
     this.numberService.useLanguage(locale);
 
     this.store.setCurrentLocale(locale, localeModule);

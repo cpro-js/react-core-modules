@@ -1615,9 +1615,10 @@ __metadata:
     "@types/react-test-renderer": ^17.0.1
     date-fns: 2.16.1
     i18next: 19.8.4
+    intl-format-cache: ^4.3.1
     jest: ^27.1.0
     microbundle: ^0.13.3
-    numbro: 2.3.2
+    pretty-bytes: ^5.6.0
     react: ^17.0.2
     react-dom: ^17.0.2
     reflect-metadata: ^0.1.13
@@ -3756,13 +3757,6 @@ __metadata:
   version: 5.2.2
   resolution: "big.js@npm:5.2.2"
   checksum: b89b6e8419b097a8fb4ed2399a1931a68c612bce3cfd5ca8c214b2d017531191070f990598de2fc6f3f993d91c0f08aa82697717f6b3b8732c9731866d233c9e
-  languageName: node
-  linkType: hard
-
-"bignumber.js@npm:^8.1.1":
-  version: 8.1.1
-  resolution: "bignumber.js@npm:8.1.1"
-  checksum: 71544348507cd16c2c152699a8e5146964d9cf4f46108075bcd16a964dffb3963256259fc6ffc9753b4d33dfd0cf863a6b564103a3a20e10002f12a1902e8075
   languageName: node
   linkType: hard
 
@@ -6264,6 +6258,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"intl-format-cache@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "intl-format-cache@npm:4.3.1"
+  checksum: d55581edaba0d083a3ff26a46e2ed953c434420918e61991db78140e3e0a7db14f924f195fcd0c01cf3de65cb18dda0c549d35f683e01dd8f062d27fe0524fae
+  languageName: node
+  linkType: hard
+
 "inversify-react@npm:^1.0.0":
   version: 1.0.0
   resolution: "inversify-react@npm:1.0.0"
@@ -8555,15 +8556,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"numbro@npm:2.3.2":
-  version: 2.3.2
-  resolution: "numbro@npm:2.3.2"
-  dependencies:
-    bignumber.js: ^8.1.1
-  checksum: ca369a8c18858d2974ee9142e640279476faa5a067cab38f90cb4a8fd5961fb6f5d89149128176b6d2b239eb2c6a9f76c30eec96757713f96d7f1ed910b5c0b1
-  languageName: node
-  linkType: hard
-
 "nwsapi@npm:^2.2.0":
   version: 2.2.0
   resolution: "nwsapi@npm:2.2.0"
@@ -9499,7 +9491,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pretty-bytes@npm:^5.4.1":
+"pretty-bytes@npm:^5.4.1, pretty-bytes@npm:^5.6.0":
   version: 5.6.0
   resolution: "pretty-bytes@npm:5.6.0"
   checksum: 9c082500d1e93434b5b291bd651662936b8bd6204ec9fa17d563116a192d6d86b98f6d328526b4e8d783c07d5499e2614a807520249692da9ec81564b2f439cd

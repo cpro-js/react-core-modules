@@ -1,6 +1,9 @@
-import numbro from "numbro";
+import memoizeFormatConstructor from "intl-format-cache";
+import prettyBytes from "pretty-bytes";
 
 import { NumberService } from "./NumberService";
+
+const getNumberFormat = memoizeFormatConstructor(Intl.NumberFormat);
 
 const countDecimals = (value: number) => {
   if (Math.floor(value) !== value)
@@ -9,30 +12,15 @@ const countDecimals = (value: number) => {
 };
 
 export class NumberServiceImpl extends NumberService {
-  formatCurrency(value: number, currency: string): string {
-    const currentLanguageData = numbro.languageData();
-    let currencySymbol: string = currency;
+  private language: string = "en-US";
 
-    if (currentLanguageData.currency.code === currency) {
-      currencySymbol = currentLanguageData.currency.symbol;
-    } else {
-      const allLanguages = numbro.languages();
-      const languagesWithCurrency = Object.keys(allLanguages)
-        .map((language) => allLanguages[language])
-        .filter((language) => language.currency?.code === currency);
-      if (languagesWithCurrency.length > 0) {
-        currencySymbol = languagesWithCurrency[0].currency.symbol;
-      }
-    }
-
-    return numbro(value).formatCurrency({
-      ...numbro.defaultCurrencyFormat("will-be-ignored, ts error"),
-      totalLength: 0,
-      spaceSeparated:
-        currentLanguageData.currencyFormat?.spaceSeparated ||
-        currentLanguageData.spaceSeparated,
-      currencySymbol: currencySymbol,
-    });
+  formatCurrency(value: number, currencyIsoCode: string): string {
+    return getNumberFormat(this.language, {
+      ...this.normalizeOptionsByValue(value),
+      style: "currency",
+      currency: currencyIsoCode,
+      currencyDisplay: "symbol",
+    }).format(value);
   }
 
   formatNumber(
@@ -43,22 +31,11 @@ export class NumberServiceImpl extends NumberService {
       maximumFractionDigits?: number;
     }
   ): string {
-    return numbro(value).format(
-      this.cleanUpNumbroOptions({
-        average: false,
-        thousandSeparated: options?.useGrouping,
-        mantissa: options?.maximumFractionDigits,
-        optionalMantissa:
-          options?.maximumFractionDigits != null &&
-          options.minimumFractionDigits == null,
-        trimMantissa:
-          options?.minimumFractionDigits != null &&
-          options?.maximumFractionDigits != null &&
-          options.minimumFractionDigits < options.maximumFractionDigits
-            ? true
-            : undefined,
-      })
-    );
+    return getNumberFormat(this.language, {
+      ...this.normalizeOptionsByValue(value, options),
+      style: "decimal",
+      useGrouping: options?.useGrouping ?? false,
+    }).format(value);
   }
 
   formatPercent(
@@ -70,63 +47,82 @@ export class NumberServiceImpl extends NumberService {
     }
   ): string {
     const percent = value / 100;
-    return numbro(percent).format(
-      this.cleanUpNumbroOptions({
-        average: false,
-        output: "percent",
-        thousandSeparated: options?.useGrouping,
-        mantissa:
-          options?.maximumFractionDigits != null
-            ? options.maximumFractionDigits
-            : countDecimals(value),
-        optionalMantissa:
-          options?.maximumFractionDigits != null &&
-          options.minimumFractionDigits == null,
-        trimMantissa:
-          options?.minimumFractionDigits != null &&
-          options?.maximumFractionDigits != null &&
-          options.minimumFractionDigits < options.maximumFractionDigits
-            ? true
-            : undefined,
-      })
-    );
+
+    return getNumberFormat(this.language, {
+      ...this.normalizeOptionsByValue(value, options),
+      style: "percent",
+      useGrouping: options?.useGrouping ?? false,
+    }).format(percent);
   }
 
   formatFileSize(value: number): string {
-    return numbro(value).format(
-      this.cleanUpNumbroOptions({
-        average: false,
-        base: "decimal",
-        output: "byte",
-        spaceSeparated: true,
-        mantissa: 1,
-        trimMantissa: true,
-      })
-    );
+    // Note: pretty-bytes is pretty small & uses Intl internally
+    return prettyBytes(value, {
+      locale: this.language,
+      maximumFractionDigits: 1,
+      bits: false,
+    });
   }
 
   getLanguage(): string {
-    return numbro.language();
+    return this.language;
   }
 
   parseNumber(value: string): number | undefined {
-    return numbro.unformat(value);
+    // based on https://stackoverflow.com/a/29273131
+    const thousandSeparator = getNumberFormat(this.language, {
+      useGrouping: true,
+    })
+      .format(11111)
+      .replace(/\p{Number}/gu, "");
+    const decimalSeparator = getNumberFormat(this.language, {
+      minimumFractionDigits: 1,
+    })
+      .format(1.1)
+      .replace(/\p{Number}/gu, "");
+
+    const parsed = parseFloat(
+      value
+        .replace(thousandSeparator, "")
+        // remove non-numeric signs except -> ",", ".", "-"
+        .replace(/[^\d.,-]/g, "")
+        // remove thousand seperator
+        .replace(new RegExp("\\" + thousandSeparator, "g"), "")
+        // replace original decimalSeparator with english one
+        .replace(new RegExp("\\" + decimalSeparator), ".")
+    );
+
+    return isNaN(parsed) ? undefined : parsed;
   }
 
   useLanguage(language: string): void {
-    numbro.setLanguage(language);
+    this.language = language;
   }
 
-  registerLanguage(languageData: numbro.NumbroLanguage): void {
-    numbro.registerLanguage(languageData, false);
-  }
+  private normalizeOptionsByValue(
+    value: number,
+    options?: {
+      useGrouping?: boolean;
+      minimumFractionDigits?: number;
+      maximumFractionDigits?: number;
+    }
+  ): {
+    useGrouping?: boolean;
+    minimumFractionDigits?: number;
+    maximumFractionDigits?: number;
+  } {
+    const fallbackMinimumDigits = countDecimals(value);
+    // either use the provided minimum fraction count or us the calculated count if possible
+    const minimumFractionDigits =
+      options?.minimumFractionDigits ??
+      (options?.maximumFractionDigits != null &&
+        fallbackMinimumDigits > options?.maximumFractionDigits)
+        ? options?.maximumFractionDigits
+        : fallbackMinimumDigits;
 
-  private cleanUpNumbroOptions(numbroOptions: numbro.Format): numbro.Format {
-    Object.keys(numbroOptions).forEach((key) => {
-      if ((numbroOptions as any)[key] === undefined) {
-        delete (numbroOptions as any)[key];
-      }
-    });
-    return numbroOptions;
+    return {
+      ...options,
+      minimumFractionDigits: minimumFractionDigits,
+    };
   }
 }
