@@ -20,18 +20,17 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-      - name: Cache dependencies
-        id: node-module-cache
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+      - name: Restore yarn cache
         uses: actions/cache@v2
-        env:
-          cache-name: node-module-cache
+        id: yarn-cache
         with:
-          path: |
-            node_modules
-            */*/node_modules
-          key: ${{ runner.os }}-ci-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock', './yarn.lock') }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-ci-${{ env.cache-name }}-
+            ${{ runner.os }}-yarn-
       - name: Install packages
         run: yarn --immutable
       - name: Run integration tests
