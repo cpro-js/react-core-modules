@@ -7,7 +7,7 @@ export { configure } from "mobx";
 export { makeAutoObservable, makeObservable, observable, computed } from "mobx";
 
 // Actions
-export { action, runInAction } from "mobx";
+export { action, runInAction, flow, flowResult } from "mobx";
 
 // Collection utilities
 export { values, keys, entries, get, has, set, remove } from "mobx";
