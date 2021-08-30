@@ -1315,7 +1315,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.8.4":
+"@babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.8.4":
   version: 7.15.3
   resolution: "@babel/runtime@npm:7.15.3"
   dependencies:
@@ -1601,6 +1601,33 @@ __metadata:
     ts-jest: ^27.0.5
     typescript: ^4.4.2
   peerDependencies:
+    "@types/react": ^17.0.0
+    react: ^17.0.0
+  languageName: unknown
+  linkType: soft
+
+"@cpro-js/i18n@workspace:packages/i18n":
+  version: 0.0.0-use.local
+  resolution: "@cpro-js/i18n@workspace:packages/i18n"
+  dependencies:
+    "@types/jest": ^27.0.1
+    "@types/react": ^17.0.19
+    "@types/react-test-renderer": ^17.0.1
+    date-fns: 2.16.1
+    i18next: 19.8.4
+    jest: ^27.1.0
+    microbundle: ^0.13.3
+    numbro: 2.3.2
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    reflect-metadata: ^0.1.13
+    rimraf: ^3.0.2
+    timezone-support: 2.0.2
+    ts-jest: ^27.0.5
+    typescript: ^4.4.2
+  peerDependencies:
+    "@cpro-js/app-state": "*"
+    "@cpro-js/di": "*"
     "@types/react": ^17.0.0
     react: ^17.0.0
   languageName: unknown
@@ -3732,6 +3759,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bignumber.js@npm:^8.1.1":
+  version: 8.1.1
+  resolution: "bignumber.js@npm:8.1.1"
+  checksum: 71544348507cd16c2c152699a8e5146964d9cf4f46108075bcd16a964dffb3963256259fc6ffc9753b4d33dfd0cf863a6b564103a3a20e10002f12a1902e8075
+  languageName: node
+  linkType: hard
+
 "boolbase@npm:^1.0.0":
   version: 1.0.0
   resolution: "boolbase@npm:1.0.0"
@@ -4200,6 +4234,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:2.20.0":
+  version: 2.20.0
+  resolution: "commander@npm:2.20.0"
+  checksum: 7f7ad57277e7a42e6931c0016e57ee1c14c3d2cf88aeff53c0c4d995a1a90ba33aa8bbff1cde1f92578b495e85c23aac7964c8f06322b9667b8b6e9ff9ceeca8
+  languageName: node
+  linkType: hard
+
 "commander@npm:^2.20.0":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
@@ -4641,6 +4682,13 @@ __metadata:
     whatwg-mimetype: ^2.3.0
     whatwg-url: ^8.0.0
   checksum: 97caf828aac25e25e04ba6869db0f99c75e6859bb5b424ada28d3e7841941ebf08ddff3c1b1bb4585986bd507a5d54c2a716853ea6cb98af877400e637393e71
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:2.16.1":
+  version: 2.16.1
+  resolution: "date-fns@npm:2.16.1"
+  checksum: f19c2b3b9bd62fdbc55b160c87b4656b3a260d79ee7a32a9cbc19107c3d61d71b569c0957351f9a07fc84c35283f74b0af5276620d4a37e36eef1898fa6c25b2
   languageName: node
   linkType: hard
 
@@ -5936,6 +5984,15 @@ __metadata:
   bin:
     husky: lib/bin.js
   checksum: 2ccfe6ddc51dc05ae8ea1e2fbb893344e93a813e00c595d6b5f5e704b7b998d6b0e2adda7c57f99b5e46a60dc07c7d860269a2ea91661c6bacef0eca8e0b8e96
+  languageName: node
+  linkType: hard
+
+"i18next@npm:19.8.4":
+  version: 19.8.4
+  resolution: "i18next@npm:19.8.4"
+  dependencies:
+    "@babel/runtime": ^7.12.0
+  checksum: 49707e82681984ccc96eb29e0b85e29609a434f04d51e730f649448036b613994b3f4a14b113a20e128a4441bce2b4be683529a400bce8124f8c50b5557a49e6
   languageName: node
   linkType: hard
 
@@ -8498,6 +8555,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"numbro@npm:2.3.2":
+  version: 2.3.2
+  resolution: "numbro@npm:2.3.2"
+  dependencies:
+    bignumber.js: ^8.1.1
+  checksum: ca369a8c18858d2974ee9142e640279476faa5a067cab38f90cb4a8fd5961fb6f5d89149128176b6d2b239eb2c6a9f76c30eec96757713f96d7f1ed910b5c0b1
+  languageName: node
+  linkType: hard
+
 "nwsapi@npm:^2.2.0":
   version: 2.2.0
   resolution: "nwsapi@npm:2.2.0"
@@ -10978,6 +11044,17 @@ resolve@1.17.0:
   version: 2.3.8
   resolution: "through@npm:2.3.8"
   checksum: a38c3e059853c494af95d50c072b83f8b676a9ba2818dcc5b108ef252230735c54e0185437618596c790bbba8fcdaef5b290405981ffa09dce67b1f1bf190cbd
+  languageName: node
+  linkType: hard
+
+"timezone-support@npm:2.0.2":
+  version: 2.0.2
+  resolution: "timezone-support@npm:2.0.2"
+  dependencies:
+    commander: 2.20.0
+  bin:
+    create-timezone-data: ./bin/create-timezone-data
+  checksum: 459e0dac572587252908a49e945e6054368e4c6d8690b20a4c676577e435a4bbe3b8c6255d53f319855765e7de58d96397ef4478ff4127eb997ad92f5c085a1f
   languageName: node
   linkType: hard
 

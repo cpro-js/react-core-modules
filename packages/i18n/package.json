@@ -1,8 +1,12 @@
 {
-  "name": "@cpro-js/di",
+  "name": "@cpro-js/i18n",
   "version": "0.0.0",
   "publishConfig": {
     "access": "public",
+    "source": "./src/index.ts",
+    "main": "./dist/index.js",
+    "module": "./dist/index.modern.js",
+    "types": "./dist/index.d.ts",
     "files": [
       "*.md",
       "src",
@@ -10,20 +14,22 @@
     ]
   },
   "license": "MIT",
-  "main": "./dist/index.js",
-  "module": "./dist/index.modern.js",
   "scripts": {
     "build": "rimraf dist && microbundle --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
     "prepublish": "rimraf dist && microbundle --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
     "test": "jest"
   },
   "peerDependencies": {
+    "@cpro-js/app-state": "*",
+    "@cpro-js/di": "*",
     "@types/react": "^17.0.0",
     "react": "^17.0.0"
   },
   "dependencies": {
-    "inversify": "^5.1.1",
-    "inversify-react": "^1.0.0"
+    "date-fns": "2.16.1",
+    "i18next": "19.8.4",
+    "numbro": "2.3.2",
+    "timezone-support": "2.0.2"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",
@@ -32,12 +38,10 @@
     "jest": "^27.1.0",
     "microbundle": "^0.13.3",
     "react": "^17.0.2",
-    "react-test-renderer": "^17.0.2",
+    "react-dom": "^17.0.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.0.5",
     "typescript": "^4.4.2"
-  },
-  "types": "./dist/index.d.ts",
-  "source": "./src/index.ts"
+  }
 }
