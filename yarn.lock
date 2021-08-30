@@ -1558,6 +1558,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cpro-js/app-state@workspace:packages/app-state":
+  version: 0.0.0-use.local
+  resolution: "@cpro-js/app-state@workspace:packages/app-state"
+  dependencies:
+    "@types/jest": ^27.0.1
+    "@types/react": ^17.0.19
+    "@types/react-test-renderer": ^17.0.1
+    jest: ^27.1.0
+    microbundle: ^0.13.3
+    mobx: 6.3.2
+    mobx-react: 7.2.0
+    mobx-utils: 6.0.4
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    react-test-renderer: ^17.0.2
+    reflect-metadata: ^0.1.13
+    rimraf: ^3.0.2
+    ts-jest: ^27.0.5
+    typescript: ^4.4.2
+  peerDependencies:
+    "@types/react": ^17.0.0
+    react: ^17.0.0
+  languageName: unknown
+  linkType: soft
+
 "@cpro-js/di@workspace:packages/di":
   version: 0.0.0-use.local
   resolution: "@cpro-js/di@workspace:packages/di"
@@ -8045,6 +8070,54 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mobx-react-lite@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "mobx-react-lite@npm:3.2.0"
+  peerDependencies:
+    mobx: ^6.1.0
+    react: ^16.8.0 || ^17
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 595b5fcb9e9999d9b1d68200f27b0da073eddf1965df75a9cdd447e5c710b9486f684110c1b5f75830c485879203375d5fc4c1194cf219d8cdbfd0fa1d3694e0
+  languageName: node
+  linkType: hard
+
+"mobx-react@npm:7.2.0":
+  version: 7.2.0
+  resolution: "mobx-react@npm:7.2.0"
+  dependencies:
+    mobx-react-lite: ^3.2.0
+  peerDependencies:
+    mobx: ^6.1.0
+    react: ^16.8.0 || ^17
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: b19bc40c330bd7006a9a0b41dd1859815ee98498c67793bc0b2b5c2721a115821afeb7eba85f4e855ac4d62f9c6b30f5d271e0be502b87464c0d8bb9a52f9b56
+  languageName: node
+  linkType: hard
+
+"mobx-utils@npm:6.0.4":
+  version: 6.0.4
+  resolution: "mobx-utils@npm:6.0.4"
+  peerDependencies:
+    mobx: ^6.0.0
+  checksum: f8a1b20b0668bb2ea64f32271f237bc8885d182d7a3ca73acc0976d6cfbf930ed380a31c5201a7a60a83b4bdf948ccf1d69ba7a1b906fe3b001c5bdd4bafbd47
+  languageName: node
+  linkType: hard
+
+"mobx@npm:6.3.2":
+  version: 6.3.2
+  resolution: "mobx@npm:6.3.2"
+  checksum: da853901ddd9bc5347f778b1aebfcbf5215d0cb0909fa17a9580dec2915b034b385e8cea6f2a85bd917078a29fcbb129c28be10e61db06c59bd3c94ace15f4a9
+  languageName: node
+  linkType: hard
+
 "modify-values@npm:^1.0.0":
   version: 1.0.1
   resolution: "modify-values@npm:1.0.1"
@@ -9512,6 +9585,19 @@ __metadata:
   dependencies:
     safe-buffer: ^5.1.0
   checksum: d779499376bd4cbb435ef3ab9a957006c8682f343f14089ed5f27764e4645114196e75b7f6abf1cbd84fd247c0cb0651698444df8c9bf30e62120fbbc52269d6
+  languageName: node
+  linkType: hard
+
+"react-dom@npm:^17.0.2":
+  version: 17.0.2
+  resolution: "react-dom@npm:17.0.2"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+    scheduler: ^0.20.2
+  peerDependencies:
+    react: 17.0.2
+  checksum: 1c1eaa3bca7c7228d24b70932e3d7c99e70d1d04e13bb0843bbf321582bc25d7961d6b8a6978a58a598af2af496d1cedcfb1bf65f6b0960a0a8161cb8dab743c
   languageName: node
   linkType: hard
 
