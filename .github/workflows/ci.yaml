@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        node: [12]
+        node: [14]
         script: ["test:ci"]
     steps:
       - uses: actions/checkout@v2
@@ -33,5 +33,7 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install packages
         run: yarn --immutable
+      - name: Build packages
+        run: yarn build
       - name: Run integration tests
         run: yarn ${{ matrix.script }}

@@ -1,0 +1,128 @@
+import memoizeFormatConstructor from "intl-format-cache";
+import prettyBytes from "pretty-bytes";
+
+import { NumberService } from "./NumberService";
+
+const getNumberFormat = memoizeFormatConstructor(Intl.NumberFormat);
+
+const countDecimals = (value: number) => {
+  if (Math.floor(value) !== value)
+    return value.toString().split(".")[1].length || 0;
+  return 0;
+};
+
+export class NumberServiceImpl extends NumberService {
+  private language: string = "en-US";
+
+  formatCurrency(value: number, currencyIsoCode: string): string {
+    return getNumberFormat(this.language, {
+      ...this.normalizeOptionsByValue(value),
+      style: "currency",
+      currency: currencyIsoCode,
+      currencyDisplay: "symbol",
+    }).format(value);
+  }
+
+  formatNumber(
+    value: number,
+    options?: {
+      useGrouping?: boolean;
+      minimumFractionDigits?: number;
+      maximumFractionDigits?: number;
+    }
+  ): string {
+    return getNumberFormat(this.language, {
+      ...this.normalizeOptionsByValue(value, options),
+      style: "decimal",
+      useGrouping: options?.useGrouping ?? false,
+    }).format(value);
+  }
+
+  formatPercent(
+    value: number,
+    options?: {
+      useGrouping?: boolean;
+      minimumFractionDigits?: number;
+      maximumFractionDigits?: number;
+    }
+  ): string {
+    const percent = value / 100;
+
+    return getNumberFormat(this.language, {
+      ...this.normalizeOptionsByValue(value, options),
+      style: "percent",
+      useGrouping: options?.useGrouping ?? false,
+    }).format(percent);
+  }
+
+  formatFileSize(value: number): string {
+    // Note: pretty-bytes is pretty small & uses Intl internally
+    return prettyBytes(value, {
+      locale: this.language,
+      maximumFractionDigits: 1,
+      bits: false,
+    });
+  }
+
+  getLanguage(): string {
+    return this.language;
+  }
+
+  parseNumber(value: string): number | undefined {
+    // based on https://stackoverflow.com/a/29273131
+    const thousandSeparator = getNumberFormat(this.language, {
+      useGrouping: true,
+    })
+      .format(11111)
+      .replace(/\p{Number}/gu, "");
+    const decimalSeparator = getNumberFormat(this.language, {
+      minimumFractionDigits: 1,
+    })
+      .format(1.1)
+      .replace(/\p{Number}/gu, "");
+
+    const parsed = parseFloat(
+      value
+        .replace(thousandSeparator, "")
+        // remove non-numeric signs except -> ",", ".", "-"
+        .replace(/[^\d.,-]/g, "")
+        // remove thousand seperator
+        .replace(new RegExp("\\" + thousandSeparator, "g"), "")
+        // replace original decimalSeparator with english one
+        .replace(new RegExp("\\" + decimalSeparator), ".")
+    );
+
+    return isNaN(parsed) ? undefined : parsed;
+  }
+
+  useLanguage(language: string): void {
+    this.language = language;
+  }
+
+  private normalizeOptionsByValue(
+    value: number,
+    options?: {
+      useGrouping?: boolean;
+      minimumFractionDigits?: number;
+      maximumFractionDigits?: number;
+    }
+  ): {
+    useGrouping?: boolean;
+    minimumFractionDigits?: number;
+    maximumFractionDigits?: number;
+  } {
+    const fallbackMinimumDigits = countDecimals(value);
+    // either use the provided minimum fraction count or us the calculated count if possible
+    const minimumFractionDigits =
+      options?.minimumFractionDigits ??
+      (options?.maximumFractionDigits != null &&
+        fallbackMinimumDigits > options?.maximumFractionDigits)
+        ? options?.maximumFractionDigits
+        : fallbackMinimumDigits;
+
+    return {
+      ...options,
+      minimumFractionDigits: minimumFractionDigits,
+    };
+  }
+}

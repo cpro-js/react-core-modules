@@ -1,0 +1,48 @@
+{
+  "name": "@cpro-js/i18n",
+  "version": "0.0.0",
+  "publishConfig": {
+    "access": "public",
+    "source": "./src/index.ts",
+    "main": "./dist/index.js",
+    "module": "./dist/index.modern.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+      "*.md",
+      "src",
+      "dist"
+    ]
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf dist && tsc --project tsconfig.locale.json && microbundle --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
+    "prepublish": "rimraf dist && tsc --project tsconfig.locale.json && microbundle --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "@cpro-js/app-state": "*",
+    "@cpro-js/di": "*",
+    "@types/react": "^17.0.0",
+    "react": "^17.0.0"
+  },
+  "dependencies": {
+    "date-fns": "2.16.1",
+    "date-fns-tz": "^1.1.6",
+    "i18next": "19.8.4",
+    "intl-format-cache": "^4.3.1",
+    "pretty-bytes": "^5.6.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "@types/react": "^17.0.19",
+    "@types/react-test-renderer": "^17.0.1",
+    "jest": "^27.1.0",
+    "microbundle": "^0.13.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.4.2"
+  }
+}

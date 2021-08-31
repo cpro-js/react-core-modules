@@ -1315,7 +1315,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.8.4":
+"@babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.8.4":
   version: 7.15.3
   resolution: "@babel/runtime@npm:7.15.3"
   dependencies:
@@ -1601,6 +1601,34 @@ __metadata:
     ts-jest: ^27.0.5
     typescript: ^4.4.2
   peerDependencies:
+    "@types/react": ^17.0.0
+    react: ^17.0.0
+  languageName: unknown
+  linkType: soft
+
+"@cpro-js/i18n@workspace:packages/i18n":
+  version: 0.0.0-use.local
+  resolution: "@cpro-js/i18n@workspace:packages/i18n"
+  dependencies:
+    "@types/jest": ^27.0.1
+    "@types/react": ^17.0.19
+    "@types/react-test-renderer": ^17.0.1
+    date-fns: 2.16.1
+    date-fns-tz: ^1.1.6
+    i18next: 19.8.4
+    intl-format-cache: ^4.3.1
+    jest: ^27.1.0
+    microbundle: ^0.13.3
+    pretty-bytes: ^5.6.0
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    reflect-metadata: ^0.1.13
+    rimraf: ^3.0.2
+    ts-jest: ^27.0.5
+    typescript: ^4.4.2
+  peerDependencies:
+    "@cpro-js/app-state": "*"
+    "@cpro-js/di": "*"
     "@types/react": ^17.0.0
     react: ^17.0.0
   languageName: unknown
@@ -4644,6 +4672,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"date-fns-tz@npm:^1.1.6":
+  version: 1.1.6
+  resolution: "date-fns-tz@npm:1.1.6"
+  peerDependencies:
+    date-fns: ">=2.0.0-alpha.13"
+  checksum: cfe4c799372fcb586b7f22d9c31e10df33dabc74452fbd92269ae02bbaed4024636c477b9aac06c521ec78a7391826d5526fedbcefbad2e5de25bcc00c61ad8f
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:2.16.1":
+  version: 2.16.1
+  resolution: "date-fns@npm:2.16.1"
+  checksum: f19c2b3b9bd62fdbc55b160c87b4656b3a260d79ee7a32a9cbc19107c3d61d71b569c0957351f9a07fc84c35283f74b0af5276620d4a37e36eef1898fa6c25b2
+  languageName: node
+  linkType: hard
+
 "dateformat@npm:^3.0.0":
   version: 3.0.3
   resolution: "dateformat@npm:3.0.3"
@@ -5939,6 +5983,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"i18next@npm:19.8.4":
+  version: 19.8.4
+  resolution: "i18next@npm:19.8.4"
+  dependencies:
+    "@babel/runtime": ^7.12.0
+  checksum: 49707e82681984ccc96eb29e0b85e29609a434f04d51e730f649448036b613994b3f4a14b113a20e128a4441bce2b4be683529a400bce8124f8c50b5557a49e6
+  languageName: node
+  linkType: hard
+
 "iconv-lite@npm:0.4.24, iconv-lite@npm:^0.4.24":
   version: 0.4.24
   resolution: "iconv-lite@npm:0.4.24"
@@ -6204,6 +6257,13 @@ __metadata:
     has: ^1.0.3
     side-channel: ^1.0.4
   checksum: 1944f92e981e47aebc98a88ff0db579fd90543d937806104d0b96557b10c1f170c51fb777b97740a8b6ddeec585fca8c39ae99fd08a8e058dfc8ab70937238bf
+  languageName: node
+  linkType: hard
+
+"intl-format-cache@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "intl-format-cache@npm:4.3.1"
+  checksum: d55581edaba0d083a3ff26a46e2ed953c434420918e61991db78140e3e0a7db14f924f195fcd0c01cf3de65cb18dda0c549d35f683e01dd8f062d27fe0524fae
   languageName: node
   linkType: hard
 
@@ -9433,7 +9493,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pretty-bytes@npm:^5.4.1":
+"pretty-bytes@npm:^5.4.1, pretty-bytes@npm:^5.6.0":
   version: 5.6.0
   resolution: "pretty-bytes@npm:5.6.0"
   checksum: 9c082500d1e93434b5b291bd651662936b8bd6204ec9fa17d563116a192d6d86b98f6d328526b4e8d783c07d5499e2614a807520249692da9ec81564b2f439cd
