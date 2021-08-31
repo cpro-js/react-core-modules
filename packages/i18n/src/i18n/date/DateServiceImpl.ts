@@ -1,6 +1,6 @@
 import { service } from "@cpro-js/di";
-import { Locale, format, formatDistance, parse } from "date-fns";
-import { findTimeZone, getUTCOffset } from "timezone-support";
+import { Locale, formatDistance, parse } from "date-fns";
+import { format, getTimezoneOffset, utcToZonedTime } from "date-fns-tz";
 
 import { DateService } from "./DateService";
 
@@ -13,22 +13,19 @@ export class DateServiceImpl extends DateService {
     formatString: string,
     options: { locale: Locale; timezone: string }
   ): string {
-    const timeZoneInfo = findTimeZone(options.timezone);
-    const timeZoneOffset = getUTCOffset(date, timeZoneInfo);
+    const timeZoneOffsetInMinutes =
+      (-1 * getTimezoneOffset(options.timezone, date)) / 1000 / 60;
 
     const formatStringTimezone =
       DateServiceImpl.replaceUtcOffsetWithTimezoneOffset(
         formatString,
-        timeZoneOffset
+        timeZoneOffsetInMinutes
       );
     const formatStringFixed =
       DateServiceImpl.replaceBrackets(formatStringTimezone);
 
-    const transformedDate = DateServiceImpl.getTimeZoneAgnosticDate(
-      date,
-      timeZoneOffset,
-      true
-    );
+    const transformedDate = utcToZonedTime(date, options.timezone);
+
     return format(transformedDate, formatStringFixed, {
       locale: options.locale,
     });
@@ -38,20 +35,8 @@ export class DateServiceImpl extends DateService {
     date: Date,
     options: { locale: Locale; timezone: string }
   ): string {
-    const timeZoneInfo = findTimeZone(options.timezone);
-    const timeZoneOffset = getUTCOffset(date, timeZoneInfo);
-
-    const now = new Date();
-    const transformedDate = DateServiceImpl.getTimeZoneAgnosticDate(
-      date,
-      timeZoneOffset,
-      true
-    );
-    const transformedDateNow = DateServiceImpl.getTimeZoneAgnosticDate(
-      now,
-      timeZoneOffset,
-      true
-    );
+    const transformedDate = utcToZonedTime(date, options.timezone);
+    const transformedDateNow = utcToZonedTime(new Date(), options.timezone);
 
     return formatDistance(transformedDate, transformedDateNow, {
       addSuffix: true,
@@ -74,23 +59,14 @@ export class DateServiceImpl extends DateService {
       return parsedDateLocal;
     }
 
-    const timeZoneInfo = findTimeZone(options.timezone);
-    const timeZoneOffset = getUTCOffset(parsedDateLocal, timeZoneInfo);
+    // date is in local time, positive offset means that local timezone is behind UTC and negative if it is ahead
+    const offset = parsedDateLocal.getTimezoneOffset() * 60 * 1000;
+    const normalizedUtcDate = new Date(parsedDateLocal.getTime() - offset);
 
-    return DateServiceImpl.getTimeZoneAgnosticDate(
-      parsedDateLocal,
-      timeZoneOffset,
-      false
+    return new Date(
+      normalizedUtcDate.getTime() -
+        getTimezoneOffset(options.timezone, normalizedUtcDate)
     );
-  }
-
-  private static getTimeZoneAgnosticDate(
-    date: Date,
-    timezone: { abbreviation?: string; offset: number },
-    subtract: boolean
-  ): Date {
-    const offset = timezone.offset - date.getTimezoneOffset();
-    return new Date(date.getTime() + (subtract ? -1 : 1) * offset * 60 * 1000);
   }
 
   private static replaceBrackets(formatString: string): string {
@@ -100,17 +76,21 @@ export class DateServiceImpl extends DateService {
 
   private static replaceUtcOffsetWithTimezoneOffset(
     format: string,
-    timezone: { abbreviation?: string; offset: number }
+    timezoneOffsetInMinutes: number
   ) {
-    return format.replace(/(z|ZZ?)(?![^\[]*])/g, (match) => {
+    return format.replace(/(ZZ?)(?![^\[]*])/g, (match) => {
       switch (match) {
-        case "z":
-          return `[${timezone.abbreviation}]`;
         case "Z":
-          return DateServiceImpl.formatTimeZoneOffset(timezone.offset, ":");
+          return DateServiceImpl.formatTimeZoneOffset(
+            timezoneOffsetInMinutes,
+            ":"
+          );
         default:
           // 'ZZ'
-          return DateServiceImpl.formatTimeZoneOffset(timezone.offset, "");
+          return DateServiceImpl.formatTimeZoneOffset(
+            timezoneOffsetInMinutes,
+            ""
+          );
       }
     });
   }
