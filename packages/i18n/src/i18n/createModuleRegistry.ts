@@ -3,7 +3,7 @@ import i18next, { i18n } from "i18next";
 
 import { DateService } from "./date/DateService";
 import { DateServiceImpl } from "./date/DateServiceImpl";
-import { I18nService, LocaleModule } from "./I18nService";
+import { I18nService } from "./I18nService";
 import { I18nServiceImpl } from "./I18nServiceImpl";
 import { LocaleStore } from "./locale/LocaleStore";
 import { LocaleStoreImpl } from "./locale/LocaleStoreImpl";
@@ -19,6 +19,7 @@ import {
 } from "./translation/TranslationService";
 import { TranslationServiceImpl } from "./translation/TranslationServiceImpl";
 import { i18nNamespace } from "./translation/util/resources";
+import { LocaleModule } from "./types";
 
 const getTimezone = (): string | undefined => {
   try {

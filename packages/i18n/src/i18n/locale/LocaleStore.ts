@@ -1,6 +1,6 @@
 import { injectable } from "@cpro-js/di";
 
-import { LocaleModule } from "../I18nService";
+import { LocaleModule } from "../types";
 
 @injectable()
 export abstract class LocaleStore {

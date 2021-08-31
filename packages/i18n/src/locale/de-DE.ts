@@ -1,6 +1,6 @@
 import de from "date-fns/locale/de";
 
-import { LocaleModule } from "../i18n/I18nService";
+import { LocaleModule } from "../i18n/types";
 
 const locale: LocaleModule = {
   locale: "de-DE",

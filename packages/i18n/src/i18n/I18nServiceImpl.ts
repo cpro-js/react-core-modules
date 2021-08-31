@@ -1,7 +1,7 @@
 import { service } from "@cpro-js/di";
 
 import { DateService } from "./date/DateService";
-import { I18nService, LocaleModule } from "./I18nService";
+import { I18nService } from "./I18nService";
 import { LocaleStore } from "./locale/LocaleStore";
 import { getLanguageFromLocale } from "./locale/util/locale";
 import { NumberService } from "./number/NumberService";
@@ -11,6 +11,7 @@ import {
   TranslationService,
   Translations,
 } from "./translation/TranslationService";
+import { LocaleModule } from "./types";
 
 export interface I18nServiceImplOptions {
   supportedLocales: Array<string>;

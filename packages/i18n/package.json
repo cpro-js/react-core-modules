@@ -15,8 +15,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "rimraf dist && microbundle --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
-    "prepublish": "rimraf dist && microbundle --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
+    "build": "rimraf dist && tsc --project tsconfig.locale.json && microbundle --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
+    "prepublish": "rimraf dist && tsc --project tsconfig.locale.json && microbundle --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
     "test": "jest"
   },
   "peerDependencies": {

@@ -1,7 +1,7 @@
 import { action, makeObservable, observable } from "@cpro-js/app-state";
 import { store } from "@cpro-js/di";
 
-import { LocaleModule } from "../I18nService";
+import { LocaleModule } from "../types";
 import { LocaleStore } from "./LocaleStore";
 import { getLanguageFromLocale } from "./util/locale";
 

@@ -2,11 +2,6 @@ import { injectable } from "@cpro-js/di";
 
 import { Locales, Translate } from "./translation/TranslationService";
 
-export interface LocaleModule {
-  locale: string;
-  date: Locale;
-}
-
 @injectable()
 export abstract class I18nService {
   abstract t: Translate;
