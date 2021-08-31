@@ -1558,7 +1558,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cpro-js/app-state@workspace:packages/app-state":
+"@cpro-js/app-state@*, @cpro-js/app-state@workspace:packages/app-state":
   version: 0.0.0-use.local
   resolution: "@cpro-js/app-state@workspace:packages/app-state"
   dependencies:
@@ -1583,7 +1583,30 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@cpro-js/di@workspace:packages/di":
+"@cpro-js/core@workspace:packages/core":
+  version: 0.0.0-use.local
+  resolution: "@cpro-js/core@workspace:packages/core"
+  dependencies:
+    "@cpro-js/app-state": "*"
+    "@cpro-js/di": "*"
+    "@cpro-js/i18n": "*"
+    "@types/jest": ^27.0.1
+    "@types/react": ^17.0.19
+    jest: ^27.1.0
+    microbundle: ^0.13.3
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    reflect-metadata: ^0.1.13
+    rimraf: ^3.0.2
+    ts-jest: ^27.0.5
+    typescript: ^4.4.2
+  peerDependencies:
+    "@types/react": ^17.0.0
+    react: ^17.0.0
+  languageName: unknown
+  linkType: soft
+
+"@cpro-js/di@*, @cpro-js/di@workspace:packages/di":
   version: 0.0.0-use.local
   resolution: "@cpro-js/di@workspace:packages/di"
   dependencies:
@@ -1606,7 +1629,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@cpro-js/i18n@workspace:packages/i18n":
+"@cpro-js/i18n@*, @cpro-js/i18n@workspace:packages/i18n":
   version: 0.0.0-use.local
   resolution: "@cpro-js/i18n@workspace:packages/i18n"
   dependencies:
