@@ -280,9 +280,8 @@ describe("DateService", () => {
 
       it("formats date with timezone tokens", () => {
         const date = new Date("2018-09-01T16:01:36.386Z");
-        const dateFormat = "d.M.yyyy HH:mm:ss.SSS [GMT]ZZ [GMT]Z (z)";
-        const dateStringExpected =
-          "1.9.2018 18:01:36.386 GMT+0200 GMT+02:00 (MESZ)";
+        const dateFormat = "d.M.yyyy HH:mm:ss.SSS [GMT]ZZ [GMT]Z";
+        const dateStringExpected = "1.9.2018 18:01:36.386 GMT+0200 GMT+02:00";
         const result = dateService.format(date, dateFormat, {
           locale: de,
           timezone: "Europe/Berlin",
