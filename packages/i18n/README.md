@@ -1,18 +1,18 @@
-# @cpro-js/i18n
+# @cpro-js/react-i18n
 
 Preconfigured i18n system for react apps to remove boilerplate code.
 
 ## Installation
 
 ```
-$ yarn add @cpro-js/i18n
+$ yarn add @cpro-js/react-i18n
 ```
 
 ## Setup
 
 ```tsx
-import { Container } from "@cpro-js/di";
-import { I18nService, createI18nModuleRegistry } from "@cpro-js/i18n";
+import { Container } from "@cpro-js/react-di";
+import { I18nService, createI18nModuleRegistry } from "@cpro-js/react-i18n";
 
 const container = new Container();
 
@@ -23,7 +23,7 @@ await container.loadAsync(
     determineLocale: () => "de-DE",
     fallbackLocale: "de-DE",
     fallbackTimezone: "Europe/Berlin",
-    getLocale: (locale: string) => import(`@cpro-js/i18n/lib/locale/${locale}.js`).then(mod => mod.default),
+    getLocale: (locale: string) => import(`@cpro-js/react-i18n/lib/locale/${locale}.js`).then(mod => mod.default),
     supportedLocales: ["de-DE"],
     getTranslations: language => import(`../asset/locale/${language}.i18n.json`),
   })

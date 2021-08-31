@@ -1,5 +1,5 @@
 {
-  "name": "@cpro-js/core",
+  "name": "@cpro-js/react-core",
   "version": "0.0.0",
   "publishConfig": {
     "access": "public",
@@ -22,9 +22,9 @@
     "react": "^17.0.0"
   },
   "dependencies": {
-    "@cpro-js/app-state": "*",
-    "@cpro-js/di": "*",
-    "@cpro-js/i18n": "*"
+    "@cpro-js/react-app-state": "*",
+    "@cpro-js/react-di": "*",
+    "@cpro-js/react-i18n": "*"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",

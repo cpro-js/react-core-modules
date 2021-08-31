@@ -1,4 +1,4 @@
-import { service } from "@cpro-js/di";
+import { service } from "@cpro-js/react-di";
 
 import { DateService } from "./date/DateService";
 import { I18nService } from "./I18nService";

@@ -1,11 +1,11 @@
-# @cpro-js/app-state
+# @cpro-js/react-app-state
 
 Basically a re-export of state management utilities powered by mobx to enforce versions in our projects.
 
 ## Installation
 
 ```
-$ yarn add @cpro-js/app-state
+$ yarn add @cpro-js/react-app-state
 ```
 
 ## Exports

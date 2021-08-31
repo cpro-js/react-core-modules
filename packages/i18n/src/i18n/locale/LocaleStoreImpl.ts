@@ -1,5 +1,5 @@
-import { action, makeObservable, observable } from "@cpro-js/app-state";
-import { store } from "@cpro-js/di";
+import { action, makeObservable, observable } from "@cpro-js/react-app-state";
+import { store } from "@cpro-js/react-di";
 
 import { LocaleModule } from "../types";
 import { LocaleStore } from "./LocaleStore";

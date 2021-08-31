@@ -1,4 +1,4 @@
-import { AsyncModuleRegistry, Container } from "@cpro-js/di";
+import { AsyncModuleRegistry, Container } from "@cpro-js/react-di";
 import i18next, { i18n } from "i18next";
 
 import { DateService } from "./date/DateService";

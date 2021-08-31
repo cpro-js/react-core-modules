@@ -1,11 +1,16 @@
-export { configure } from "@cpro-js/app-state";
+export { configure } from "@cpro-js/react-app-state";
 export {
   makeAutoObservable,
   makeObservable,
   observable,
   computed,
-} from "@cpro-js/app-state";
-export { action, runInAction, flow, flowResult } from "@cpro-js/app-state";
+} from "@cpro-js/react-app-state";
+export {
+  action,
+  runInAction,
+  flow,
+  flowResult,
+} from "@cpro-js/react-app-state";
 export {
   values,
   keys,
@@ -14,25 +19,25 @@ export {
   has,
   set,
   remove,
-} from "@cpro-js/app-state";
-export { autorun, reaction, when } from "@cpro-js/app-state";
-export { observer, Observer, disposeOnUnmount } from "@cpro-js/app-state";
-export { toJS } from "@cpro-js/app-state";
-export { trace } from "@cpro-js/app-state";
-export { fromPromise, computedFn } from "@cpro-js/app-state";
-export type { ObservablePromise } from "@cpro-js/app-state";
+} from "@cpro-js/react-app-state";
+export { autorun, reaction, when } from "@cpro-js/react-app-state";
+export { observer, Observer, disposeOnUnmount } from "@cpro-js/react-app-state";
+export { toJS } from "@cpro-js/react-app-state";
+export { trace } from "@cpro-js/react-app-state";
+export { fromPromise, computedFn } from "@cpro-js/react-app-state";
+export type { ObservablePromise } from "@cpro-js/react-app-state";
 
-export type { AsyncModuleRegistry, ModuleRegistry } from "@cpro-js/di";
-export { Container } from "@cpro-js/di";
-export { inject } from "@cpro-js/di";
-export { injectable } from "@cpro-js/di";
-export { service } from "@cpro-js/di";
-export { store } from "@cpro-js/di";
-export { useInjection } from "@cpro-js/di";
-export { ContainerProvider } from "@cpro-js/di";
+export type { AsyncModuleRegistry, ModuleRegistry } from "@cpro-js/react-di";
+export { Container } from "@cpro-js/react-di";
+export { inject } from "@cpro-js/react-di";
+export { injectable } from "@cpro-js/react-di";
+export { service } from "@cpro-js/react-di";
+export { store } from "@cpro-js/react-di";
+export { useInjection } from "@cpro-js/react-di";
+export { ContainerProvider } from "@cpro-js/react-di";
 
-export { I18nService } from "@cpro-js/i18n";
-export { createI18nModuleRegistry } from "@cpro-js/i18n";
-export { useI18n } from "@cpro-js/i18n";
+export { I18nService } from "@cpro-js/react-i18n";
+export { createI18nModuleRegistry } from "@cpro-js/react-i18n";
+export { useI18n } from "@cpro-js/react-i18n";
 
-export type { I18nModuleRegistryOptions } from "@cpro-js/i18n";
+export type { I18nModuleRegistryOptions } from "@cpro-js/react-i18n";

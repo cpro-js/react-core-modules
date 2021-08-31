@@ -1,17 +1,17 @@
-# @cpro-js/di
+# @cpro-js/react-di
 
 A simplified & preconfigured wrapper of InversifyJS that works out the box with React.
 
 ## Installation
 
 ```
-$ yarn add @cpro-js/di
+$ yarn add @cpro-js/react-di
 ```
 
 ## Example
 
 ```tsx
-import { Container, store, service } from "@cpro-js/di";
+import { Container, store, service } from "@cpro-js/react-di";
 import { observable, makeObservable } from "mobx";
 import { observer } from "mobx-react";
 import { Component } from "react";
