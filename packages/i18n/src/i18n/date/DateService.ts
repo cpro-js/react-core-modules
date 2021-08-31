@@ -1,4 +1,4 @@
-import { injectable } from "@cpro-js/di";
+import { injectable } from "@cpro-js/react-di";
 import { Locale } from "date-fns";
 
 @injectable()

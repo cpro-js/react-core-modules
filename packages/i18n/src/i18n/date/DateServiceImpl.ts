@@ -1,4 +1,4 @@
-import { service } from "@cpro-js/di";
+import { service } from "@cpro-js/react-di";
 import { Locale, formatDistance, parse } from "date-fns";
 import { format, getTimezoneOffset, utcToZonedTime } from "date-fns-tz";
 

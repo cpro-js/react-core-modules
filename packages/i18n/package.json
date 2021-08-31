@@ -1,5 +1,5 @@
 {
-  "name": "@cpro-js/i18n",
+  "name": "@cpro-js/react-i18n",
   "version": "0.0.0",
   "publishConfig": {
     "access": "public",
@@ -18,8 +18,8 @@
     "test": "jest"
   },
   "peerDependencies": {
-    "@cpro-js/app-state": "*",
-    "@cpro-js/di": "*",
+    "@cpro-js/react-app-state": "*",
+    "@cpro-js/react-di": "*",
     "@types/react": "^17.0.0",
     "react": "^17.0.0"
   },

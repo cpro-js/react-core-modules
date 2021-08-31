@@ -1,4 +1,4 @@
-import { service } from "@cpro-js/di";
+import { service } from "@cpro-js/react-di";
 import { i18n } from "i18next";
 
 import { TranslationService, Translations } from "./TranslationService";

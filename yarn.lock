@@ -1558,9 +1558,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cpro-js/app-state@*, @cpro-js/app-state@workspace:packages/app-state":
+"@cpro-js/react-app-state@*, @cpro-js/react-app-state@workspace:packages/app-state":
   version: 0.0.0-use.local
-  resolution: "@cpro-js/app-state@workspace:packages/app-state"
+  resolution: "@cpro-js/react-app-state@workspace:packages/app-state"
   dependencies:
     "@types/jest": ^27.0.1
     "@types/react": ^17.0.19
@@ -1583,13 +1583,32 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@cpro-js/core@workspace:packages/core":
+"@cpro-js/react-core-modules@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@cpro-js/core@workspace:packages/core"
+  resolution: "@cpro-js/react-core-modules@workspace:."
   dependencies:
-    "@cpro-js/app-state": "*"
-    "@cpro-js/di": "*"
-    "@cpro-js/i18n": "*"
+    "@commitlint/cli": ^13.1.0
+    "@commitlint/config-conventional": ^13.1.0
+    "@commitlint/config-lerna-scopes": ^13.1.0
+    env-cmd: ^10.1.0
+    husky: ^7.0.2
+    import-sort-style-module: ^6.0.0
+    is-ci: ^3.0.0
+    lerna: ^4.0.0
+    lint-staged: ^11.1.2
+    prettier: ^2.3.2
+    prettier-plugin-import-sort: ^0.0.7
+    prettier-plugin-package: ^1.3.0
+  languageName: unknown
+  linkType: soft
+
+"@cpro-js/react-core@workspace:packages/core":
+  version: 0.0.0-use.local
+  resolution: "@cpro-js/react-core@workspace:packages/core"
+  dependencies:
+    "@cpro-js/react-app-state": "*"
+    "@cpro-js/react-di": "*"
+    "@cpro-js/react-i18n": "*"
     "@types/jest": ^27.0.1
     "@types/react": ^17.0.19
     jest: ^27.1.0
@@ -1606,9 +1625,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@cpro-js/di@*, @cpro-js/di@workspace:packages/di":
+"@cpro-js/react-di@*, @cpro-js/react-di@workspace:packages/di":
   version: 0.0.0-use.local
-  resolution: "@cpro-js/di@workspace:packages/di"
+  resolution: "@cpro-js/react-di@workspace:packages/di"
   dependencies:
     "@types/jest": ^27.0.1
     "@types/react": ^17.0.19
@@ -1629,9 +1648,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@cpro-js/i18n@*, @cpro-js/i18n@workspace:packages/i18n":
+"@cpro-js/react-i18n@*, @cpro-js/react-i18n@workspace:packages/i18n":
   version: 0.0.0-use.local
-  resolution: "@cpro-js/i18n@workspace:packages/i18n"
+  resolution: "@cpro-js/react-i18n@workspace:packages/i18n"
   dependencies:
     "@types/jest": ^27.0.1
     "@types/react": ^17.0.19
@@ -1650,29 +1669,10 @@ __metadata:
     ts-jest: ^27.0.5
     typescript: ^4.4.2
   peerDependencies:
-    "@cpro-js/app-state": "*"
-    "@cpro-js/di": "*"
+    "@cpro-js/react-app-state": "*"
+    "@cpro-js/react-di": "*"
     "@types/react": ^17.0.0
     react: ^17.0.0
-  languageName: unknown
-  linkType: soft
-
-"@cpro-js/react-core-modules@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@cpro-js/react-core-modules@workspace:."
-  dependencies:
-    "@commitlint/cli": ^13.1.0
-    "@commitlint/config-conventional": ^13.1.0
-    "@commitlint/config-lerna-scopes": ^13.1.0
-    env-cmd: ^10.1.0
-    husky: ^7.0.2
-    import-sort-style-module: ^6.0.0
-    is-ci: ^3.0.0
-    lerna: ^4.0.0
-    lint-staged: ^11.1.2
-    prettier: ^2.3.2
-    prettier-plugin-import-sort: ^0.0.7
-    prettier-plugin-package: ^1.3.0
   languageName: unknown
   linkType: soft
 

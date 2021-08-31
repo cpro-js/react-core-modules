@@ -1,4 +1,4 @@
-import { injectable } from "@cpro-js/di";
+import { injectable } from "@cpro-js/react-di";
 
 export type Translations = { [key: string]: string | object };
 export type Locales = { [language: string]: Translations };

@@ -1,15 +1,15 @@
-# @cpro-js/core
+# @cpro-js/react-core
 
 Re-export of our base libraries to develop react apps:
 
-- @cpro-js/app-state
-- @cpro-js/di
-- @cpro-js/i18n
+- @cpro-js/react-app-state
+- @cpro-js/react-di
+- @cpro-js/react-i18n
 
-It's recommended to install only `@cpro-js/core` to eliminate the need of managing versions for the listed libs above.
+It's recommended to install only `@cpro-js/react-core` to eliminate the need of managing versions for the listed libs above.
 
 ## Installation
 
 ```
-$ yarn add @cpro-js/core
+$ yarn add @cpro-js/react-core
 ```

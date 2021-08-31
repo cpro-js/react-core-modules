@@ -1,4 +1,4 @@
-import { injectable } from "@cpro-js/di";
+import { injectable } from "@cpro-js/react-di";
 
 import { Locales, Translate } from "./translation/TranslationService";
 
