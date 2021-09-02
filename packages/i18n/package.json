@@ -2,12 +2,7 @@
   "name": "@cpro-js/react-i18n",
   "version": "0.0.0",
   "publishConfig": {
-    "access": "public",
-    "files": [
-      "*.md",
-      "src",
-      "dist"
-    ]
+    "access": "public"
   },
   "license": "MIT",
   "main": "./dist/index.js",
@@ -17,6 +12,10 @@
     "prepublish": "rimraf dist && tsc --project tsconfig.locale.json && microbundle --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
     "test": "jest"
   },
+  "files": [
+    "*.md",
+    "dist"
+  ],
   "peerDependencies": {
     "@cpro-js/react-app-state": "*",
     "@cpro-js/react-di": "*",
