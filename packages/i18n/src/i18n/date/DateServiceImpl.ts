@@ -4,11 +4,12 @@ import { getTimezoneOffset, utcToZonedTime } from "date-fns-tz";
 import memoizeFormatConstructor from "intl-format-cache";
 
 import {
-  CommonFormatOptions,
   DateFormatOptions,
   DateService,
   DateTimeFormatOptions,
+  LocaleOptions,
   TimeFormatOptions,
+  TimezoneOptions,
 } from "./DateService";
 
 const Duration = require("duration-relativetimeformat");
@@ -21,7 +22,7 @@ export class DateServiceImpl extends DateService {
   formatPattern(
     date: Date,
     formatString: string,
-    options: { timezone: string }
+    options: TimezoneOptions
   ): string {
     const formatStringFixed = DateServiceImpl.replaceBrackets(formatString);
     const transformedDate = this.applyTimeZoneToLocalDate(
@@ -34,7 +35,7 @@ export class DateServiceImpl extends DateService {
 
   formatDate(
     date: Date,
-    options: CommonFormatOptions & DateFormatOptions
+    options: LocaleOptions & TimezoneOptions & DateFormatOptions
   ): string {
     const transformedDate = this.applyTimeZoneToLocalDate(
       date,
@@ -50,7 +51,7 @@ export class DateServiceImpl extends DateService {
 
   formatDateTime(
     date: Date,
-    options: CommonFormatOptions & DateTimeFormatOptions
+    options: LocaleOptions & TimezoneOptions & DateTimeFormatOptions
   ): string {
     const transformedDate = this.applyTimeZoneToLocalDate(
       date,
@@ -69,7 +70,7 @@ export class DateServiceImpl extends DateService {
 
   formatTime(
     date: Date,
-    options: CommonFormatOptions & TimeFormatOptions
+    options: LocaleOptions & TimezoneOptions & TimeFormatOptions
   ): string {
     const transformedDate = this.applyTimeZoneToLocalDate(
       date,
@@ -83,7 +84,7 @@ export class DateServiceImpl extends DateService {
     }).format(transformedDate);
   }
 
-  formatRelative(date: Date, options: { locale: string }): string {
+  formatRelative(date: Date, options: LocaleOptions): string {
     const now = new Date();
 
     return getRelativeTimeFormat(options.locale, {
@@ -95,7 +96,7 @@ export class DateServiceImpl extends DateService {
   parse(
     dateString: string,
     formatString: string,
-    options: { timezone: string }
+    options: TimezoneOptions
   ): Date {
     const formatStringFixed = DateServiceImpl.replaceBrackets(formatString);
     const parsedDateLocal = parse(dateString, formatStringFixed, new Date());

@@ -1,14 +1,17 @@
 import { injectable } from "@cpro-js/react-di";
 
-export interface CommonFormatOptions {
+export interface LocaleOptions {
   locale: string;
+}
+
+export interface TimezoneOptions {
   timezone: string;
 }
 
 export interface DateFormatOptions {
-  year: "numeric" | "2-digit";
-  month: "numeric" | "2-digit" | "narrow" | "short" | "long";
-  day: "numeric" | "2-digit";
+  year: "numeric" | "2-digit" | undefined;
+  month: "numeric" | "2-digit" | "narrow" | "short" | "long" | undefined;
+  day: "numeric" | "2-digit" | undefined;
 }
 
 export interface TimeFormatOptions {
@@ -26,29 +29,29 @@ export abstract class DateService {
   abstract formatPattern(
     date: Date,
     formatString: string,
-    options: { timezone: string }
+    options: TimezoneOptions
   ): string;
 
   abstract formatDate(
     date: Date,
-    options: CommonFormatOptions & DateFormatOptions
+    options: LocaleOptions & TimezoneOptions & DateFormatOptions
   ): string;
 
   abstract formatTime(
     date: Date,
-    options: CommonFormatOptions & TimeFormatOptions
+    options: LocaleOptions & TimezoneOptions & TimeFormatOptions
   ): string;
 
   abstract formatDateTime(
     date: Date,
-    options: CommonFormatOptions & DateTimeFormatOptions
+    options: LocaleOptions & TimezoneOptions & DateTimeFormatOptions
   ): string;
 
-  abstract formatRelative(date: Date, options: { locale: string }): string;
+  abstract formatRelative(date: Date, options: LocaleOptions): string;
 
   abstract parse(
     dateString: string,
     formatString: string,
-    options: { timezone: string }
+    options: TimezoneOptions
   ): Date;
 }
