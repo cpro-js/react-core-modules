@@ -8,8 +8,8 @@ const dateService: DateService = new DateServiceImpl();
 
 describe("DateService", () => {
   describe(".parse()", () => {
-    describe("timezone: utc", () => {
-      it("parses 'yyyyMMddHHmmssSSS'", () => {
+    describe("parses pattern 'yyyyMMddHHmmssSSS'", () => {
+      it("as 'Etc/UTC' timezone", () => {
         const dateFormat = "yyyyMMddHHmmssSSS";
 
         const dateString1 = "20190630170000000";
@@ -27,25 +27,69 @@ describe("DateService", () => {
         expect(result2.toISOString()).toBe(dateStringExpected2);
       });
 
-      it("parses 'yyyyMMddHHmmssSSS'", () => {
+      it("as 'Europe/Berlin' timezone", () => {
         const dateFormat = "yyyyMMddHHmmssSSS";
 
         const dateString1 = "20190630170000000";
-        const dateStringExpected1 = "2019-06-30T17:00:00.000Z";
+        const dateStringExpected1 = "2019-06-30T15:00:00.000Z";
+        const result1 = dateService.parse(dateString1, dateFormat, {
+          timezone: "Europe/Berlin",
+        });
+        expect(result1.toISOString()).toBe(dateStringExpected1);
+
+        const dateString2 = "20190627165943076";
+        const dateStringExpected2 = "2019-06-27T14:59:43.076Z";
+        const result2 = dateService.parse(dateString2, dateFormat, {
+          timezone: "Europe/Berlin",
+        });
+        expect(result2.toISOString()).toBe(dateStringExpected2);
+      });
+    });
+
+    describe("parses pattern 'yyyy-MM-dd'", () => {
+      it("as 'Etc/UTC' timezone", () => {
+        const dateFormat = "yyyy-MM-dd";
+
+        const dateString1 = "2019-06-30";
+        const dateStringExpected1 = "2019-06-30T00:00:00.000Z";
         const result1 = dateService.parse(dateString1, dateFormat, {
           timezone: "Etc/UTC",
         });
         expect(result1.toISOString()).toBe(dateStringExpected1);
 
-        const dateString2 = "20190627165943076";
-        const dateStringExpected2 = "2019-06-27T16:59:43.076Z";
+        const dateString2 = "2019-06-27";
+        const dateStringExpected2 = "2019-06-27T00:00:00.000Z";
         const result2 = dateService.parse(dateString2, dateFormat, {
           timezone: "Etc/UTC",
         });
         expect(result2.toISOString()).toBe(dateStringExpected2);
       });
 
-      it("parses 'yyyy-MM-dd[T]HH:mm:ss.SSS[Z]'", () => {
+      it("as 'Europe/Berlin' timezone", () => {
+        const dateFormat = "yyyy-MM-dd";
+
+        const dateString1 = "2019-06-30";
+        const dateStringExpected1 = "2019-06-29T22:00:00.000Z";
+        const result1 = dateService.parse(dateString1, dateFormat, {
+          timezone: "Europe/Berlin",
+        });
+        expect(result1.toISOString()).toBe(dateStringExpected1);
+
+        const dateString2 = "2019-06-27";
+        const dateStringExpected2 = "2019-06-26T22:00:00.000Z";
+        const result2 = dateService.parse(dateString2, dateFormat, {
+          timezone: "Europe/Berlin",
+        });
+        expect(result2.toISOString()).toBe(dateStringExpected2);
+      });
+    });
+
+    describe("parses pattern 'yyyy-MM-dd[T]HH:mm:ss.SSS[Z]'", () => {
+      // NOTE: the test is completely stupid, because the pattern is always an ISO UTC Date String
+      // parsing it like this should be avoided as the exsting timezone information will be ignored and the
+      // date will be parsed instead to the desired time zone.
+
+      it("as 'Etc/UTC' timezone", () => {
         const dateFormat = "yyyy-MM-dd[T]HH:mm:ss.SSS[Z]";
 
         const dateString = "2019-06-27T16:59:43.076Z";
@@ -56,82 +100,11 @@ describe("DateService", () => {
         expect(result1.toISOString()).toBe(dateStringExpected);
       });
 
-      it.skip("parses 'yyyy-MM-dd HH:mm:ss xxxx'", () => {
-        const dateFormat = "yyyy-MM-dd HH:mm:ss xxxx";
-
-        const dateString = "2010-11-17 13:12:00 +0100";
-        const dateStringExpected = "2010-11-17T12:12:00.000Z";
-        const result1 = dateService.parse(dateString, dateFormat, {
-          timezone: "Etc/UTC",
-        });
-        expect(result1.toISOString()).toBe(dateStringExpected);
-      });
-
-      it.skip("parses 'do LLLL yyyy' (locale aware date)", () => {
-        const dateFormat = "do LLLL yyyy";
-
-        const dateString = "30. Juni 2019";
-        const dateStringExpected = "2019-06-30T00:00:00.000Z";
-        const result1 = dateService.parse(dateString, dateFormat, {
-          timezone: "Etc/UTC",
-        });
-        expect(result1.toISOString()).toBe(dateStringExpected);
-      });
-    });
-
-    describe("timezone: Europe/Berlin", () => {
-      it("parses 'yyyyMMddHHmmssSSS'", () => {
-        const dateFormat = "yyyyMMddHHmmssSSS";
-
-        const dateString1 = "20190630170000000";
-        const dateStringExpected1 = "2019-06-30T15:00:00.000Z";
-        const result1 = dateService.parse(dateString1, dateFormat, {
-          timezone: "Europe/Berlin",
-        });
-        expect(result1.toISOString()).toBe(dateStringExpected1);
-
-        const dateString2 = "20190627165943076";
-        const dateStringExpected2 = "2019-06-27T14:59:43.076Z";
-        const result2 = dateService.parse(dateString2, dateFormat, {
-          timezone: "Europe/Berlin",
-        });
-        expect(result2.toISOString()).toBe(dateStringExpected2);
-      });
-
-      it("parses 'yyyyMMddHHmmssSSS'", () => {
-        const dateFormat = "yyyyMMddHHmmssSSS";
-
-        const dateString1 = "20190630170000000";
-        const dateStringExpected1 = "2019-06-30T15:00:00.000Z";
-        const result1 = dateService.parse(dateString1, dateFormat, {
-          timezone: "Europe/Berlin",
-        });
-        expect(result1.toISOString()).toBe(dateStringExpected1);
-
-        const dateString2 = "20190627165943076";
-        const dateStringExpected2 = "2019-06-27T14:59:43.076Z";
-        const result2 = dateService.parse(dateString2, dateFormat, {
-          timezone: "Europe/Berlin",
-        });
-        expect(result2.toISOString()).toBe(dateStringExpected2);
-      });
-
-      it("parses 'yyyy-MM-dd[T]HH:mm:ss.SSS[Z]'", () => {
+      it("as 'Europe/Berlin' timezone", () => {
         const dateFormat = "yyyy-MM-dd[T]HH:mm:ss.SSS[Z]";
 
         const dateString = "2019-06-27T16:59:43.076Z";
         const dateStringExpected = "2019-06-27T14:59:43.076Z";
-        const result1 = dateService.parse(dateString, dateFormat, {
-          timezone: "Europe/Berlin",
-        });
-        expect(result1.toISOString()).toBe(dateStringExpected);
-      });
-
-      it.skip("parses 'do LLLL yyyy' (locale aware date)", () => {
-        const dateFormat = "do LLLL yyyy";
-
-        const dateString = "30. Juni 2019";
-        const dateStringExpected = "2019-06-29T22:00:00.000Z"; // todo is this right?
         const result1 = dateService.parse(dateString, dateFormat, {
           timezone: "Europe/Berlin",
         });
