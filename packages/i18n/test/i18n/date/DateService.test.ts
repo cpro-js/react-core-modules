@@ -1,4 +1,5 @@
-import { subHours, subMinutes } from "date-fns";
+import { subHours, subSeconds } from "date-fns";
+import { de, enUS } from "date-fns/locale";
 
 import { DateService } from "../../../src/i18n/date/DateService";
 import { DateServiceImpl } from "../../../src/i18n/date/DateServiceImpl";
@@ -119,14 +120,14 @@ describe("DateService", () => {
 
         const date1 = new Date("2019-06-30T17:00:00.000Z");
         const dateStringExpected1 = "20190630170000000";
-        const result1 = dateService.formatPattern(date1, dateFormat, {
+        const result1 = dateService.format(date1, dateFormat, {
           timezone: "Etc/UTC",
         });
         expect(result1).toBe(dateStringExpected1);
 
         const date2 = new Date("2019-06-27T16:59:43.076Z");
         const dateStringExpected2 = "20190627165943076";
-        const result2 = dateService.formatPattern(date2, dateFormat, {
+        const result2 = dateService.format(date2, dateFormat, {
           timezone: "Etc/UTC",
         });
         expect(result2).toBe(dateStringExpected2);
@@ -137,7 +138,7 @@ describe("DateService", () => {
 
         const date1 = new Date("2019-06-30T17:00:00.000Z");
         const dateStringExpected1 = "20190630190000000";
-        const result1 = dateService.formatPattern(date1, dateFormat, {
+        const result1 = dateService.format(date1, dateFormat, {
           timezone: "Europe/Berlin",
         });
 
@@ -145,7 +146,7 @@ describe("DateService", () => {
 
         const date2 = new Date("2019-06-27T16:59:43.076Z");
         const dateStringExpected2 = "20190627185943076";
-        const result2 = dateService.formatPattern(date2, dateFormat, {
+        const result2 = dateService.format(date2, dateFormat, {
           timezone: "Europe/Berlin",
         });
 
@@ -159,14 +160,14 @@ describe("DateService", () => {
 
         const date1 = new Date("2019-06-30T00:00:00.000Z");
         const dateStringExpected1 = "2019-06-30";
-        const result1 = dateService.formatPattern(date1, dateFormat, {
+        const result1 = dateService.format(date1, dateFormat, {
           timezone: "Etc/UTC",
         });
         expect(result1).toBe(dateStringExpected1);
 
         const date2 = new Date("2019-06-26T22:00:00.000Z");
         const dateStringExpected2 = "2019-06-26";
-        const result2 = dateService.formatPattern(date2, dateFormat, {
+        const result2 = dateService.format(date2, dateFormat, {
           timezone: "Etc/UTC",
         });
         expect(result2).toBe(dateStringExpected2);
@@ -177,7 +178,7 @@ describe("DateService", () => {
 
         const date1 = new Date("2019-06-30T00:00:00.000Z");
         const dateStringExpected1 = "2019-06-30";
-        const result1 = dateService.formatPattern(date1, dateFormat, {
+        const result1 = dateService.format(date1, dateFormat, {
           timezone: "Europe/Berlin",
         });
 
@@ -185,7 +186,7 @@ describe("DateService", () => {
 
         const date2 = new Date("2019-06-26T22:00:00.000Z");
         const dateStringExpected2 = "2019-06-27";
-        const result2 = dateService.formatPattern(date2, dateFormat, {
+        const result2 = dateService.format(date2, dateFormat, {
           timezone: "Europe/Berlin",
         });
 
@@ -197,7 +198,7 @@ describe("DateService", () => {
 
         const date1 = new Date("2019-06-30T00:00:00.000Z");
         const dateStringExpected1 = "2019-06-29";
-        const result1 = dateService.formatPattern(date1, dateFormat, {
+        const result1 = dateService.format(date1, dateFormat, {
           timezone: "America/Chicago",
         });
 
@@ -205,7 +206,7 @@ describe("DateService", () => {
 
         const date2 = new Date("2019-06-26T22:00:00.000Z");
         const dateStringExpected2 = "2019-06-26";
-        const result2 = dateService.formatPattern(date2, dateFormat, {
+        const result2 = dateService.format(date2, dateFormat, {
           timezone: "America/Chicago",
         });
 
@@ -219,7 +220,7 @@ describe("DateService", () => {
 
         const date1 = new Date("2019-06-30T17:00:00.000Z");
         const dateStringExpected1 = "2019-06-30T17:00:00.000";
-        const result1 = dateService.formatPattern(date1, dateFormat, {
+        const result1 = dateService.format(date1, dateFormat, {
           timezone: "Etc/UTC",
         });
 
@@ -227,7 +228,7 @@ describe("DateService", () => {
 
         const date2 = new Date("2019-06-27T16:59:43.076Z");
         const dateStringExpected2 = "2019-06-27T16:59:43.076";
-        const result2 = dateService.formatPattern(date2, dateFormat, {
+        const result2 = dateService.format(date2, dateFormat, {
           timezone: "Etc/UTC",
         });
 
@@ -239,7 +240,7 @@ describe("DateService", () => {
 
         const date1 = new Date("2019-06-30T17:00:00.000Z");
         const dateStringExpected1 = "2019-06-30T19:00:00.000";
-        const result1 = dateService.formatPattern(date1, dateFormat, {
+        const result1 = dateService.format(date1, dateFormat, {
           timezone: "Europe/Berlin",
         });
 
@@ -247,7 +248,7 @@ describe("DateService", () => {
 
         const date2 = new Date("2019-06-27T16:59:43.076Z");
         const dateStringExpected2 = "2019-06-27T18:59:43.076";
-        const result2 = dateService.formatPattern(date2, dateFormat, {
+        const result2 = dateService.format(date2, dateFormat, {
           timezone: "Europe/Berlin",
         });
 
@@ -257,41 +258,87 @@ describe("DateService", () => {
   });
 
   describe(".formatRelative()", () => {
-    describe("timezone: current", () => {
-      it("formats date (1 minute ago) - en-US", () => {
-        const dateBefore = subMinutes(new Date(), 1);
+    describe("timezone: utc", () => {
+      it("formats date (1 minute ago)", () => {
+        const dateBefore = subSeconds(new Date(), 30);
         const result = dateService.formatRelative(dateBefore, {
-          locale: "en-US",
+          locale: enUS,
+          timezone: "Etc/UTC",
         });
 
         expect(result).toBe("1 minute ago");
       });
 
-      it("formats date (1 minute ago) - de-DE", () => {
-        const dateBefore = subMinutes(new Date(), 1);
+      it("formats date (1 minute ago) - locale aware", () => {
+        const dateBefore = subSeconds(new Date(), 30);
         const result = dateService.formatRelative(dateBefore, {
-          locale: "de-DE",
+          locale: de,
+          timezone: "Etc/UTC",
         });
 
-        expect(result).toBe("vor 1 Minute");
+        expect(result).toBe("vor einer Minute");
       });
 
-      it("formats date (about 1 hour ago) - en-US", () => {
+      it("formats date (about 1 hour ago)", () => {
         const dateBefore = subHours(new Date(), 1);
         const result = dateService.formatRelative(dateBefore, {
-          locale: "en-US",
+          locale: enUS,
+          timezone: "Etc/UTC",
         });
 
-        expect(result).toBe("1 hour ago");
+        expect(result).toBe("about 1 hour ago");
       });
 
-      it("formats date (about 1 hour ago) - de-DE", () => {
+      it("formats date (about 1 hour ago) - locale aware", () => {
         const dateBefore = subHours(new Date(), 1);
         const result = dateService.formatRelative(dateBefore, {
-          locale: "de-DE",
+          locale: de,
+          timezone: "Etc/UTC",
         });
 
-        expect(result).toBe("vor 1 Stunde");
+        expect(result).toBe("vor etwa einer Stunde");
+      });
+    });
+
+    describe("timezone: Europe/Berlin", () => {
+      it("formats date (1 minute ago)", () => {
+        const dateBefore = subSeconds(new Date(), 30);
+        const result = dateService.formatRelative(dateBefore, {
+          locale: enUS,
+          timezone: "Europe/Berlin",
+        });
+
+        expect(result).toBe("1 minute ago");
+      });
+
+      it("formats date (1 minute ago) - locale aware", () => {
+        const dateBefore = subSeconds(new Date(), 30);
+        const result = dateService.formatRelative(dateBefore, {
+          timezone: "Europe/Berlin",
+          locale: de,
+        });
+
+        expect(result).toBe("vor einer Minute");
+      });
+
+      it("formats date (about 1 hour ago)", () => {
+        const dateBefore = subHours(new Date(), 1);
+        const result = dateService.formatRelative(dateBefore, {
+          timezone: "Europe/Berlin",
+          locale: enUS,
+        });
+
+        expect(result).toBe("about 1 hour ago");
+      });
+
+      it("formats date (about 1 hour ago) - locale aware", () => {
+        const dateBefore = subHours(new Date(), 1);
+        const result = dateService.formatRelative(dateBefore, {
+          timezone: "Europe/Berlin",
+          locale: de,
+        });
+
+        expect(result).toBe("vor etwa einer Stunde");
       });
     });
   });

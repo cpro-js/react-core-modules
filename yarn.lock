@@ -1657,7 +1657,6 @@ __metadata:
     "@types/react-test-renderer": ^17.0.1
     date-fns: 2.16.1
     date-fns-tz: ^1.1.6
-    duration-relativetimeformat: ^2.0.1
     i18next: 19.8.4
     intl-format-cache: ^4.3.1
     jest: ^27.1.0
@@ -4966,13 +4965,6 @@ __metadata:
   version: 0.1.2
   resolution: "duplexer@npm:0.1.2"
   checksum: 62ba61a830c56801db28ff6305c7d289b6dc9f859054e8c982abd8ee0b0a14d2e9a8e7d086ffee12e868d43e2bbe8a964be55ddbd8c8957714c87373c7a4f9b0
-  languageName: node
-  linkType: hard
-
-"duration-relativetimeformat@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "duration-relativetimeformat@npm:2.0.1"
-  checksum: 9759615813a7bbf8968f0cc73d6cee3e639e71c7ecb03550644073db3d53d67888b2068f52a78387c04d97db3d3a67090912bf083d19a112abbd3e7f3dd22755
   languageName: node
   linkType: hard
 
