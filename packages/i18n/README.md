@@ -23,7 +23,6 @@ await container.loadAsync(
     determineLocale: () => "de-DE",
     fallbackLocale: "de-DE",
     fallbackTimezone: "Europe/Berlin",
-    getLocale: (locale: string) => import(`@cpro-js/react-i18n/lib/locale/${locale}.js`).then(mod => mod.default),
     supportedLocales: ["de-DE"],
     getTranslations: language => import(`../asset/locale/${language}.i18n.json`),
   })

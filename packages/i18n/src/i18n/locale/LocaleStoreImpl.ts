@@ -1,7 +1,6 @@
 import { action, makeObservable, observable } from "@cpro-js/react-app-state";
 import { store } from "@cpro-js/react-di";
 
-import { LocaleModule } from "../types";
 import { LocaleStore } from "./LocaleStore";
 import { getLanguageFromLocale } from "./util/locale";
 
@@ -16,8 +15,6 @@ export class LocaleStoreImpl extends LocaleStore {
   protected currentLanguage: string = "";
   @observable
   protected currentLanguageCounter: number = 0;
-  @observable.ref
-  protected localeModule: LocaleModule | undefined = undefined;
   @observable
   protected currentTimezone: string = "";
 
@@ -48,23 +45,12 @@ export class LocaleStoreImpl extends LocaleStore {
   }
 
   @action
-  setCurrentLocale(locale: string, localeModule: LocaleModule): void {
-    this.localeModule = localeModule;
+  setCurrentLocale(locale: string): void {
     if (this.currentLocale !== locale) {
       this.currentLocale = locale;
       this.currentLanguage = getLanguageFromLocale(locale);
     }
     this.currentLanguageCounter++;
-  }
-
-  getLocaleModule(): LocaleModule {
-    if (this.localeModule == null) {
-      throw new Error(
-        "Calling i18n service before proper initialization is not allowed!"
-      );
-    }
-
-    return this.localeModule;
   }
 
   getCurrentTimezone(): string {
