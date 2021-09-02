@@ -114,26 +114,8 @@ describe("DateService", () => {
   });
 
   describe(".format()", () => {
-    describe("timezone: utc", () => {
-      it("formats date in format iso format yyyy-MM-dd[T]HH:mm:ss.SSS[Z]", () => {
-        const dateFormat = "yyyy-MM-dd[T]HH:mm:ss.SSS[Z]";
-
-        const date1 = new Date("2019-06-30T17:00:00.000Z");
-        const dateStringExpected1 = "2019-06-30T17:00:00.000Z";
-        const result1 = dateService.formatPattern(date1, dateFormat, {
-          timezone: "Etc/UTC",
-        });
-        expect(result1).toBe(dateStringExpected1);
-
-        const date2 = new Date("2019-06-27T16:59:43.076Z");
-        const dateStringExpected2 = "2019-06-27T16:59:43.076Z";
-        const result2 = dateService.formatPattern(date2, dateFormat, {
-          timezone: "Etc/UTC",
-        });
-        expect(result2).toBe(dateStringExpected2);
-      });
-
-      it("formats date in format yyyyMMddHHmmssSSS", () => {
+    describe("formats pattern 'yyyyMMddHHmmssSSS'", () => {
+      it("as 'Etc/UTC' timezone", () => {
         const dateFormat = "yyyyMMddHHmmssSSS";
 
         const date1 = new Date("2019-06-30T17:00:00.000Z");
@@ -151,51 +133,7 @@ describe("DateService", () => {
         expect(result2).toBe(dateStringExpected2);
       });
 
-      it.skip("formats date in format 'do LLLL yyyy HH[:]mm' (locale aware date)", () => {
-        const dateFormat = "do LLLL yyyy HH[:]mm";
-
-        const date1 = new Date("2019-06-30T17:00:00.000Z");
-        const dateStringExpected1 = "30. Juni 2019 17:00";
-        const result1 = dateService.formatPattern(date1, dateFormat, {
-          timezone: "Etc/UTC",
-        });
-
-        expect(result1).toBe(dateStringExpected1);
-      });
-
-      it.skip("formats date with timezone tokens", () => {
-        const date = new Date("2018-09-01T16:01:36.386Z");
-        const dateFormat = "d.M.yyyy HH:mm:ss.SSS [GMT]ZZ [GMT]Z";
-        const dateStringExpected = "1.9.2018 16:01:36.386 GMT+0000 GMT+00:00";
-        const result = dateService.formatPattern(date, dateFormat, {
-          timezone: "Etc/UTC",
-        });
-        expect(result).toBe(dateStringExpected);
-      });
-    });
-
-    describe("timezone: Europe/Berlin", () => {
-      it("formats date in format format yyyy-MM-dd[T]HH:mm:ss.SSS", () => {
-        const dateFormat = "yyyy-MM-dd[T]HH:mm:ss.SSS";
-
-        const date1 = new Date("2019-06-30T17:00:00.000Z");
-        const dateStringExpected1 = "2019-06-30T19:00:00.000";
-        const result1 = dateService.formatPattern(date1, dateFormat, {
-          timezone: "Europe/Berlin",
-        });
-
-        expect(result1).toBe(dateStringExpected1);
-
-        const date2 = new Date("2019-06-27T16:59:43.076Z");
-        const dateStringExpected2 = "2019-06-27T18:59:43.076";
-        const result2 = dateService.formatPattern(date2, dateFormat, {
-          timezone: "Europe/Berlin",
-        });
-
-        expect(result2).toBe(dateStringExpected2);
-      });
-
-      it("formats date in format yyyyMMddHHmmssSSS", () => {
+      it("as 'Europe/Berlin' timezone", () => {
         const dateFormat = "yyyyMMddHHmmssSSS";
 
         const date1 = new Date("2019-06-30T17:00:00.000Z");
@@ -214,27 +152,107 @@ describe("DateService", () => {
 
         expect(result2).toBe(dateStringExpected2);
       });
+    });
 
-      it.skip("formats date in format 'do LLLL yyyy HH[:]mm' (locale aware date)", () => {
-        const dateFormat = "do LLLL yyyy HH[:]mm";
+    describe("formats pattern 'yyyy-MM-dd'", () => {
+      it("as 'Etc/UTC' timezone", () => {
+        const dateFormat = "yyyy-MM-dd";
 
-        const date1 = new Date("2019-06-30T17:00:00.000Z");
-        const dateStringExpected1 = "30. Juni 2019 19:00";
+        const date1 = new Date("2019-06-30T00:00:00.000Z");
+        const dateStringExpected1 = "2019-06-30";
+        const result1 = dateService.formatPattern(date1, dateFormat, {
+          timezone: "Etc/UTC",
+        });
+        expect(result1).toBe(dateStringExpected1);
+
+        const date2 = new Date("2019-06-26T22:00:00.000Z");
+        const dateStringExpected2 = "2019-06-26";
+        const result2 = dateService.formatPattern(date2, dateFormat, {
+          timezone: "Etc/UTC",
+        });
+        expect(result2).toBe(dateStringExpected2);
+      });
+
+      it("as 'Europe/Berlin' timezone", () => {
+        const dateFormat = "yyyy-MM-dd";
+
+        const date1 = new Date("2019-06-30T00:00:00.000Z");
+        const dateStringExpected1 = "2019-06-30";
         const result1 = dateService.formatPattern(date1, dateFormat, {
           timezone: "Europe/Berlin",
         });
 
         expect(result1).toBe(dateStringExpected1);
-      });
 
-      it("formats date with timezone tokens", () => {
-        const date = new Date("2018-09-01T16:01:36.386Z");
-        const dateFormat = "d.M.yyyy HH:mm:ss.SSS [GMT]ZZ [GMT]Z";
-        const dateStringExpected = "1.9.2018 18:01:36.386 GMT+0200 GMT+02:00";
-        const result = dateService.formatPattern(date, dateFormat, {
+        const date2 = new Date("2019-06-26T22:00:00.000Z");
+        const dateStringExpected2 = "2019-06-27";
+        const result2 = dateService.formatPattern(date2, dateFormat, {
           timezone: "Europe/Berlin",
         });
-        expect(result).toBe(dateStringExpected);
+
+        expect(result2).toBe(dateStringExpected2);
+      });
+
+      it("as 'America/Chicago' timezone", () => {
+        const dateFormat = "yyyy-MM-dd";
+
+        const date1 = new Date("2019-06-30T00:00:00.000Z");
+        const dateStringExpected1 = "2019-06-29";
+        const result1 = dateService.formatPattern(date1, dateFormat, {
+          timezone: "America/Chicago",
+        });
+
+        expect(result1).toBe(dateStringExpected1);
+
+        const date2 = new Date("2019-06-26T22:00:00.000Z");
+        const dateStringExpected2 = "2019-06-26";
+        const result2 = dateService.formatPattern(date2, dateFormat, {
+          timezone: "America/Chicago",
+        });
+
+        expect(result2).toBe(dateStringExpected2);
+      });
+    });
+
+    describe("formats date in format 'yyyy-MM-dd[T]HH:mm:ss.SSS'", () => {
+      it("as 'Etc/UTC' timezone", () => {
+        const dateFormat = "yyyy-MM-dd[T]HH:mm:ss.SSS";
+
+        const date1 = new Date("2019-06-30T17:00:00.000Z");
+        const dateStringExpected1 = "2019-06-30T17:00:00.000";
+        const result1 = dateService.formatPattern(date1, dateFormat, {
+          timezone: "Etc/UTC",
+        });
+
+        expect(result1).toBe(dateStringExpected1);
+
+        const date2 = new Date("2019-06-27T16:59:43.076Z");
+        const dateStringExpected2 = "2019-06-27T16:59:43.076";
+        const result2 = dateService.formatPattern(date2, dateFormat, {
+          timezone: "Etc/UTC",
+        });
+
+        expect(result2).toBe(dateStringExpected2);
+      });
+
+      it("as 'Europe/Berlin' timezone", () => {
+        const dateFormat = "yyyy-MM-dd[T]HH:mm:ss.SSS";
+
+        const date1 = new Date("2019-06-30T17:00:00.000Z");
+        const dateStringExpected1 = "2019-06-30T19:00:00.000";
+        const result1 = dateService.formatPattern(date1, dateFormat, {
+          timezone: "Europe/Berlin",
+        });
+
+        expect(result1).toBe(dateStringExpected1);
+
+        const date2 = new Date("2019-06-27T16:59:43.076Z");
+        const dateStringExpected2 = "2019-06-27T18:59:43.076";
+        const result2 = dateService.formatPattern(date2, dateFormat, {
+          timezone: "Europe/Berlin",
+        });
+
+        expect(result2).toBe(dateStringExpected2);
       });
     });
   });

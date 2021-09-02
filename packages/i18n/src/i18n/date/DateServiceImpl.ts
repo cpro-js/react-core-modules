@@ -13,17 +13,9 @@ export class DateServiceImpl extends DateService {
     formatString: string,
     options: { timezone: string }
   ): string {
-    const timeZoneOffsetInMinutes =
-      (-1 * getTimezoneOffset(options.timezone, date)) / 1000 / 60;
+    const formatStringFixed = DateServiceImpl.replaceBrackets(formatString);
 
-    const formatStringTimezone =
-      DateServiceImpl.replaceUtcOffsetWithTimezoneOffset(
-        formatString,
-        timeZoneOffsetInMinutes
-      );
-    const formatStringFixed =
-      DateServiceImpl.replaceBrackets(formatStringTimezone);
-
+    // shift locale javascript date to zoned time date
     const transformedDate = utcToZonedTime(date, options.timezone);
 
     return lightFormat(transformedDate, formatStringFixed);
