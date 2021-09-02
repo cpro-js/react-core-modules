@@ -19,7 +19,6 @@ import {
 } from "./translation/TranslationService";
 import { TranslationServiceImpl } from "./translation/TranslationServiceImpl";
 import { i18nNamespace } from "./translation/util/resources";
-import { LocaleModule } from "./types";
 
 const getTimezone = (): string | undefined => {
   try {
@@ -39,7 +38,6 @@ export interface I18nModuleRegistryOptions {
     supportedLocales: Array<string>,
     fallbackLocale: string
   ) => string;
-  getLocale: (locale: string) => Promise<LocaleModule>;
   getTranslations: (language: string) => Promise<Translations>;
   dateFormat?: I18nDateFormatOptions;
 }
@@ -83,7 +81,6 @@ export const createI18nModuleRegistry: I18nModuleRegistry =
 
     const i18nService: I18nService = new I18nServiceImpl(
       {
-        getLocale: options.getLocale,
         getTranslations: options.getTranslations,
         supportedLocales: options.supportedLocales,
         dateFormat: options.dateFormat ?? {},
