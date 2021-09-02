@@ -4,7 +4,7 @@ import i18next, { i18n } from "i18next";
 import { DateService } from "./date/DateService";
 import { DateServiceImpl } from "./date/DateServiceImpl";
 import { I18nService } from "./I18nService";
-import { I18nServiceImpl } from "./I18nServiceImpl";
+import { I18nDateFormatOptions, I18nServiceImpl } from "./I18nServiceImpl";
 import { LocaleStore } from "./locale/LocaleStore";
 import { LocaleStoreImpl } from "./locale/LocaleStoreImpl";
 import {
@@ -41,6 +41,7 @@ export interface I18nModuleRegistryOptions {
   ) => string;
   getLocale: (locale: string) => Promise<LocaleModule>;
   getTranslations: (language: string) => Promise<Translations>;
+  dateFormat?: I18nDateFormatOptions;
 }
 
 export type I18nModuleRegistry = (
@@ -85,6 +86,7 @@ export const createI18nModuleRegistry: I18nModuleRegistry =
         getLocale: options.getLocale,
         getTranslations: options.getTranslations,
         supportedLocales: options.supportedLocales,
+        dateFormat: options.dateFormat ?? {},
       },
       localStore,
       translationService,

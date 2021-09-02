@@ -1,6 +1,12 @@
 import { service } from "@cpro-js/react-di";
 
-import { DateService } from "./date/DateService";
+import {
+  DateFormatOptions,
+  DateService,
+  DateTimeFormatOptions,
+  TimeFormatOptions,
+  TimezoneOptions,
+} from "./date/DateService";
 import { I18nService } from "./I18nService";
 import { LocaleStore } from "./locale/LocaleStore";
 import { getLanguageFromLocale } from "./locale/util/locale";
@@ -13,10 +19,15 @@ import {
 } from "./translation/TranslationService";
 import { LocaleModule } from "./types";
 
+export type I18nDateFormatOptions = Partial<
+  DateFormatOptions & TimeFormatOptions & DateTimeFormatOptions
+>;
+
 export interface I18nServiceImplOptions {
   supportedLocales: Array<string>;
   getLocale: (locale: string) => Promise<LocaleModule>;
   getTranslations: (language: string) => Promise<Translations>;
+  dateFormat: I18nDateFormatOptions;
 }
 
 @service()
@@ -43,31 +54,77 @@ export class I18nServiceImpl extends I18nService {
     return this.translationService.t(key, values);
   };
 
-  formatDate = (
+  formatDateByPattern = (
     date: Date,
     formatString: string,
-    options?: { timezone?: string }
+    options?: Partial<TimezoneOptions>
   ): string => {
     this.accessLanguageAndLocale(); // access language and locale to detect changes of language within components
 
-    return this.dateService.format(date, formatString, {
+    return this.dateService.formatPattern(date, formatString, {
       timezone: options?.timezone || this.store.getCurrentTimezone(),
     });
   };
 
-  formatDateRelative = (
+  formatDate = (
     date: Date,
-    options?: { timezone?: string }
+    options?: Partial<TimezoneOptions & DateFormatOptions>
   ): string => {
+    this.accessLanguageAndLocale(); // access language and locale to detect changes of language within components
+
+    const mergedOptions = this.getMergedDateFormatOptions(options);
+
+    return this.dateService.formatDate(date, {
+      timezone: options?.timezone || this.store.getCurrentTimezone(),
+      locale: this.store.getCurrentLocale(),
+      year: mergedOptions.year,
+      month: mergedOptions.month,
+      day: mergedOptions.day,
+    });
+  };
+
+  formatDateTime = (
+    date: Date,
+    options?: Partial<TimezoneOptions & DateTimeFormatOptions>
+  ): string => {
+    const mergedOptions = this.getMergedDateFormatOptions(options);
+
+    return this.dateService.formatDateTime(date, {
+      timezone: options?.timezone || this.store.getCurrentTimezone(),
+      locale: this.store.getCurrentLocale(),
+      year: mergedOptions.year,
+      month: mergedOptions.month,
+      day: mergedOptions.day,
+      hour: mergedOptions.hour,
+      minute: mergedOptions.minute,
+      second: mergedOptions.second,
+    });
+  };
+
+  formatTime = (
+    date: Date,
+    options?: Partial<TimezoneOptions & TimeFormatOptions>
+  ): string => {
+    const mergedOptions = this.getMergedDateFormatOptions(options);
+
+    return this.dateService.formatTime(date, {
+      timezone: options?.timezone || this.store.getCurrentTimezone(),
+      locale: this.store.getCurrentLocale(),
+      hour: mergedOptions.hour,
+      minute: mergedOptions.minute,
+      second: mergedOptions.second,
+    });
+  };
+
+  formatDateRelative = (date: Date): string => {
     this.accessLanguageAndLocale(); // access language and locale to detect changes of language within components
 
     return this.dateService.formatRelative(date, {
-      timezone: options?.timezone || this.store.getCurrentTimezone(),
-      locale: this.store.getLocaleModule().date,
+      locale: this.store.getLocaleModule().locale,
     });
   };
 
-  parseDate = (
+  parseDateByPattern = (
     dateString: string,
     formatString: string,
     options?: { timezone?: string }
@@ -167,6 +224,21 @@ export class I18nServiceImpl extends I18nService {
 
   useTimezone(timezone: string): void {
     this.store.setCurrentTimezone(timezone);
+  }
+
+  private getMergedDateFormatOptions(
+    options?: I18nDateFormatOptions
+  ): Required<I18nDateFormatOptions> {
+    return {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      ...this.options.dateFormat,
+      ...options,
+    };
   }
 
   private accessLanguage(): void {

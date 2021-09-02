@@ -1,5 +1,11 @@
 import { injectable } from "@cpro-js/react-di";
 
+import {
+  DateFormatOptions,
+  DateTimeFormatOptions,
+  TimeFormatOptions,
+  TimezoneOptions,
+} from "./date/DateService";
 import { Locales, Translate } from "./translation/TranslationService";
 
 @injectable()
@@ -8,18 +14,30 @@ export abstract class I18nService {
 
   abstract translate: Translate;
 
-  abstract formatDate(
+  abstract formatDateByPattern(
     date: Date,
     formatString: string,
-    options?: { timezone?: string }
+    options?: Partial<TimezoneOptions>
   ): string;
 
-  abstract formatDateRelative(
+  abstract formatDate(
     date: Date,
-    options?: { timezone?: string }
+    options?: Partial<TimezoneOptions & DateFormatOptions>
   ): string;
 
-  abstract parseDate(
+  abstract formatDateTime(
+    date: Date,
+    options?: Partial<TimezoneOptions & DateTimeFormatOptions>
+  ): string;
+
+  abstract formatTime(
+    date: Date,
+    options?: Partial<TimezoneOptions & TimeFormatOptions>
+  ): string;
+
+  abstract formatDateRelative(date: Date): string;
+
+  abstract parseDateByPattern(
     dateString: string,
     formatString: string,
     options?: { timezone?: string }
