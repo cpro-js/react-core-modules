@@ -43,16 +43,15 @@ export class I18nServiceImpl extends I18nService {
     return this.translationService.t(key, values);
   };
 
-  formatDate = (
+  formatDateByPattern = (
     date: Date,
     formatString: string,
     options?: { timezone?: string }
   ): string => {
     this.accessLanguageAndLocale(); // access language and locale to detect changes of language within components
 
-    return this.dateService.format(date, formatString, {
+    return this.dateService.formatPattern(date, formatString, {
       timezone: options?.timezone || this.store.getCurrentTimezone(),
-      locale: this.store.getLocaleModule().date,
     });
   };
 
@@ -68,14 +67,13 @@ export class I18nServiceImpl extends I18nService {
     });
   };
 
-  parseDate = (
+  parseDateByPattern = (
     dateString: string,
     formatString: string,
     options?: { timezone?: string }
   ): Date => {
     return this.dateService.parse(dateString, formatString, {
       timezone: options?.timezone || this.store.getCurrentTimezone(),
-      locale: this.store.getLocaleModule().date,
     });
   };
 
