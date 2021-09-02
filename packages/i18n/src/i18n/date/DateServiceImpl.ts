@@ -3,13 +3,18 @@ import { lightFormat, parse } from "date-fns";
 import { getTimezoneOffset, utcToZonedTime } from "date-fns-tz";
 import memoizeFormatConstructor from "intl-format-cache";
 
-import { DateService } from "./DateService";
+import {
+  CommonFormatOptions,
+  DateFormatOptions,
+  DateService,
+  DateTimeFormatOptions,
+  TimeFormatOptions,
+} from "./DateService";
 
 const Duration = require("duration-relativetimeformat");
 
+const getDateTimeFormat = memoizeFormatConstructor(Intl.DateTimeFormat);
 const getRelativeTimeFormat = memoizeFormatConstructor(Duration);
-
-const padToTwoDigits = (number: number) => (number > 9 ? number : `0${number}`);
 
 @service()
 export class DateServiceImpl extends DateService {
@@ -19,11 +24,63 @@ export class DateServiceImpl extends DateService {
     options: { timezone: string }
   ): string {
     const formatStringFixed = DateServiceImpl.replaceBrackets(formatString);
-
-    // shift locale javascript date to zoned time date
-    const transformedDate = utcToZonedTime(date, options.timezone);
+    const transformedDate = this.applyTimeZoneToLocalDate(
+      date,
+      options.timezone
+    );
 
     return lightFormat(transformedDate, formatStringFixed);
+  }
+
+  formatDate(
+    date: Date,
+    options: CommonFormatOptions & DateFormatOptions
+  ): string {
+    const transformedDate = this.applyTimeZoneToLocalDate(
+      date,
+      options.timezone
+    );
+
+    return getDateTimeFormat(options.locale, {
+      year: options.year,
+      month: options.month,
+      day: options.day,
+    }).format(transformedDate);
+  }
+
+  formatDateTime(
+    date: Date,
+    options: CommonFormatOptions & DateTimeFormatOptions
+  ): string {
+    const transformedDate = this.applyTimeZoneToLocalDate(
+      date,
+      options.timezone
+    );
+
+    return getDateTimeFormat(options.locale, {
+      year: options.year,
+      month: options.month,
+      day: options.day,
+      hour: options.hour,
+      minute: options.minute,
+      second: options.second,
+    }).format(transformedDate);
+  }
+
+  formatTime(
+    date: Date,
+    options: CommonFormatOptions & TimeFormatOptions
+  ): string {
+    const transformedDate = this.applyTimeZoneToLocalDate(
+      date,
+      options.timezone
+    );
+
+    return getDateTimeFormat(options.locale, {
+      hour: options.hour,
+      minute: options.minute,
+      second: options.second,
+    }).format(transformedDate);
   }
 
   formatRelative(date: Date, options: { locale: string }): string {
@@ -51,6 +108,11 @@ export class DateServiceImpl extends DateService {
       normalizedUtcDate.getTime() -
         getTimezoneOffset(options.timezone, normalizedUtcDate)
     );
+  }
+
+  applyTimeZoneToLocalDate(date: Date, timezone: string) {
+    // shift locale javascript date to zoned time date
+    return utcToZonedTime(date, timezone);
   }
 
   private static replaceBrackets(formatString: string): string {
