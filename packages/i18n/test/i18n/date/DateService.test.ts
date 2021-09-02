@@ -1,5 +1,4 @@
-import { subHours, subSeconds } from "date-fns";
-import { de, enUS } from "date-fns/locale";
+import { subHours, subMinutes } from "date-fns";
 
 import { DateService } from "../../../src/i18n/date/DateService";
 import { DateServiceImpl } from "../../../src/i18n/date/DateServiceImpl";
@@ -258,87 +257,41 @@ describe("DateService", () => {
   });
 
   describe(".formatRelative()", () => {
-    describe("timezone: utc", () => {
-      it("formats date (1 minute ago)", () => {
-        const dateBefore = subSeconds(new Date(), 30);
+    describe("timezone: current", () => {
+      it("formats date (1 minute ago) - en-US", () => {
+        const dateBefore = subMinutes(new Date(), 1);
         const result = dateService.formatRelative(dateBefore, {
-          locale: enUS,
-          timezone: "Etc/UTC",
+          locale: "en-US",
         });
 
         expect(result).toBe("1 minute ago");
       });
 
-      it("formats date (1 minute ago) - locale aware", () => {
-        const dateBefore = subSeconds(new Date(), 30);
+      it("formats date (1 minute ago) - de-DE", () => {
+        const dateBefore = subMinutes(new Date(), 1);
         const result = dateService.formatRelative(dateBefore, {
-          locale: de,
-          timezone: "Etc/UTC",
+          locale: "de-DE",
         });
 
-        expect(result).toBe("vor einer Minute");
+        expect(result).toBe("vor 1 Minute");
       });
 
-      it("formats date (about 1 hour ago)", () => {
+      it("formats date (about 1 hour ago) - en-US", () => {
         const dateBefore = subHours(new Date(), 1);
         const result = dateService.formatRelative(dateBefore, {
-          locale: enUS,
-          timezone: "Etc/UTC",
+          locale: "en-US",
         });
 
-        expect(result).toBe("about 1 hour ago");
+        expect(result).toBe("1 hour ago");
       });
 
-      it("formats date (about 1 hour ago) - locale aware", () => {
+      it("formats date (about 1 hour ago) - de-DE", () => {
         const dateBefore = subHours(new Date(), 1);
         const result = dateService.formatRelative(dateBefore, {
-          locale: de,
-          timezone: "Etc/UTC",
+          locale: "de-DE",
         });
 
-        expect(result).toBe("vor etwa einer Stunde");
-      });
-    });
-
-    describe("timezone: Europe/Berlin", () => {
-      it("formats date (1 minute ago)", () => {
-        const dateBefore = subSeconds(new Date(), 30);
-        const result = dateService.formatRelative(dateBefore, {
-          locale: enUS,
-          timezone: "Europe/Berlin",
-        });
-
-        expect(result).toBe("1 minute ago");
-      });
-
-      it("formats date (1 minute ago) - locale aware", () => {
-        const dateBefore = subSeconds(new Date(), 30);
-        const result = dateService.formatRelative(dateBefore, {
-          timezone: "Europe/Berlin",
-          locale: de,
-        });
-
-        expect(result).toBe("vor einer Minute");
-      });
-
-      it("formats date (about 1 hour ago)", () => {
-        const dateBefore = subHours(new Date(), 1);
-        const result = dateService.formatRelative(dateBefore, {
-          timezone: "Europe/Berlin",
-          locale: enUS,
-        });
-
-        expect(result).toBe("about 1 hour ago");
-      });
-
-      it("formats date (about 1 hour ago) - locale aware", () => {
-        const dateBefore = subHours(new Date(), 1);
-        const result = dateService.formatRelative(dateBefore, {
-          timezone: "Europe/Berlin",
-          locale: de,
-        });
-
-        expect(result).toBe("vor etwa einer Stunde");
+        expect(result).toBe("vor 1 Stunde");
       });
     });
   });

@@ -55,15 +55,11 @@ export class I18nServiceImpl extends I18nService {
     });
   };
 
-  formatDateRelative = (
-    date: Date,
-    options?: { timezone?: string }
-  ): string => {
+  formatDateRelative = (date: Date): string => {
     this.accessLanguageAndLocale(); // access language and locale to detect changes of language within components
 
     return this.dateService.formatRelative(date, {
-      timezone: options?.timezone || this.store.getCurrentTimezone(),
-      locale: this.store.getLocaleModule().date,
+      locale: this.store.getLocaleModule().locale,
     });
   };
 
