@@ -2,12 +2,7 @@
   "name": "@cpro-js/react-app-state",
   "version": "0.0.0",
   "publishConfig": {
-    "access": "public",
-    "files": [
-      "*.md",
-      "src",
-      "dist"
-    ]
+    "access": "public"
   },
   "license": "MIT",
   "main": "./dist/index.js",
@@ -17,6 +12,10 @@
     "prepublish": "rimraf dist && microbundle --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
     "test": "jest"
   },
+  "files": [
+    "*.md",
+    "dist"
+  ],
   "peerDependencies": {
     "@types/react": "^17.0.0",
     "react": "^17.0.0"
