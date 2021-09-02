@@ -6,7 +6,7 @@ export abstract class DateService {
   abstract format(
     date: Date,
     formatString: string,
-    options: { locale: Locale; timezone: string }
+    options: { timezone: string }
   ): string;
 
   abstract formatRelative(
@@ -17,6 +17,6 @@ export abstract class DateService {
   abstract parse(
     dateString: string,
     formatString: string,
-    options: { locale: Locale; timezone: string }
+    options: { timezone: string }
   ): Date;
 }

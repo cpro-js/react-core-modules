@@ -52,7 +52,6 @@ export class I18nServiceImpl extends I18nService {
 
     return this.dateService.format(date, formatString, {
       timezone: options?.timezone || this.store.getCurrentTimezone(),
-      locale: this.store.getLocaleModule().date,
     });
   };
 
@@ -75,7 +74,6 @@ export class I18nServiceImpl extends I18nService {
   ): Date => {
     return this.dateService.parse(dateString, formatString, {
       timezone: options?.timezone || this.store.getCurrentTimezone(),
-      locale: this.store.getLocaleModule().date,
     });
   };
 
