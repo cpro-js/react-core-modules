@@ -19,13 +19,15 @@ import {
 } from "./translation/TranslationService";
 import { LocaleModule } from "./types";
 
+export type I18nDateFormatOptions = Partial<
+  DateFormatOptions & TimeFormatOptions & DateTimeFormatOptions
+>;
+
 export interface I18nServiceImplOptions {
   supportedLocales: Array<string>;
   getLocale: (locale: string) => Promise<LocaleModule>;
   getTranslations: (language: string) => Promise<Translations>;
-  dateFormat: Partial<
-    DateFormatOptions & TimeFormatOptions & DateTimeFormatOptions
-  >;
+  dateFormat: I18nDateFormatOptions;
 }
 
 @service()
@@ -225,10 +227,8 @@ export class I18nServiceImpl extends I18nService {
   }
 
   private getMergedDateFormatOptions(
-    options?: Partial<
-      DateFormatOptions & TimeFormatOptions & DateTimeFormatOptions
-    >
-  ): DateFormatOptions & TimeFormatOptions & DateTimeFormatOptions {
+    options?: I18nDateFormatOptions
+  ): Required<I18nDateFormatOptions> {
     return {
       day: "2-digit",
       month: "2-digit",
