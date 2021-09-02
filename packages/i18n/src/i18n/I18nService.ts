@@ -8,7 +8,7 @@ export abstract class I18nService {
 
   abstract translate: Translate;
 
-  abstract formatDate(
+  abstract formatDateByPattern(
     date: Date,
     formatString: string,
     options?: { timezone?: string }
@@ -19,7 +19,7 @@ export abstract class I18nService {
     options?: { timezone?: string }
   ): string;
 
-  abstract parseDate(
+  abstract parseDateByPattern(
     dateString: string,
     formatString: string,
     options?: { timezone?: string }

@@ -43,31 +43,27 @@ export class I18nServiceImpl extends I18nService {
     return this.translationService.t(key, values);
   };
 
-  formatDate = (
+  formatDateByPattern = (
     date: Date,
     formatString: string,
     options?: { timezone?: string }
   ): string => {
     this.accessLanguageAndLocale(); // access language and locale to detect changes of language within components
 
-    return this.dateService.format(date, formatString, {
+    return this.dateService.formatPattern(date, formatString, {
       timezone: options?.timezone || this.store.getCurrentTimezone(),
     });
   };
 
-  formatDateRelative = (
-    date: Date,
-    options?: { timezone?: string }
-  ): string => {
+  formatDateRelative = (date: Date): string => {
     this.accessLanguageAndLocale(); // access language and locale to detect changes of language within components
 
     return this.dateService.formatRelative(date, {
-      timezone: options?.timezone || this.store.getCurrentTimezone(),
-      locale: this.store.getLocaleModule().date,
+      locale: this.store.getLocaleModule().locale,
     });
   };
 
-  parseDate = (
+  parseDateByPattern = (
     dateString: string,
     formatString: string,
     options?: { timezone?: string }

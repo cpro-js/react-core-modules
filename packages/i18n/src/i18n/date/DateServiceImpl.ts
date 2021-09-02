@@ -1,12 +1,19 @@
 import { service } from "@cpro-js/react-di";
-import { Locale, formatDistance, lightFormat, parse } from "date-fns";
+import { lightFormat, parse } from "date-fns";
 import { getTimezoneOffset, utcToZonedTime } from "date-fns-tz";
+import memoizeFormatConstructor from "intl-format-cache";
 
 import { DateService } from "./DateService";
 
+const Duration = require("duration-relativetimeformat");
+
+const getRelativeTimeFormat = memoizeFormatConstructor(Duration);
+
+const padToTwoDigits = (number: number) => (number > 9 ? number : `0${number}`);
+
 @service()
 export class DateServiceImpl extends DateService {
-  format(
+  formatPattern(
     date: Date,
     formatString: string,
     options: { timezone: string }
@@ -19,17 +26,13 @@ export class DateServiceImpl extends DateService {
     return lightFormat(transformedDate, formatStringFixed);
   }
 
-  formatRelative(
-    date: Date,
-    options: { locale: Locale; timezone: string }
-  ): string {
-    const transformedDate = utcToZonedTime(date, options.timezone);
-    const transformedDateNow = utcToZonedTime(new Date(), options.timezone);
+  formatRelative(date: Date, options: { locale: string }): string {
+    const now = new Date();
 
-    return formatDistance(transformedDate, transformedDateNow, {
-      addSuffix: true,
-      locale: options.locale,
-    });
+    return getRelativeTimeFormat(options.locale, {
+      numeric: "auto",
+      style: "long",
+    }).format(date, now);
   }
 
   parse(
