@@ -6,7 +6,7 @@ import {
   TimeFormatOptions,
   TimezoneOptions,
 } from "./date/DateService";
-import { Locales, Translate } from "./translation/TranslationService";
+import { Translate } from "./translation/TranslationService";
 
 @injectable()
 export abstract class I18nService {
@@ -68,8 +68,6 @@ export abstract class I18nService {
   abstract getLocale(): string;
 
   abstract useLocale(locale: string): Promise<void>;
-
-  abstract updateTranslations(locales: Locales): Promise<void>;
 
   abstract getTimezone(): string;
 

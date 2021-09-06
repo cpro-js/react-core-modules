@@ -18,7 +18,6 @@ import {
   Translations,
 } from "./translation/TranslationService";
 import { TranslationServiceImpl } from "./translation/TranslationServiceImpl";
-import { i18nNamespace } from "./translation/util/resources";
 
 const getTimezone = (): string | undefined => {
   try {
@@ -34,11 +33,26 @@ export interface I18nModuleRegistryOptions {
   fallbackLocale: string;
   timezone?: string;
   fallbackTimezone: string;
+  /**
+   * array of namespaces to load. Default 'translation'.
+   */
+  namespaces?: string | Array<string>;
+  /**
+   * default namespace used if not passed to the translation function. Default 'translation'.
+   */
+  defaultNS?: string;
+  /**
+   * string or array of namespaces to lookup key if not found in given namespace.
+   */
+  fallbackNS?: string | Array<string>;
   determineLocale: (
     supportedLocales: Array<string>,
     fallbackLocale: string
   ) => string;
-  getTranslations: (language: string) => Promise<Translations>;
+  getTranslations: (
+    language: string,
+    namespace: string
+  ) => Promise<Translations>;
   dateFormat?: I18nDateFormatOptions;
 }
 
@@ -55,12 +69,27 @@ export const createI18nModuleRegistry: I18nModuleRegistry =
 
     const i18nInstance: i18n = i18next.createInstance();
 
+    i18nInstance.use({
+      type: "backend",
+      read(
+        language: string,
+        namespace: string,
+        callback: (errorValue: unknown, translations: null | {}) => void
+      ) {
+        options
+          .getTranslations(language, namespace)
+          .then((resources) => callback(null, resources))
+          .catch((error) => callback(error, null));
+      },
+    });
+
     await i18nInstance.init({
       debug: options.debug,
       fallbackLng: getLanguageFromLocale(options.fallbackLocale),
       supportedLngs: getLanguagesByLocales(options.supportedLocales),
-      fallbackNS: i18nNamespace,
-      ns: [i18nNamespace],
+      ns: options.namespaces,
+      fallbackNS: options.fallbackNS,
+      defaultNS: options.defaultNS,
       resources: {},
       parseMissingKeyHandler(key: string) {
         return `???${key}???`;
@@ -81,7 +110,6 @@ export const createI18nModuleRegistry: I18nModuleRegistry =
 
     const i18nService: I18nService = new I18nServiceImpl(
       {
-        getTranslations: options.getTranslations,
         supportedLocales: options.supportedLocales,
         dateFormat: options.dateFormat ?? {},
       },
