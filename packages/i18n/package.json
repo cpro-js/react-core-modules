@@ -31,6 +31,8 @@
     "pretty-bytes": "^5.6.0"
   },
   "devDependencies": {
+    "@cpro-js/react-app-state": "*",
+    "@cpro-js/react-di": "*",
     "@types/jest": "^27.0.1",
     "@types/react": "^17.0.19",
     "@types/react-test-renderer": "^17.0.1",
