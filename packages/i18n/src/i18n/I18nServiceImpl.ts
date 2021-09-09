@@ -12,10 +12,8 @@ import { LocaleStore } from "./locale/LocaleStore";
 import { getLanguageFromLocale } from "./locale/util/locale";
 import { NumberService } from "./number/NumberService";
 import {
-  Locales,
   Translate,
   TranslationService,
-  Translations,
 } from "./translation/TranslationService";
 
 export type I18nDateFormatOptions = Partial<
@@ -24,7 +22,6 @@ export type I18nDateFormatOptions = Partial<
 
 export interface I18nServiceImplOptions {
   supportedLocales: Array<string>;
-  getTranslations: (language: string) => Promise<Translations>;
   dateFormat: I18nDateFormatOptions;
 }
 
@@ -190,25 +187,22 @@ export class I18nServiceImpl extends I18nService {
     }
 
     const language = getLanguageFromLocale(locale);
-    const translations = await this.options.getTranslations(language);
 
-    this.translationService.setTranslations(language, translations);
-    await this.translationService.useLanguage(language);
+    if (this.translationService.getLanguage() !== language) {
+      await this.translationService.useLanguage(language);
+    }
 
-    this.numberService.useLanguage(locale);
+    if (this.numberService.getLanguage() !== locale) {
+      this.numberService.useLanguage(locale);
+    }
 
     this.store.setCurrentLocale(locale);
   };
 
-  async updateTranslations(locales: Locales): Promise<void> {
-    Object.keys(locales).map((language) =>
-      this.translationService.setTranslations(language, locales[language])
-    );
-    await this.translationService.useLanguage(
-      this.translationService.getLanguage()
-    );
+  reloadResources = async (): Promise<void> => {
+    await this.translationService.reloadResources();
     this.store.setCurrentLocale(this.store.getCurrentLocale());
-  }
+  };
 
   getTimezone(): string {
     return this.store.getCurrentTimezone();

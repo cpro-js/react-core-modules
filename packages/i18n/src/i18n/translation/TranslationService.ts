@@ -1,7 +1,6 @@
 import { injectable } from "@cpro-js/react-di";
 
 export type Translations = { [key: string]: string | object };
-export type Locales = { [language: string]: Translations };
 
 export type Translate = (
   key: string,
@@ -13,6 +12,8 @@ export abstract class TranslationService {
   abstract t: Translate;
 
   abstract getLanguage(): string;
+
   abstract useLanguage(language: string): Promise<void>;
-  abstract setTranslations(language: string, values: Translations): void;
+
+  abstract reloadResources(): Promise<void>;
 }
