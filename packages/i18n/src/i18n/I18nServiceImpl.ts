@@ -82,7 +82,6 @@ export class I18nServiceImpl extends I18nService {
     date: Date,
     options?: Partial<TimezoneOptions & DateTimeFormatOptions>
   ): string => {
-    // this.accessLanguageAndLocale(); // access language and locale to detect changes of language within components
     const mergedOptions = this.getMergedDateFormatOptions(options);
 
     return this.dateService.formatDateTime(date, {
@@ -101,7 +100,6 @@ export class I18nServiceImpl extends I18nService {
     date: Date,
     options?: Partial<TimezoneOptions & TimeFormatOptions>
   ): string => {
-    // this.accessLanguageAndLocale(); // access language and locale to detect changes of language within components
     const mergedOptions = this.getMergedDateFormatOptions(options);
 
     return this.dateService.formatTime(date, {
