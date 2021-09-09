@@ -190,11 +190,20 @@ export class I18nServiceImpl extends I18nService {
 
     const language = getLanguageFromLocale(locale);
 
-    await this.translationService.useLanguage(language);
+    if (this.translationService.getLanguage() !== language) {
+      await this.translationService.useLanguage(language);
+    }
 
-    this.numberService.useLanguage(locale);
+    if (this.numberService.getLanguage() !== locale) {
+      this.numberService.useLanguage(locale);
+    }
 
     this.store.setCurrentLocale(locale);
+  };
+
+  reloadResources = async (): Promise<void> => {
+    await this.translationService.reloadResources();
+    this.store.setCurrentLocale(this.store.getCurrentLocale());
   };
 
   getTimezone(): string {

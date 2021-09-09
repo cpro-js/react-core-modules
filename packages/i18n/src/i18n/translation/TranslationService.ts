@@ -14,4 +14,6 @@ export abstract class TranslationService {
   abstract getLanguage(): string;
 
   abstract useLanguage(language: string): Promise<void>;
+
+  abstract reloadResources(): Promise<void>;
 }

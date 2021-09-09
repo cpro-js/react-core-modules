@@ -1,5 +1,5 @@
 import { AsyncModuleRegistry, Container } from "@cpro-js/react-di";
-import i18next, { i18n } from "i18next";
+import i18next, { BackendModule, i18n } from "i18next";
 
 import { DateService } from "./date/DateService";
 import { DateServiceImpl } from "./date/DateServiceImpl";
@@ -34,15 +34,16 @@ export interface I18nModuleRegistryOptions {
   timezone?: string;
   fallbackTimezone: string;
   /**
-   * array of namespaces to load. Default 'translation'.
+   * Array of namespaces to load. Default 'translation'. Please make sure that 'defaultNS' and 'fallbackNS' is also part of the list.
+   * Otherwise the namespace will never be loaded.
    */
   namespaces?: string | Array<string>;
   /**
-   * default namespace used if not passed to the translation function. Default 'translation'.
+   * Default namespace used if not passed to the translation function. Default 'translation'.
    */
   defaultNS?: string;
   /**
-   * string or array of namespaces to lookup key if not found in given namespace.
+   * String or array of namespaces to lookup key if not found in given namespace.
    */
   fallbackNS?: string | Array<string>;
   determineLocale: (
@@ -69,6 +70,11 @@ export const createI18nModuleRegistry: I18nModuleRegistry =
 
     const i18nInstance: i18n = i18next.createInstance();
 
+    const locale = options.determineLocale(
+      options.supportedLocales,
+      options.fallbackLocale
+    );
+
     i18nInstance.use({
       type: "backend",
       read(
@@ -81,16 +87,17 @@ export const createI18nModuleRegistry: I18nModuleRegistry =
           .then((resources) => callback(null, resources))
           .catch((error) => callback(error, null));
       },
-    });
+    } as BackendModule);
 
     await i18nInstance.init({
       debug: options.debug,
+      lng: getLanguageFromLocale(locale),
       fallbackLng: getLanguageFromLocale(options.fallbackLocale),
       supportedLngs: getLanguagesByLocales(options.supportedLocales),
-      ns: options.namespaces,
-      fallbackNS: options.fallbackNS,
-      defaultNS: options.defaultNS,
-      resources: {},
+      ns: options.namespaces ?? "translation",
+      fallbackNS: options.fallbackNS ?? false,
+      defaultNS: options.defaultNS ?? "translation",
+      // resources: {}, // empty object prevents loading
       parseMissingKeyHandler(key: string) {
         return `???${key}???`;
       },
@@ -120,11 +127,6 @@ export const createI18nModuleRegistry: I18nModuleRegistry =
     );
 
     container.bindConstant(I18nService, i18nService);
-
-    const locale = options.determineLocale(
-      options.supportedLocales,
-      options.fallbackLocale
-    );
 
     i18nService.useTimezone(
       options.timezone || getTimezone() || options.fallbackTimezone

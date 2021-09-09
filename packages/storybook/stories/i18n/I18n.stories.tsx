@@ -24,8 +24,9 @@ const createContainer = async () => {
       fallbackLocale: "de-DE",
       fallbackTimezone: "Europe/Berlin",
       supportedLocales: ["de-DE"],
-      getTranslations: (language) => {
-        console.log("getTranslations", language);
+      // namespaces: ["common", "app", "translation"],
+      getTranslations: (language, namespace) => {
+        console.log("getTranslations", language, namespace);
         return Promise.resolve({
           hello: {
             world: `Hello World ${language} - ${++counter}`,
@@ -59,11 +60,11 @@ const Provider: FC<{}> = observer(({ children }) => {
 const Consumer = observer(() => {
   const { t } = useI18n();
 
-  const i18nService = useInjection(I18nService);
+  const i18nService = useInjection<I18nService>(I18nService);
 
   useEffect(() => {
     const reload = setTimeout(() => {
-      i18nService.useLocale(i18nService.getLocale());
+      i18nService.reloadResources();
     }, 2000);
 
     return () => {

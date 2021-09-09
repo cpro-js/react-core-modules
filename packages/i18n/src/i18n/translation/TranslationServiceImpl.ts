@@ -21,4 +21,8 @@ export class TranslationServiceImpl extends TranslationService {
     await this.i18nInstance.loadLanguages(language);
     await this.i18nInstance.changeLanguage(language);
   }
+
+  async reloadResources(): Promise<void> {
+    await this.i18nInstance.reloadResources();
+  }
 }

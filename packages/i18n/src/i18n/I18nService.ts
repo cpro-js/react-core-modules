@@ -69,6 +69,8 @@ export abstract class I18nService {
 
   abstract useLocale(locale: string): Promise<void>;
 
+  abstract reloadResources(): Promise<void>;
+
   abstract getTimezone(): string;
 
   abstract useTimezone(timezone: string): void;
