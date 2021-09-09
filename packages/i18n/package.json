@@ -8,8 +8,8 @@
   "main": "./dist/index.js",
   "module": "./dist/index.modern.js",
   "scripts": {
-    "build": "rimraf dist && microbundle --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
-    "dev": "rimraf dist && microbundle --watch --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
+    "build": "rimraf dist && microbundle --sourcemap --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
+    "dev": "rimraf dist && microbundle --sourcemap --watch --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
     "prepublish": "rimraf dist && microbundle --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
     "test": "jest"
   },
