@@ -9,7 +9,7 @@ import {
   useInjection,
 } from "@cpro-js/react-core";
 import { Meta } from "@storybook/react";
-import { FC, useEffect, useMemo } from "react";
+import { ChangeEvent, FC, useCallback, useEffect, useMemo } from "react";
 
 const createContainer = async () => {
   const container = new Container();
@@ -23,7 +23,7 @@ const createContainer = async () => {
       determineLocale: () => "de-DE",
       fallbackLocale: "de-DE",
       fallbackTimezone: "Europe/Berlin",
-      supportedLocales: ["de-DE"],
+      supportedLocales: ["de-DE", "en-US"],
       // namespaces: ["common", "app", "translation"],
       getTranslations: (language, namespace) => {
         console.log("getTranslations", language, namespace);
@@ -57,11 +57,8 @@ const Provider: FC<{}> = observer(({ children }) => {
   });
 });
 
-const Consumer = observer(() => {
-  const { t } = useI18n();
-
+const ReloadResources = observer(() => {
   const i18nService = useInjection<I18nService>(I18nService);
-
   useEffect(() => {
     const reload = setTimeout(() => {
       i18nService.reloadResources();
@@ -72,7 +69,93 @@ const Consumer = observer(() => {
     };
   }, [i18nService]);
 
-  return <div>{t("hello.world")}</div>;
+  return null;
+});
+
+const LocaleChanger = observer(() => {
+  const { useLocale, getLocale } = useInjection<I18nService>(I18nService);
+
+  const onChange = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      useLocale(event.target.value);
+    },
+    [useLocale]
+  );
+
+  const currentLocale = getLocale();
+
+  return (
+    <select onChange={onChange}>
+      {["en-US", "de-DE"].map((locale) => (
+        <option value={locale} selected={locale === currentLocale}>
+          {locale}
+        </option>
+      ))}
+    </select>
+  );
+});
+
+const Consumer = observer(() => {
+  const {
+    t,
+    formatNumber,
+    formatPercent,
+    formatFileSize,
+    formatCurrency,
+    formatDateByPattern,
+    formatDate,
+    formatTime,
+    formatDateTime,
+    formatDateRelative,
+  } = useI18n();
+
+  return (
+    <div>
+      <dl>
+        <dt>Message Bundle 'hello.world'</dt>
+        <dd>{t("hello.world")} </dd>
+      </dl>
+      <dl>
+        <dt>Formatted Number ('0.3999' - maximum 2 fraction digits)</dt>
+        <dd>{formatNumber(0.3999, { maximumFractionDigits: 2 })} </dd>
+      </dl>
+      <dl>
+        <dt>
+          Formatted Number as percent ('50.8888' - maximum 2 fraction digits)
+        </dt>
+        <dd>{formatPercent(50.8888, { maximumFractionDigits: 2 })} </dd>
+      </dl>
+      <dl>
+        <dt>Formatted file size (4096 Bytes)</dt>
+        <dd>{formatFileSize(4096)} </dd>
+      </dl>
+      <dl>
+        <dt>Formatted currency (4096 EUR)</dt>
+        <dd>{formatCurrency(4096, "EUR")} </dd>
+      </dl>
+      <dl>
+        <dt>Formatted date by pattern 'yyyy-MM-dd'</dt>
+        <dd>{formatDateByPattern(new Date(), "yyyy-MM-dd")} </dd>
+      </dl>
+
+      <dl>
+        <dt>Formatted date</dt>
+        <dd>{formatDate(new Date())} </dd>
+      </dl>
+      <dl>
+        <dt>Formatted date-time</dt>
+        <dd>{formatDateTime(new Date())} </dd>
+      </dl>
+      <dl>
+        <dt>Formatted time</dt>
+        <dd>{formatTime(new Date())} </dd>
+      </dl>
+      <dl>
+        <dt>Formatted date relative</dt>
+        <dd>{formatDateRelative(new Date())} </dd>
+      </dl>
+    </div>
+  );
 });
 
 export default {
@@ -82,6 +165,8 @@ export default {
 export const Default = () => {
   return (
     <Provider>
+      <ReloadResources />
+      <LocaleChanger />
       <Consumer />
     </Provider>
   );
