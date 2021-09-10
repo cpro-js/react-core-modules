@@ -5,6 +5,7 @@
   "command": {
     "version": {
       "allowBranch": "main",
+      "exact": true,
       "conventionalCommits": true,
       "createRelease": "github",
       "message": "chore(release): publish %s"
