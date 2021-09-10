@@ -1,6 +1,6 @@
 {
   "name": "@cpro-js/react-story",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -8,7 +8,7 @@
     "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
-    "@cpro-js/react-core": "*"
+    "@cpro-js/react-core": "0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",

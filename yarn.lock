@@ -2028,7 +2028,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cpro-js/react-app-state@*, @cpro-js/react-app-state@workspace:packages/app-state":
+"@cpro-js/react-app-state@0.1.0, @cpro-js/react-app-state@workspace:packages/app-state":
   version: 0.0.0-use.local
   resolution: "@cpro-js/react-app-state@workspace:packages/app-state"
   dependencies:
@@ -2072,13 +2072,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@cpro-js/react-core@*, @cpro-js/react-core@workspace:packages/core":
+"@cpro-js/react-core@0.1.0, @cpro-js/react-core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@cpro-js/react-core@workspace:packages/core"
   dependencies:
-    "@cpro-js/react-app-state": "*"
-    "@cpro-js/react-di": "*"
-    "@cpro-js/react-i18n": "*"
+    "@cpro-js/react-app-state": 0.1.0
+    "@cpro-js/react-di": 0.1.0
+    "@cpro-js/react-i18n": 0.1.0
     "@types/jest": ^27.0.1
     "@types/react": ^17.0.19
     jest: ^27.1.0
@@ -2095,7 +2095,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@cpro-js/react-di@*, @cpro-js/react-di@workspace:packages/di":
+"@cpro-js/react-di@0.1.0, @cpro-js/react-di@workspace:packages/di":
   version: 0.0.0-use.local
   resolution: "@cpro-js/react-di@workspace:packages/di"
   dependencies:
@@ -2118,12 +2118,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@cpro-js/react-i18n@*, @cpro-js/react-i18n@workspace:packages/i18n":
+"@cpro-js/react-i18n@0.1.0, @cpro-js/react-i18n@workspace:packages/i18n":
   version: 0.0.0-use.local
   resolution: "@cpro-js/react-i18n@workspace:packages/i18n"
   dependencies:
-    "@cpro-js/react-app-state": "*"
-    "@cpro-js/react-di": "*"
+    "@cpro-js/react-app-state": 0.1.0
+    "@cpro-js/react-di": 0.1.0
     "@types/jest": ^27.0.1
     "@types/react": ^17.0.19
     "@types/react-test-renderer": ^17.0.1
@@ -2154,7 +2154,7 @@ __metadata:
   resolution: "@cpro-js/react-story@workspace:packages/storybook"
   dependencies:
     "@babel/core": ^7.15.5
-    "@cpro-js/react-core": "*"
+    "@cpro-js/react-core": 0.1.0
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-actions": ^6.3.8
     "@storybook/addon-docs": ^6.3.8
