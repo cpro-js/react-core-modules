@@ -19,20 +19,11 @@ import {
 } from "./translation/TranslationService";
 import { TranslationServiceImpl } from "./translation/TranslationServiceImpl";
 
-const getTimezone = (): string | undefined => {
-  try {
-    return Intl.DateTimeFormat().resolvedOptions().timeZone;
-  } catch (e) {
-    return undefined;
-  }
-};
-
 export interface I18nModuleRegistryOptions {
   debug: boolean;
   supportedLocales: Array<string>;
   fallbackLocale: string;
   timezone?: string;
-  fallbackTimezone: string;
   /**
    * Array of namespaces to load. Default 'translation'. Please make sure that 'defaultNS' and 'fallbackNS' is also part of the list.
    * Otherwise the namespace will never be loaded.
@@ -129,7 +120,7 @@ export const createI18nModuleRegistry: I18nModuleRegistry =
     container.bindConstant(I18nService, i18nService);
 
     i18nService.useTimezone(
-      options.timezone || getTimezone() || options.fallbackTimezone
+      options.timezone ?? Intl.DateTimeFormat().resolvedOptions().timeZone
     );
     await i18nService.useLocale(locale);
   };

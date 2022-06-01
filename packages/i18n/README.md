@@ -22,7 +22,6 @@ await container.loadAsync(
     debug: true,
     determineLocale: () => "de-DE",
     fallbackLocale: "de-DE",
-    fallbackTimezone: "Europe/Berlin",
     supportedLocales: ["de-DE"],
     getTranslations: language => import(`../asset/locale/${language}.i18n.json`),
   })
