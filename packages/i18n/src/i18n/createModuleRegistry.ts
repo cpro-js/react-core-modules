@@ -24,7 +24,6 @@ export interface I18nModuleRegistryOptions {
   supportedLocales: Array<string>;
   fallbackLocale: string;
   timezone?: string;
-  fallbackTimezone: string;
   /**
    * Array of namespaces to load. Default 'translation'. Please make sure that 'defaultNS' and 'fallbackNS' is also part of the list.
    * Otherwise the namespace will never be loaded.
