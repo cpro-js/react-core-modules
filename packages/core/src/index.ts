@@ -35,6 +35,7 @@ export { service } from "@cpro-js/react-di";
 export { store } from "@cpro-js/react-di";
 export { useInjection } from "@cpro-js/react-di";
 export { ContainerProvider } from "@cpro-js/react-di";
+export type { ContainerProviderProps } from "@cpro-js/react-di";
 
 export { I18nService } from "@cpro-js/react-i18n";
 export { createI18nModuleRegistry } from "@cpro-js/react-i18n";

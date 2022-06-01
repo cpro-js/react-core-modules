@@ -20,8 +20,8 @@
   "peerDependencies": {
     "@cpro-js/react-app-state": "*",
     "@cpro-js/react-di": "*",
-    "@types/react": "^17.0.0",
-    "react": "^17.0.0"
+    "@types/react": "^17.0.0 || ^18.0.0",
+    "react": "^17.0.0 || ^18.0.0"
   },
   "dependencies": {
     "date-fns": "2.16.1",
@@ -35,12 +35,12 @@
     "@cpro-js/react-app-state": "0.1.0",
     "@cpro-js/react-di": "0.1.0",
     "@types/jest": "^27.0.1",
-    "@types/react": "^17.0.19",
+    "@types/react": "^18.0.10",
     "@types/react-test-renderer": "^17.0.1",
     "jest": "^27.1.0",
     "microbundle": "^0.13.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.0.5",
