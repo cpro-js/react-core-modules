@@ -9,7 +9,14 @@ import {
   useInjection,
 } from "@cpro-js/react-core";
 import { Meta } from "@storybook/react";
-import { ChangeEvent, FC, useCallback, useEffect, useMemo } from "react";
+import {
+  ChangeEvent,
+  FC,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+} from "react";
 
 const createContainer = async () => {
   const container = new Container();
@@ -39,7 +46,7 @@ const createContainer = async () => {
   return container;
 };
 
-const Provider: FC<{}> = observer(({ children }) => {
+const Provider: FC<{ children: ReactNode }> = observer(({ children }) => {
   const container = useMemo(() => {
     return fromPromise(createContainer());
   }, []);
@@ -85,9 +92,9 @@ const LocaleChanger = observer(() => {
   const currentLocale = getLocale();
 
   return (
-    <select onChange={onChange}>
+    <select onChange={onChange} value={currentLocale}>
       {["en-US", "de-DE"].map((locale) => (
-        <option value={locale} selected={locale === currentLocale}>
+        <option key={locale} value={locale}>
           {locale}
         </option>
       ))}

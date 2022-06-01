@@ -9,3 +9,4 @@ export { service } from "./decorator/service";
 export { store } from "./decorator/store";
 export { useInjection } from "./react/useInjection";
 export { ContainerProvider } from "./react/context";
+export type { ContainerProviderProps } from "./react/context";
