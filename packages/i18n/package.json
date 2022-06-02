@@ -1,6 +1,6 @@
 {
   "name": "@cpro-js/react-i18n",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publishConfig": {
     "access": "public"
   },
@@ -32,8 +32,8 @@
     "pretty-bytes": "^5.6.0"
   },
   "devDependencies": {
-    "@cpro-js/react-app-state": "0.1.0",
-    "@cpro-js/react-di": "0.1.0",
+    "@cpro-js/react-app-state": "0.2.0",
+    "@cpro-js/react-di": "0.2.0",
     "@types/jest": "^27.0.1",
     "@types/react": "^18.0.10",
     "@types/react-test-renderer": "^17.0.1",

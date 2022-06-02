@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/cpro-js/react-core-modules/compare/v0.1.0...v0.2.0) (2022-06-02)
+
+### Features
+
+- upgrade to react 18 ([#21](https://github.com/cpro-js/react-core-modules/issues/21)) ([b9a0088](https://github.com/cpro-js/react-core-modules/commit/b9a0088b6c7d5a55d125e7137c46654f03f305ab))
+
 # 0.1.0 (2021-09-10)
 
 ### Bug Fixes
