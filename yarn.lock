@@ -1888,7 +1888,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.17.8":
+"@babel/runtime@npm:^7.14.6, @babel/runtime@npm:^7.17.8":
   version: 7.18.3
   resolution: "@babel/runtime@npm:7.18.3"
   dependencies:
@@ -2337,6 +2337,7 @@ __metadata:
     date-fns-tz: ^1.1.6
     duration-relativetimeformat: 2.0.1
     i18next: 19.8.4
+    i18next-browser-languagedetector: ^6.1.4
     intl-format-cache: ^4.3.1
     jest: ^27.1.0
     microbundle: ^0.13.3
@@ -11219,6 +11220,15 @@ fsevents@^1.2.7:
   bin:
     husky: lib/bin.js
   checksum: 2ccfe6ddc51dc05ae8ea1e2fbb893344e93a813e00c595d6b5f5e704b7b998d6b0e2adda7c57f99b5e46a60dc07c7d860269a2ea91661c6bacef0eca8e0b8e96
+  languageName: node
+  linkType: hard
+
+"i18next-browser-languagedetector@npm:^6.1.4":
+  version: 6.1.4
+  resolution: "i18next-browser-languagedetector@npm:6.1.4"
+  dependencies:
+    "@babel/runtime": ^7.14.6
+  checksum: 379dba3527c359c3adeb26c1e16e6b7e007989763c4361d43662e4d9412c538ca35e28a6a12df0654edc0adb78b44ff5afdf4c5d842bbf0e83db59d5e9e02f55
   languageName: node
   linkType: hard
 
