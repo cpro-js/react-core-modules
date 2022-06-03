@@ -1,7 +1,7 @@
 import { service } from "@cpro-js/react-di";
 import { i18n } from "i18next";
 
-import { TranslationService } from "./TranslationService";
+import { Translate, TranslationService } from "./TranslationService";
 
 @service()
 export class TranslationServiceImpl extends TranslationService {
@@ -9,7 +9,7 @@ export class TranslationServiceImpl extends TranslationService {
     super();
   }
 
-  t = (key: string, values?: { [key: string]: string }) => {
+  t: Translate = (key, values) => {
     return this.i18nInstance.t(key, values);
   };
 

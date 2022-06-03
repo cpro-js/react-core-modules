@@ -37,13 +37,13 @@ export class I18nServiceImpl extends I18nService {
     super();
   }
 
-  t: Translate = (key: string, values?: { [key: string]: string }) => {
+  t: Translate = (key, values) => {
     this.accessLanguage(); // access language to detect changes of language within component
 
     return this.translationService.t(key, values);
   };
 
-  translate: Translate = (key: string, values?: { [key: string]: string }) => {
+  translate: Translate = (key, values) => {
     this.accessLanguage(); // access language to detect changes of language within component
 
     return this.translationService.t(key, values);

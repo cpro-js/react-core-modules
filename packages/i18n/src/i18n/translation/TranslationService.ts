@@ -4,7 +4,7 @@ export type Translations = { [key: string]: string | object };
 
 export type Translate = (
   key: string,
-  values?: { [key: string]: string }
+  values?: { [key: string]: string | number | boolean }
 ) => string;
 
 @injectable()
