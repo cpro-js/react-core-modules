@@ -1,5 +1,6 @@
 import { AsyncModuleRegistry, Container } from "@cpro-js/react-di";
 import i18next, { BackendModule, i18n } from "i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
 
 import { DateService } from "./date/DateService";
 import { DateServiceImpl } from "./date/DateServiceImpl";
@@ -20,7 +21,7 @@ import {
 import { TranslationServiceImpl } from "./translation/TranslationServiceImpl";
 
 export interface I18nModuleRegistryOptions {
-  debug: boolean;
+  debug?: boolean;
   supportedLocales: Array<string>;
   fallbackLocale: string;
   timezone?: string;
@@ -37,10 +38,19 @@ export interface I18nModuleRegistryOptions {
    * String or array of namespaces to lookup key if not found in given namespace.
    */
   fallbackNS?: string | Array<string>;
-  determineLocale: (
-    supportedLocales: Array<string>,
-    fallbackLocale: string
-  ) => string;
+  /**
+   * Configures the locale to be used.
+   * Using the launchpad, you should pass the locale evaluated by the launchpad here; we determine the
+   * most fitting translation then.
+   * If you need full control over the language evaluation process, then implement the appropriate function.
+   *
+   * For standalone apps without launchpad integration leave out this parameter or pass undefined.
+   * We will use a language detector which will respect query param "sap-language".
+   * In consequence, the app will behave as any other Fiori app in regard to locale determination.
+   */
+  determineLocale?:
+    | string
+    | ((supportedLocales: Array<string>, fallbackLocale: string) => string);
   getTranslations: (
     language: string,
     namespace: string
@@ -52,6 +62,23 @@ export type I18nModuleRegistry = (
   options: I18nModuleRegistryOptions
 ) => AsyncModuleRegistry;
 
+function evaluateLocale(
+  locale: string,
+  supportedLocales: Array<string>,
+  fallbackLocale: string
+) {
+  if (supportedLocales.includes(locale)) {
+    return locale;
+  }
+  if (/-/.test(locale)) {
+    const lang = locale.split("-")[0];
+    if (supportedLocales.includes(lang)) {
+      return lang;
+    }
+  }
+  return fallbackLocale;
+}
+
 export const createI18nModuleRegistry: I18nModuleRegistry =
   (options: I18nModuleRegistryOptions) => async (container: Container) => {
     const localStore: LocaleStore = new LocaleStoreImpl(
@@ -61,10 +88,18 @@ export const createI18nModuleRegistry: I18nModuleRegistry =
 
     const i18nInstance: i18n = i18next.createInstance();
 
-    const locale = options.determineLocale(
-      options.supportedLocales,
-      options.fallbackLocale
-    );
+    const locale = !options.determineLocale
+      ? undefined
+      : typeof options.determineLocale === "string"
+      ? evaluateLocale(
+          options.determineLocale,
+          options.supportedLocales,
+          options.fallbackLocale
+        )
+      : options.determineLocale(
+          options.supportedLocales,
+          options.fallbackLocale
+        );
 
     i18nInstance.use({
       type: "backend",
@@ -80,9 +115,13 @@ export const createI18nModuleRegistry: I18nModuleRegistry =
       },
     } as BackendModule);
 
+    if (!locale) {
+      i18nInstance.use(LanguageDetector);
+    }
+
     await i18nInstance.init({
       debug: options.debug,
-      lng: getLanguageFromLocale(locale),
+      lng: locale ? getLanguageFromLocale(locale) : undefined,
       fallbackLng: getLanguageFromLocale(options.fallbackLocale),
       supportedLngs: getLanguagesByLocales(options.supportedLocales),
       ns: options.namespaces ?? "translation",
@@ -98,6 +137,12 @@ export const createI18nModuleRegistry: I18nModuleRegistry =
       react: {
         useSuspense: false, // fix https://github.com/i18next/react-i18next/issues/766
       },
+      detection: locale
+        ? undefined
+        : {
+            order: ["querystring", "navigator"],
+            lookupQuerystring: "sap-language",
+          },
     });
 
     const translationService: TranslationService = new TranslationServiceImpl(
@@ -122,5 +167,4 @@ export const createI18nModuleRegistry: I18nModuleRegistry =
     i18nService.useTimezone(
       options.timezone ?? Intl.DateTimeFormat().resolvedOptions().timeZone
     );
-    await i18nService.useLocale(locale);
   };
