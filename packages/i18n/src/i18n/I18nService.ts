@@ -63,15 +63,19 @@ export abstract class I18nService {
 
   abstract parseNumber(value: string): number | undefined;
 
-  abstract getLanguage(): string;
+  abstract getTranslationLocale(): string;
 
-  abstract getLocale(): string;
+  abstract getFormattingLocale(): string;
 
   abstract useLocale(locale: string): Promise<void>;
+
+  abstract useTranslationLocale(locale: string): Promise<void>;
+
+  abstract useFormattingLocale(locale: string): Promise<void>;
 
   abstract reloadResources(): Promise<void>;
 
   abstract getTimezone(): string;
 
-  abstract useTimezone(timezone: string): void;
+  abstract useTimezone(timezone: string): Promise<void>;
 }

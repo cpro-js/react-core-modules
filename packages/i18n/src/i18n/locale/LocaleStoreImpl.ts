@@ -2,11 +2,11 @@ import { action, makeObservable, observable } from "@cpro-js/react-app-state";
 import { store } from "@cpro-js/react-di";
 
 import { LocaleStore } from "./LocaleStore";
-import { getLanguageFromLocale } from "./util/locale";
+import { getLanguageFromLocale } from "./util/localeUtils";
 
 @store()
 export class LocaleStoreImpl extends LocaleStore {
-  protected readonly supportedLocales: Array<string>;
+  protected readonly supportedLocales: Array<string> | undefined;
   protected readonly fallbackLocale: string;
 
   @observable
@@ -18,7 +18,10 @@ export class LocaleStoreImpl extends LocaleStore {
   @observable
   protected currentTimezone: string = "";
 
-  constructor(supportedLocales: Array<string>, fallbackLocale: string) {
+  constructor(
+    supportedLocales: Array<string> | undefined,
+    fallbackLocale: string
+  ) {
     super();
     this.supportedLocales = supportedLocales;
     this.fallbackLocale = fallbackLocale;
@@ -40,7 +43,7 @@ export class LocaleStoreImpl extends LocaleStore {
     return this.fallbackLocale;
   }
 
-  getSupportedLocales(): Array<string> {
+  getSupportedLocales() {
     return this.supportedLocales;
   }
 

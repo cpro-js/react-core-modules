@@ -6,7 +6,7 @@ const numberService: NumberService = new NumberServiceImpl();
 describe("NumberServiceImpl", () => {
   describe("de-DE", () => {
     beforeEach(() => {
-      numberService.useLanguage("de-DE");
+      numberService.useLocale("de-DE");
     });
 
     describe(".formatNumber()", () => {
@@ -418,7 +418,7 @@ describe("NumberServiceImpl", () => {
 
   describe("en-US", () => {
     beforeEach(() => {
-      numberService.useLanguage("en-US");
+      numberService.useLocale("en-US");
     });
 
     describe(".formatNumber()", () => {
