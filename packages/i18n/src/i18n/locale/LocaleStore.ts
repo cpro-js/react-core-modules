@@ -2,14 +2,14 @@ import { injectable } from "@cpro-js/react-di";
 
 @injectable()
 export abstract class LocaleStore {
-  protected abstract supportedLocales: Array<string>;
+  protected abstract supportedLocales: Array<string> | undefined;
   protected abstract fallbackLocale: string;
 
   protected abstract currentLocale: string;
   protected abstract currentLanguage: string;
   protected abstract currentTimezone: string;
 
-  abstract getSupportedLocales(): Array<string>;
+  abstract getSupportedLocales(): Array<string> | undefined;
 
   abstract getFallbackLocale(): string;
 

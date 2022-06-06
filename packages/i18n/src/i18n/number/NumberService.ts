@@ -1,7 +1,7 @@
 export abstract class NumberService {
-  abstract getLanguage(): string;
+  abstract getLocale(): string;
 
-  abstract useLanguage(language: string): void;
+  abstract useLocale(locale: string): void;
 
   abstract formatNumber(
     value: number,

@@ -12,10 +12,10 @@ const countDecimals = (value: number) => {
 };
 
 export class NumberServiceImpl extends NumberService {
-  private language: string = "en-US";
+  private locale: string = "en-US";
 
   formatCurrency(value: number, currencyIsoCode: string): string {
-    return getNumberFormat(this.language, {
+    return getNumberFormat(this.locale, {
       ...this.normalizeOptionsByValue(value),
       style: "currency",
       currency: currencyIsoCode,
@@ -31,7 +31,7 @@ export class NumberServiceImpl extends NumberService {
       maximumFractionDigits?: number;
     }
   ): string {
-    return getNumberFormat(this.language, {
+    return getNumberFormat(this.locale, {
       ...this.normalizeOptionsByValue(value, options),
       style: "decimal",
       useGrouping: options?.useGrouping ?? false,
@@ -48,7 +48,7 @@ export class NumberServiceImpl extends NumberService {
   ): string {
     const percent = value / 100;
 
-    return getNumberFormat(this.language, {
+    return getNumberFormat(this.locale, {
       ...this.normalizeOptionsByValue(value, options),
       style: "percent",
       useGrouping: options?.useGrouping ?? false,
@@ -58,24 +58,24 @@ export class NumberServiceImpl extends NumberService {
   formatFileSize(value: number): string {
     // Note: pretty-bytes is pretty small & uses Intl internally
     return prettyBytes(value, {
-      locale: this.language,
+      locale: this.locale,
       maximumFractionDigits: 1,
       bits: false,
     });
   }
 
-  getLanguage(): string {
-    return this.language;
+  getLocale(): string {
+    return this.locale;
   }
 
   parseNumber(value: string): number | undefined {
     // based on https://stackoverflow.com/a/29273131
-    const thousandSeparator = getNumberFormat(this.language, {
+    const thousandSeparator = getNumberFormat(this.locale, {
       useGrouping: true,
     })
       .format(11111)
       .replace(/\p{Number}/gu, "");
-    const decimalSeparator = getNumberFormat(this.language, {
+    const decimalSeparator = getNumberFormat(this.locale, {
       minimumFractionDigits: 1,
     })
       .format(1.1)
@@ -95,8 +95,8 @@ export class NumberServiceImpl extends NumberService {
     return isNaN(parsed) ? undefined : parsed;
   }
 
-  useLanguage(language: string): void {
-    this.language = language;
+  useLocale(locale: string): void {
+    this.locale = locale;
   }
 
   private normalizeOptionsByValue(

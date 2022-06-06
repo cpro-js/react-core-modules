@@ -1,3 +1,4 @@
+import { action } from "@cpro-js/react-app-state";
 import { service } from "@cpro-js/react-di";
 
 import {
@@ -9,7 +10,7 @@ import {
 } from "./date/DateService";
 import { I18nService } from "./I18nService";
 import { LocaleStore } from "./locale/LocaleStore";
-import { getLanguageFromLocale } from "./locale/util/locale";
+import { evaluateLocale } from "./locale/util/localeUtils";
 import { NumberService } from "./number/NumberService";
 import {
   Translate,
@@ -21,7 +22,7 @@ export type I18nDateFormatOptions = Partial<
 >;
 
 export interface I18nServiceImplOptions {
-  supportedLocales: Array<string>;
+  supportedLocales: Array<string> | undefined;
   dateFormat: I18nDateFormatOptions;
 }
 
@@ -169,36 +170,40 @@ export class I18nServiceImpl extends I18nService {
     return this.numberService.parseNumber(value);
   };
 
-  getLanguage = (): string => {
-    return this.store.getCurrentLanguage();
+  getTranslationLocale = () => {
+    return this.translationService.getLanguage();
   };
 
-  getLocale = (): string => {
+  getFormattingLocale = (): string => {
     return this.store.getCurrentLocale();
   };
 
-  useLocale = async (locale: string): Promise<void> => {
-    if (this.options.supportedLocales.indexOf(locale) === -1) {
-      return Promise.reject(
-        new Error(
-          `Request unsupported locale ${locale} for supported locales ${this.options.supportedLocales.join(
-            ", "
-          )}`
-        )
-      );
+  @action
+  useLocale = async (locale: string) => {
+    await this.useTranslationLocale(locale);
+    await this.useFormattingLocale(locale);
+  };
+
+  useTranslationLocale = async (locale: string) => {
+    if (this.translationService.getLanguage() !== locale) {
+      await this.translationService.useLanguage(locale);
+    }
+  };
+
+  @action
+  useFormattingLocale = async (locale: string): Promise<void> => {
+    const checkedLocale = evaluateLocale(
+      locale,
+      this.store.getSupportedLocales(),
+      this.store.getFallbackLocale()
+    );
+    console.log("using formatting locale", checkedLocale, locale);
+
+    if (this.numberService.getLocale() !== checkedLocale) {
+      this.numberService.useLocale(checkedLocale);
     }
 
-    const language = getLanguageFromLocale(locale);
-
-    if (this.translationService.getLanguage() !== language) {
-      await this.translationService.useLanguage(language);
-    }
-
-    if (this.numberService.getLanguage() !== locale) {
-      this.numberService.useLanguage(locale);
-    }
-
-    this.store.setCurrentLocale(locale);
+    this.store.setCurrentLocale(checkedLocale);
   };
 
   reloadResources = async (): Promise<void> => {
@@ -206,13 +211,13 @@ export class I18nServiceImpl extends I18nService {
     this.store.setCurrentLocale(this.store.getCurrentLocale());
   };
 
-  getTimezone(): string {
+  getTimezone = (): string => {
     return this.store.getCurrentTimezone();
-  }
+  };
 
-  useTimezone(timezone: string): void {
+  useTimezone = async (timezone: string) => {
     this.store.setCurrentTimezone(timezone);
-  }
+  };
 
   private getMergedDateFormatOptions(
     options?: I18nDateFormatOptions
@@ -232,11 +237,13 @@ export class I18nServiceImpl extends I18nService {
   private accessLanguage(): void {
     // access language to detect changes of language within components
     this.store.getCurrentLanguage();
+    this.translationService.getLanguage();
   }
 
   private accessLanguageAndLocale(): void {
     // access language and locale to detect changes of language within components
     this.store.getCurrentLanguage();
+    this.translationService.getLanguage();
     this.store.getCurrentLocale();
   }
 }
