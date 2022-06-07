@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/cpro-js/react-core-modules/compare/v0.2.0...v0.3.0) (2022-06-07)
+
+### Bug Fixes
+
+- **react-i18n:** allow also to use booleans & numbers for translation argument values ([3f860d0](https://github.com/cpro-js/react-core-modules/commit/3f860d04dd1c0a7849ce09f1487804e7bea7cf11))
+- **react-i18n:** wrong example in README ([4f14a87](https://github.com/cpro-js/react-core-modules/commit/4f14a8734278c617ea87e36e81264e2a191e84c8))
+
+### chore
+
+- **react-i18n:** upgrade i18next from 19 to 21 ([5f4ee12](https://github.com/cpro-js/react-core-modules/commit/5f4ee12dddb649bff426ac2f317141c8376d94e4))
+
+### Features
+
+- **react-i18n:** flexibile determineLocale implementation ([c345525](https://github.com/cpro-js/react-core-modules/commit/c3455257334d0e58a302b85520a9b2d4842c5dc8))
+- **react-i18n:** refactor i18next initialization & separate language and formatting locales ([1db10a4](https://github.com/cpro-js/react-core-modules/commit/1db10a48db63d26fc0721ed7a1025474926ef227))
+
+### BREAKING CHANGES
+
+- **react-i18n:** Use "localeResolver" instead of "determineLocale", which also allows for detection options via i18next and uses it by default if localeResolver is not defined at all.
+  Use "supportedFormattingLocales" instead of "supportedLocales".
+  I18nService interface changes regarding split into formattingLocale & translationLocale.
+- **react-i18n:** different pluralization rules; see https://www.i18next.com/misc/migration-guide
+
 # [0.2.0](https://github.com/cpro-js/react-core-modules/compare/v0.1.0...v0.2.0) (2022-06-02)
 
 ### Bug Fixes
