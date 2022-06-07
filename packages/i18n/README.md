@@ -48,7 +48,7 @@ await container.loadAsync(
     getTranslations: language => import(`../asset/locale/${language}.i18n.json`),
     maintainedTranslations: ["en", "de"],
     localeResolver: "de-DE",
-    supportedFormattingLocales: ["en/*", "de/*"],
+    supportedFormattingLocales: ["en-*", "de-*"],
   })
 );
 
