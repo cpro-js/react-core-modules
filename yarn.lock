@@ -1698,9 +1698,9 @@ __metadata:
     "@types/react-test-renderer": "npm:^18.0.0"
     jest: "npm:^27.1.0"
     microbundle: "npm:^0.13.3"
-    mobx: "npm:6.6.0"
-    mobx-react: "npm:7.5.0"
-    mobx-utils: "npm:6.0.5"
+    mobx: "npm:^6.13.6"
+    mobx-react: "npm:^9.2.0"
+    mobx-utils: "npm:^6.1.0"
     react: "npm:^18.1.0"
     react-dom: "npm:^18.1.0"
     react-test-renderer: "npm:^18.1.0"
@@ -1709,8 +1709,8 @@ __metadata:
     ts-jest: "npm:^27.0.5"
     typescript: "npm:^4.9.5"
   peerDependencies:
-    "@types/react": ^17.0.0 || ^18.0.0
-    react: ^17.0.0 || ^18.0.0
+    "@types/react": ^17.0.0 || ^18.0.0 || ^19.0.0
+    react: ^17.0.0 || ^18.0.0 || ^19.0.0
   languageName: unknown
   linkType: soft
 
@@ -7019,51 +7019,53 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mobx-react-lite@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "mobx-react-lite@npm:3.4.0"
-  peerDependencies:
-    mobx: ^6.1.0
-    react: ^16.8.0 || ^17 || ^18
-  peerDependenciesMeta:
-    react-dom:
-      optional: true
-    react-native:
-      optional: true
-  checksum: 10c0/7aa64fb8740d48de23c370385331063f0a0821a87ed7a1eb0324305e8ef2f5173806c3e5ff2bfb7696e5b80faf19de11e2d3c0b64268df21895d4eec4816e325
-  languageName: node
-  linkType: hard
-
-"mobx-react@npm:7.5.0":
-  version: 7.5.0
-  resolution: "mobx-react@npm:7.5.0"
+"mobx-react-lite@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "mobx-react-lite@npm:4.1.0"
   dependencies:
-    mobx-react-lite: "npm:^3.4.0"
+    use-sync-external-store: "npm:^1.4.0"
   peerDependencies:
-    mobx: ^6.1.0
-    react: ^16.8.0 || ^17 || ^18
+    mobx: ^6.9.0
+    react: ^16.8.0 || ^17 || ^18 || ^19
   peerDependenciesMeta:
     react-dom:
       optional: true
     react-native:
       optional: true
-  checksum: 10c0/cb5dc99e249d93e607005e691a66e5c4dd96ba5cae7247396f135e4a34b520ad1323c48a6da64091407117f9baa2de6101d022fa7d55f7beb6d05079be8a27be
+  checksum: 10c0/72300665cc64d73a58d650bdf5131878376a865ae708cabc2940ee22cf6b762aeed239a83ea104ea3742a0b1563a81a19acc02f162e19f524a9b5b0f0a86668e
   languageName: node
   linkType: hard
 
-"mobx-utils@npm:6.0.5":
-  version: 6.0.5
-  resolution: "mobx-utils@npm:6.0.5"
+"mobx-react@npm:^9.2.0":
+  version: 9.2.0
+  resolution: "mobx-react@npm:9.2.0"
+  dependencies:
+    mobx-react-lite: "npm:^4.1.0"
+  peerDependencies:
+    mobx: ^6.9.0
+    react: ^16.8.0 || ^17 || ^18 || ^19
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 10c0/253410a3a4d5005d6f8ec5ed8e6c9696381e65ffe03b072ee6baa7bb5973eaaa0b51f10c83849a94a1b03011538c76b80af26c6230808bd99fb3dfd130ac1845
+  languageName: node
+  linkType: hard
+
+"mobx-utils@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "mobx-utils@npm:6.1.0"
   peerDependencies:
     mobx: ^6.0.0
-  checksum: 10c0/ba5e8b0972987266c64105a7c9da8441dbe250643cdeb212b25957e2655f28f56217b294010675380f0c5b36961cadb215f50282b67d84821e40e2a5ad8a0448
+  checksum: 10c0/a4afd8a208ff809529cf24a01b29730207c93bb30510969ec21f11c842ea5b24d489b085cd2663b48fc278577e68f83b42a98113d81e6b5b0e3f37b232975336
   languageName: node
   linkType: hard
 
-"mobx@npm:6.6.0":
-  version: 6.6.0
-  resolution: "mobx@npm:6.6.0"
-  checksum: 10c0/4406b26442bb0285693292f43669227b429f88af543262cd3eabc9b4970cbb32e7fb14e7c8e3f7c184fded971e4ebe6f8f7f1f834547ef47b08145a7a927f718
+"mobx@npm:^6.13.6":
+  version: 6.13.6
+  resolution: "mobx@npm:6.13.6"
+  checksum: 10c0/4419003efdcc7ce964c5a20d5630987b936c60202d782ffe6b34f57848418a2b7f33ea2a5038d4e004c25758c4cf474c20a894c52d4234dd7cfda76887a3e4fd
   languageName: node
   linkType: hard
 
@@ -9505,6 +9507,15 @@ __metadata:
   bin:
     update-browserslist-db: cli.js
   checksum: 10c0/9cb353998d6d7d6ba1e46b8fa3db888822dd972212da4eda609d185eb5c3557a93fd59780ceb757afd4d84240518df08542736969e6a5d6d6ce2d58e9363aac6
+  languageName: node
+  linkType: hard
+
+"use-sync-external-store@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "use-sync-external-store@npm:1.4.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/ec011a5055962c0f6b509d6e78c0b143f8cd069890ae370528753053c55e3b360d3648e76cfaa854faa7a59eb08d6c5fb1015e60ffde9046d32f5b2a295acea5
   languageName: node
   linkType: hard
 

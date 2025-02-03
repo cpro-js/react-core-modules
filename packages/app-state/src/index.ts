@@ -4,7 +4,15 @@ import { IPromiseBasedObservable } from "mobx-utils";
 export { configure } from "mobx";
 
 // Creating observables
-export { makeAutoObservable, makeObservable, observable, computed } from "mobx";
+export {
+  makeAutoObservable,
+  makeObservable,
+  observable,
+  computed,
+  override,
+  ObservableMap,
+  ObservableSet,
+} from "mobx";
 
 // Actions
 export { action, runInAction, flow, flowResult } from "mobx";
@@ -25,5 +33,5 @@ export { toJS } from "mobx";
 export { trace } from "mobx";
 
 // utils
-export { fromPromise, computedFn } from "mobx-utils";
+export { isPromiseBasedObservable, fromPromise, computedFn } from "mobx-utils";
 export type ObservablePromise<T> = IPromiseBasedObservable<T>;
