@@ -2138,7 +2138,7 @@ __metadata:
     "@types/react-test-renderer": "npm:^17.0.1"
     date-fns: "npm:2.16.1"
     date-fns-tz: "npm:^1.1.6"
-    duration-relativetimeformat: "npm:2.0.1"
+    duration-relativetimeformat: "npm:2.0.4"
     i18next: "npm:^21.8.8"
     i18next-browser-languagedetector: "npm:^6.1.4"
     intl-format-cache: "npm:^4.3.1"
@@ -7450,10 +7450,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"duration-relativetimeformat@npm:2.0.1":
-  version: 2.0.1
-  resolution: "duration-relativetimeformat@npm:2.0.1"
-  checksum: 10c0/750dc1fbbef8885f806d57ca3afb028b31fde4744ae281e2d1acca2cd7c09249cde46449f16cce300fd096bb502ede5fb0b9d1d4590b9446e0629a0482c00928
+"duration-relativetimeformat@npm:2.0.4":
+  version: 2.0.4
+  resolution: "duration-relativetimeformat@npm:2.0.4"
+  checksum: 10c0/ca57b0b88c312c1fa77d8758e8fb56940539794d8817e26d2e67b6dbc116504e7c56be1e71e4190e0ca2007bdcba2a80239dbf8d268c773227ec935637a65bbb
   languageName: node
   linkType: hard
 

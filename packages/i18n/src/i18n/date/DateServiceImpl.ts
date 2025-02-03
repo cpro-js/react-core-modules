@@ -1,6 +1,7 @@
 import { service } from "@cpro-js/react-di";
 import { lightFormat, parse } from "date-fns";
 import { getTimezoneOffset, utcToZonedTime } from "date-fns-tz";
+import Duration from "duration-relativetimeformat";
 import memoizeFormatConstructor from "intl-format-cache";
 
 import {
@@ -11,8 +12,6 @@ import {
   TimeFormatOptions,
   TimezoneOptions,
 } from "./DateService";
-
-const Duration = require("duration-relativetimeformat");
 
 const getDateTimeFormat = memoizeFormatConstructor(Intl.DateTimeFormat);
 const getRelativeTimeFormat = memoizeFormatConstructor(Duration);
