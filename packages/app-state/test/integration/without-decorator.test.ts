@@ -1,3 +1,5 @@
+import { describe, expect, test } from "vitest";
+
 import {
   makeAutoObservable,
   makeObservable,
@@ -8,7 +10,7 @@ import {
 
 describe("without decorator", () => {
   describe("makeObservable", () => {
-    it("simple property", async () => {
+    test("simple property", async () => {
       class Store {
         stringProperty: string = "";
 
@@ -34,7 +36,7 @@ describe("without decorator", () => {
       expect(store.stringProperty).toBe("hello world");
     });
 
-    it("array property", async () => {
+    test("array property", async () => {
       class Store {
         arrayProperty: Array<{ id: number }> = [];
 
@@ -62,7 +64,7 @@ describe("without decorator", () => {
       expect(store.arrayProperty).toEqual([{ id: 1 }]);
     });
 
-    it("objectProperty property", async () => {
+    test("objectProperty property", async () => {
       class Store {
         objectProperty: { id: number } = { id: 0 };
 
@@ -92,7 +94,7 @@ describe("without decorator", () => {
   });
 
   describe("makeAutoObservable", () => {
-    it("simple property", async () => {
+    test("simple property", async () => {
       class Store {
         stringProperty: string = "";
 
@@ -116,7 +118,7 @@ describe("without decorator", () => {
       expect(store.stringProperty).toBe("hello world");
     });
 
-    it("array property", async () => {
+    test("array property", async () => {
       class Store {
         arrayProperty: Array<{ id: number }> = [];
 
@@ -142,7 +144,7 @@ describe("without decorator", () => {
       expect(store.arrayProperty).toEqual([{ id: 1 }]);
     });
 
-    it("objectProperty property", async () => {
+    test("objectProperty property", async () => {
       class Store {
         objectProperty: { id: number } = { id: 0 };
 
