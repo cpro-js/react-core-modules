@@ -18,12 +18,12 @@
     "dist"
   ],
   "peerDependencies": {
-    "@types/react": "^17.0.0 || ^18.0.0",
-    "react": "^17.0.0 || ^18.0.0"
+    "@types/react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "inversify": "^5.1.1",
-    "inversify-react": "^1.0.2"
+    "inversify": "^6.2.2",
+    "inversify-react": "^1.2.0"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",
