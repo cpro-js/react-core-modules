@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "yarn workspaces foreach --all --topological-dev --interlaced run build",
+    "typecheck": "yarn workspaces foreach --all --topological-dev --interlaced run typecheck",
     "test": "yarn workspaces foreach --all --topological-dev --interlaced run test"
   },
   "dependencies": {
