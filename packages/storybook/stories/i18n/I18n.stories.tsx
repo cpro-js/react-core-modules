@@ -27,10 +27,8 @@ const createContainer = async () => {
   await container.loadAsync(
     createI18nModuleRegistry({
       debug: true,
-      determineLocale: () => "de-DE",
+      maintainedTranslations: ["de-DE", "en-US"],
       fallbackLocale: "de-DE",
-      fallbackTimezone: "Europe/Berlin",
-      supportedLocales: ["de-DE", "en-US"],
       // namespaces: ["common", "app", "translation"],
       getTranslations: (language, namespace) => {
         console.log("getTranslations", language, namespace);
@@ -80,7 +78,8 @@ const ReloadResources = observer(() => {
 });
 
 const LocaleChanger = observer(() => {
-  const { useLocale, getLocale } = useInjection<I18nService>(I18nService);
+  const { useLocale, getFormattingLocale } =
+    useInjection<I18nService>(I18nService);
 
   const onChange = useCallback(
     (event: ChangeEvent<HTMLSelectElement>) => {
@@ -89,7 +88,7 @@ const LocaleChanger = observer(() => {
     [useLocale]
   );
 
-  const currentLocale = getLocale();
+  const currentLocale = getFormattingLocale();
 
   return (
     <select onChange={onChange} value={currentLocale}>
