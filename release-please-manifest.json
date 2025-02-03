@@ -1,0 +1,6 @@
+{
+  "packages/app-state": "0.3.0",
+  "packages/core": "0.3.0",
+  "packages/di": "0.3.0",
+  "packages/i18n": "0.3.0"
+}

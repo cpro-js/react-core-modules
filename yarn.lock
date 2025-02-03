@@ -2081,7 +2081,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@cpro-js/react-core@npm:0.3.0, @cpro-js/react-core@workspace:packages/core":
+"@cpro-js/react-core@npm:*, @cpro-js/react-core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@cpro-js/react-core@workspace:packages/core"
   dependencies:
@@ -2164,7 +2164,7 @@ __metadata:
   resolution: "@cpro-js/react-story@workspace:packages/storybook"
   dependencies:
     "@babel/core": "npm:^7.15.5"
-    "@cpro-js/react-core": "npm:0.3.0"
+    "@cpro-js/react-core": "npm:*"
     "@mdx-js/react": "npm:^1.6.22"
     "@storybook/addon-actions": "npm:^6.5.6"
     "@storybook/addon-docs": "npm:^6.5.6"
