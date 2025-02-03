@@ -2,10 +2,9 @@
   "name": "@cpro-js/react-core-modules",
   "private": true,
   "scripts": {
-    "build": "yarn workspaces foreach --parallel --topological-dev run build",
+    "build": "yarn workspaces foreach --all --topological-dev --interlaced run build",
     "postinstall": "is-ci || husky install",
-    "test": "yarn workspaces foreach -pt run test",
-    "test:ci": "yarn workspaces foreach -pt run test"
+    "test": "yarn workspaces foreach --all --topological-dev --interlaced run test"
   },
   "dependencies": {
     "husky": "^7.0.2",
@@ -25,7 +24,7 @@
   "lint-staged": {
     "*": "prettier --ignore-unknown --write"
   },
-  "packageManager": "yarn@3.0.1",
+  "packageManager": "yarn@4.6.0",
   "workspaces": [
     "packages/*"
   ]
