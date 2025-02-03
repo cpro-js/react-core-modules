@@ -19,9 +19,7 @@ const config: StorybookConfig = {
     options: {},
   },
 
-  docs: {
-    autodocs: true,
-  },
+  docs: {},
 
   core: {
     // 👈 Disables telemetry
@@ -29,7 +27,7 @@ const config: StorybookConfig = {
   },
 
   typescript: {
-    reactDocgen: "react-docgen-typescript",
+    reactDocgen: "react-docgen",
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
     },
