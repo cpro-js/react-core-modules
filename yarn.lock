@@ -1755,8 +1755,8 @@ __metadata:
     "@types/jest": "npm:^27.0.1"
     "@types/react": "npm:^18.0.10"
     "@types/react-test-renderer": "npm:^18.0.0"
-    inversify: "npm:^5.1.1"
-    inversify-react: "npm:^1.0.2"
+    inversify: "npm:^6.2.2"
+    inversify-react: "npm:^1.2.0"
     jest: "npm:^27.1.0"
     microbundle: "npm:^0.13.3"
     react: "npm:^18.1.0"
@@ -1766,8 +1766,8 @@ __metadata:
     ts-jest: "npm:^27.0.5"
     typescript: "npm:^4.9.5"
   peerDependencies:
-    "@types/react": ^17.0.0 || ^18.0.0
-    react: ^17.0.0 || ^18.0.0
+    "@types/react": ^17.0.0 || ^18.0.0 || ^19.0.0
+    react: ^17.0.0 || ^18.0.0 || ^19.0.0
   languageName: unknown
   linkType: soft
 
@@ -2001,6 +2001,32 @@ __metadata:
   version: 0.24.2
   resolution: "@esbuild/win32-x64@npm:0.24.2"
   conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@inversifyjs/common@npm:1.4.0":
+  version: 1.4.0
+  resolution: "@inversifyjs/common@npm:1.4.0"
+  checksum: 10c0/03f76538de4d678f09c1d8a84351bcbedd5add502c46af27b8ce439d07162c428fccf26d23f0452e2adf1aaa893e179372c04f2aa9bfc3554e3125e43a76dd2b
+  languageName: node
+  linkType: hard
+
+"@inversifyjs/core@npm:1.3.5":
+  version: 1.3.5
+  resolution: "@inversifyjs/core@npm:1.3.5"
+  dependencies:
+    "@inversifyjs/common": "npm:1.4.0"
+    "@inversifyjs/reflect-metadata-utils": "npm:0.2.4"
+  checksum: 10c0/c0b08d574be8a5a6b4c69910b443491b9b48f37a122e606e5b1a23c5d988f89f87571ef06c01465d20284515941a86685fd0eb1967be3d2e4957f8ea1fb602e5
+  languageName: node
+  linkType: hard
+
+"@inversifyjs/reflect-metadata-utils@npm:0.2.4":
+  version: 0.2.4
+  resolution: "@inversifyjs/reflect-metadata-utils@npm:0.2.4"
+  peerDependencies:
+    reflect-metadata: 0.2.2
+  checksum: 10c0/cfe93bf2366ea8fbf8e968c06e422b93ad20e5a264706aa632bca481a35f2324c38f826d639b8039181760e6a2a8cf9ef89ca57b7cec9851638cf99a1377596a
   languageName: node
   linkType: hard
 
@@ -5598,20 +5624,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"inversify-react@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "inversify-react@npm:1.0.2"
+"inversify-react@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "inversify-react@npm:1.2.0"
   peerDependencies:
     inversify: ^5.0.5 || ^6.0.1
-    react: ^16.3.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/f29473487d0ed5813b54b59991b09aacc9640b8df34c8acbcafd4b430f354ed9d208d8e92896607141b77f92282ab8fa8df1eeb4c5e1307381149476ecfd2c8c
+    react: ^16.3.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/ce422714db84578d329e8fa7d6c12bd270894a19c7e97696a7e66a09a4d179098407aa0b13e2ef3f74b7aa572f621d0ce682a38a97adda066ccb2d2df9177119
   languageName: node
   linkType: hard
 
-"inversify@npm:^5.1.1":
-  version: 5.1.1
-  resolution: "inversify@npm:5.1.1"
-  checksum: 10c0/0c061ab6e8526ffd40c63301ab12267f0f208fce3bac384fdf97c7d8ea0c0896e1358c1a2419ad202395244625d10cb90a254b25735a969574f19a2666d1ca00
+"inversify@npm:^6.2.2":
+  version: 6.2.2
+  resolution: "inversify@npm:6.2.2"
+  dependencies:
+    "@inversifyjs/common": "npm:1.4.0"
+    "@inversifyjs/core": "npm:1.3.5"
+  peerDependencies:
+    reflect-metadata: ~0.2.2
+  checksum: 10c0/f4acff320cebec022b408c7f081192e7e96296d40ee9cbc3915c6fe331333af53f4a418058e31c9d760bb00e36e97d4ae3ef5e4e18096f60f46f45b9a6540aeb
   languageName: node
   linkType: hard
 
