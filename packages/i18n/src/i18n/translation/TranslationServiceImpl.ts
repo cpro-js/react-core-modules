@@ -1,5 +1,6 @@
 import { service } from "@cpro-js/react-di";
-import i18next, { BackendModule, i18n } from "i18next";
+import i18next, { BackendModule } from "i18next";
+import type { i18n } from "i18next";
 import LanguageDetector, {
   DetectorOptions,
 } from "i18next-browser-languagedetector";

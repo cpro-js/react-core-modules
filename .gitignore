@@ -28,6 +28,7 @@ coverage
 build
 dist
 lib
+storybook-static
 
 # TypeScript incremental compilation cache
 *.tsbuildinfo
