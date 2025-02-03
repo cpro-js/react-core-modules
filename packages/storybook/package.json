@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build-storybook": "build-storybook",
-    "storybook": "start-storybook -p 6006"
+    "storybook": "start-storybook -p 6006",
+    "typecheck": "tsc --noEmit --pretty"
   },
   "dependencies": {
     "@cpro-js/react-core": "*"

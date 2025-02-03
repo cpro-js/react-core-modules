@@ -11,7 +11,8 @@
     "build": "rimraf dist && microbundle --sourcemap --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
     "dev": "rimraf dist && microbundle --sourcemap --watch --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
     "prepack": "rimraf dist && microbundle --tsconfig tsconfig.build.json --no-compress --format cjs,modern --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx",
-    "test": "jest"
+    "test": "jest",
+    "typecheck": "tsc --noEmit --pretty"
   },
   "files": [
     "*.md",
