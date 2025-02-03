@@ -1,15 +1,16 @@
-import React from "react";
+import { Component, FC } from "react";
 import renderer from "react-test-renderer";
+import { describe, expect, test } from "vitest";
 
 import { Container, ContainerProvider, inject, useInjection } from "../../src";
 
 describe("react", () => {
   describe("class components", () => {
-    it("property injection", () => {
+    test("property injection", () => {
       const testValue = "hello-world";
       const testKey = "testKey";
 
-      class TestComponent extends React.Component {
+      class TestComponent extends Component {
         @inject(testKey)
         private testValue!: string;
 
@@ -34,12 +35,12 @@ describe("react", () => {
   });
 
   describe("functional components", () => {
-    it("works with react hooks", () => {
+    test("works with react hooks", () => {
       const testValue = "hello-world";
       const testKey = "testKey";
 
-      const TestComponent: React.FC<{}> = () => {
-        return useInjection(testKey);
+      const TestComponent: FC<{}> = () => {
+        return <>{useInjection<string>(testKey)}</>;
       };
 
       const container = new Container();

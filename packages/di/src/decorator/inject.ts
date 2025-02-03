@@ -4,35 +4,60 @@ import {
   optional as inversifyOptional,
 } from "inversify";
 import { resolve } from "inversify-react";
+import type { DecoratorTarget } from "inversify/lib/cjs/annotation/decorator_utils";
 
 function isReactClassComponent(component: any) {
   return typeof component === "object" && !!component.isReactComponent;
 }
 
-export function inject(serviceIdentifier: interfaces.ServiceIdentifier<any>) {
-  return function (target: any, targetKey: string, index?: number): void {
+export function inject<T = unknown>(
+  serviceIdentifier: interfaces.ServiceIdentifier<T>
+) {
+  return function (
+    target: DecoratorTarget,
+    targetKey?: string,
+    indexOrPropertyDescriptor?: number | TypedPropertyDescriptor<T>
+  ): void {
     // special decorator for react component
     if (isReactClassComponent(target)) {
-      // fixme does not longer work with ["@babel/plugin-proposal-class-properties", { "loose": false }] / TypeScript "useDefineForClassFields": true
-      return resolve(serviceIdentifier)(target, targetKey, index);
+      return resolve(serviceIdentifier)(
+        target,
+        targetKey!,
+        indexOrPropertyDescriptor
+      );
     }
 
-    inversifyInject(serviceIdentifier)(target, targetKey, index);
+    inversifyInject(serviceIdentifier)(
+      target,
+      targetKey,
+      indexOrPropertyDescriptor
+    );
   };
 }
 
-inject.optional = function (
-  serviceIdentifier: interfaces.ServiceIdentifier<any>
+inject.optional = function injectOptional<T = unknown>(
+  serviceIdentifier: interfaces.ServiceIdentifier<T>
 ) {
-  return function (target: any, targetKey: string, index?: number): void {
+  return function (
+    target: DecoratorTarget,
+    targetKey?: string,
+    indexOrPropertyDescriptor?: number | TypedPropertyDescriptor<T>
+  ): void {
     // special decorator for react components -> class instance created by react
     if (isReactClassComponent(target)) {
-      // fixme does not longer work with ["@babel/plugin-proposal-class-properties", { "loose": false }] / TypeScript "useDefineForClassFields": true
-      return resolve.optional(serviceIdentifier)(target, targetKey, index);
+      return resolve.optional(serviceIdentifier)(
+        target,
+        targetKey!,
+        indexOrPropertyDescriptor
+      );
     }
 
     // normal classes -> instances created by inversify
-    inversifyInject(serviceIdentifier)(target, targetKey, index);
-    inversifyOptional()(target, targetKey, index);
+    inversifyInject(serviceIdentifier)(
+      target,
+      targetKey,
+      indexOrPropertyDescriptor
+    );
+    inversifyOptional()(target, targetKey, indexOrPropertyDescriptor);
   };
 };
