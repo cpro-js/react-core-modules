@@ -4,6 +4,9 @@ export {
   makeObservable,
   observable,
   computed,
+  override,
+  ObservableMap,
+  ObservableSet,
 } from "@cpro-js/react-app-state";
 export {
   action,
@@ -24,7 +27,11 @@ export { autorun, reaction, when } from "@cpro-js/react-app-state";
 export { observer, Observer, disposeOnUnmount } from "@cpro-js/react-app-state";
 export { toJS } from "@cpro-js/react-app-state";
 export { trace } from "@cpro-js/react-app-state";
-export { fromPromise, computedFn } from "@cpro-js/react-app-state";
+export {
+  isPromiseBasedObservable,
+  fromPromise,
+  computedFn,
+} from "@cpro-js/react-app-state";
 export type { ObservablePromise } from "@cpro-js/react-app-state";
 
 export type { AsyncModuleRegistry, ModuleRegistry } from "@cpro-js/react-di";
