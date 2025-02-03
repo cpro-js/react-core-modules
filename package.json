@@ -4,18 +4,13 @@
   "scripts": {
     "build": "yarn workspaces foreach --parallel --topological-dev run build",
     "postinstall": "is-ci || husky install",
-    "postversion": "lerna publish from-git",
-    "release": "env-cmd -f .env.local --no-override lerna version",
     "test": "yarn workspaces foreach -pt run test",
-    "test:ci": "yarn workspaces foreach -pt run test",
-    "version": "yarn install && git add yarn.lock"
+    "test:ci": "yarn workspaces foreach -pt run test"
   },
   "dependencies": {
-    "env-cmd": "^10.1.0",
     "husky": "^7.0.2",
     "import-sort-style-module": "^6.0.0",
     "is-ci": "^3.0.0",
-    "lerna": "^4.0.0",
     "lint-staged": "^11.1.2",
     "prettier": "^2.3.2",
     "prettier-plugin-import-sort": "^0.0.7",
