@@ -1,0 +1,129 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="@cpro-js/react-core/Dependency Injection" />
+
+# Dependency Injection
+
+## Declare dependencies using the @injectable, @service or @store decorator
+
+Decorators:
+
+- @_injectable_: Base decorator to declare a class as injectable.
+- _@service_: Alias for `@injectable`. Should be used for service classes to identify them easier.
+- _@store_: Alias for `@injectable`. Should be used for mobx stores. In the future we may provide additional functionality
+  based on this decorator like data persistence or SSR-hydration.
+
+```ts
+import { makeObservable, observable, service, store  } from "@cpro-js/react-core";
+
+@store()
+export class Store {
+  @observable
+  public items: Array<string> = [];
+
+  constructor() {
+    makeObservable(this);
+  }
+}
+
+@service()
+export class Service {
+
+  constructor(private store: Store) {
+  }
+
+  getItems() {
+    return this.store.items;
+  }
+}
+
+```
+
+## Inject dependencies using @inject into classes
+
+Into normal classes like services or stores via constructor injection:
+
+```tsx
+import { inject, service } from "@cpro-js/react-core";
+
+@service()
+export class Service {
+
+  constructor(@inject(Store) private store: Store) {}
+
+  getItems() {
+    return this.store.items;
+  }
+}
+
+```
+
+Into react class components:
+
+```tsx
+import { FC, Component } from "react";
+import { inject, observer, useInjection } from "@cpro-js/react-core";
+import { Service } from "./service";
+
+@observer
+export class App extends Component<{}> {
+  @inject(Service) private service!: Service;
+  @inject.optional(Service) private orAsOptionalService?: Service;
+
+  render() {
+    return (
+      <ul>
+        {this.service.getItems().map((item, index) => <ul key={index}>{item}</ul>)}
+      </ul>
+    );
+  }
+}
+```
+
+Or injection into functional components is also supported using the useInjection hook:
+
+```tsx
+import { FC } from "react";
+import { observer, useInjection } from "@cpro-js/react-core";
+import { Service } from "./service";
+
+export const App: FC<{}> = observer(() => {
+  const service = useInjection(Service);
+
+  return (
+    <ul>
+      {service.getItems().map((item, index) => <ul key={index}>{item}</ul>)}
+    </ul>
+  );
+})
+```
+
+## Create and configure a DI Container
+
+```ts
+import { Container } from "@cpro-js/react-core";
+import { Service, Store } from "./service";
+
+// setup dependency injection container
+const container = new Container();
+container.addSingleton(Store); // alias for container.addSingleton(Store, Store);
+container.addSingleton(Service); // alias for container.addSingleton(Service, Service);
+```
+
+Setup your DI container for React Components:
+
+```tsx
+//...
+import { ContainerProvider } from "@cpro-js/react-core";
+
+// render react app
+ReactDOM.render(
+  <React.StrictMode>
+    <ContainerProvider container={container}>
+      <App/>
+    </ContainerProvider>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+```
+
