@@ -23,7 +23,7 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        interop: "compat", // transforms default import into require('xxx').default;
+        interop: "auto", // transforms default import into require('xxx').default;
       },
     },
   },
