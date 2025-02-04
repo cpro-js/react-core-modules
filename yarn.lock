@@ -617,6 +617,7 @@ __metadata:
     "@types/node": "npm:^20.17.16"
     "@types/react": "npm:^18.0.10"
     get-tsconfig: "npm:^4.10.0"
+    p-memoize: "npm:^7.1.1"
     react: "npm:^18.1.0"
     react-dom: "npm:^18.1.0"
     reflect-metadata: "npm:^0.2.2"
@@ -3773,6 +3774,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mimic-fn@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "mimic-fn@npm:4.0.0"
+  checksum: 10c0/de9cc32be9996fd941e512248338e43407f63f6d497abe8441fa33447d922e927de54d4cc3c1a3c6d652857acd770389d5a3823f311a744132760ce2be15ccbf
+  languageName: node
+  linkType: hard
+
 "min-indent@npm:^1.0.1":
   version: 1.0.1
   resolution: "min-indent@npm:1.0.1"
@@ -4107,6 +4115,16 @@ __metadata:
   dependencies:
     aggregate-error: "npm:^3.0.0"
   checksum: 10c0/592c05bd6262c466ce269ff172bb8de7c6975afca9b50c975135b974e9bdaafbfe80e61aaaf5be6d1200ba08b30ead04b88cfa7e25ff1e3b93ab28c9f62a2c75
+  languageName: node
+  linkType: hard
+
+"p-memoize@npm:^7.1.1":
+  version: 7.1.1
+  resolution: "p-memoize@npm:7.1.1"
+  dependencies:
+    mimic-fn: "npm:^4.0.0"
+    type-fest: "npm:^3.0.0"
+  checksum: 10c0/6adbdf0ac0e53d80ac3a2ff01fb39ae2053976295d15e3e614ff9e981eca9d4f8c28cf54e857c791cee48abd5c37849e9eca7deab18be1e4f064d5753e3d87b8
   languageName: node
   linkType: hard
 
@@ -5047,6 +5065,13 @@ __metadata:
   version: 2.19.0
   resolution: "type-fest@npm:2.19.0"
   checksum: 10c0/a5a7ecf2e654251613218c215c7493574594951c08e52ab9881c9df6a6da0aeca7528c213c622bc374b4e0cb5c443aa3ab758da4e3c959783ce884c3194e12cb
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:^3.0.0":
+  version: 3.13.1
+  resolution: "type-fest@npm:3.13.1"
+  checksum: 10c0/547d22186f73a8c04590b70dcf63baff390078c75ea8acd366bbd510fd0646e348bd1970e47ecf795b7cff0b41d26e9c475c1fedd6ef5c45c82075fbf916b629
   languageName: node
   linkType: hard
 
