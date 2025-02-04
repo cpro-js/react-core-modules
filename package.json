@@ -3,14 +3,17 @@
   "private": true,
   "scripts": {
     "build": "yarn workspaces foreach --all --topological-dev --interlaced run build",
-    "typecheck": "yarn workspaces foreach --all --topological-dev --interlaced run typecheck",
-    "test": "yarn workspaces foreach --all --topological-dev --interlaced run test"
+    "test": "vitest",
+    "typecheck": "yarn workspaces foreach --all --topological-dev --interlaced run typecheck"
   },
   "dependencies": {
     "import-sort-style-module": "^6.0.0",
     "prettier": "^2.3.2",
     "prettier-plugin-import-sort": "^0.0.7",
     "prettier-plugin-package": "^1.3.0"
+  },
+  "devDependencies": {
+    "vitest": "^3.0.5"
   },
   "importSort": {
     ".js, .jsx, .ts, .tsx": {
