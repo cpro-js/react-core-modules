@@ -3,7 +3,8 @@ import {
   inject as inversifyInject,
   optional as inversifyOptional,
 } from "inversify";
-import { resolve } from "inversify-react";
+// fixes import  -> SyntaxError: Named export 'Provider' not found. The requested module 'inversify-react' is a CommonJS module,
+import inversifyReact from "inversify-react";
 import type { DecoratorTarget } from "inversify/lib/cjs/annotation/decorator_utils";
 
 function isReactClassComponent(component: any) {
@@ -20,7 +21,7 @@ export function inject<T = unknown>(
   ): void {
     // special decorator for react component
     if (isReactClassComponent(target)) {
-      return resolve(serviceIdentifier)(
+      return inversifyReact.resolve(serviceIdentifier)(
         target,
         targetKey!,
         indexOrPropertyDescriptor
@@ -45,7 +46,7 @@ inject.optional = function injectOptional<T = unknown>(
   ): void {
     // special decorator for react components -> class instance created by react
     if (isReactClassComponent(target)) {
-      return resolve.optional(serviceIdentifier)(
+      return inversifyReact.resolve.optional(serviceIdentifier)(
         target,
         targetKey!,
         indexOrPropertyDescriptor

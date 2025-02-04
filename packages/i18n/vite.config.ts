@@ -1,10 +1,15 @@
 import { resolve } from "path";
 
-import react from "@vitejs/plugin-react";
+import { JscConfig } from "@swc/types";
+import { getTsconfig } from "get-tsconfig";
+import nodeExternals from "rollup-plugin-node-externals";
+import swc from "unplugin-swc";
 import dts from "vite-plugin-dts";
 import { defineConfig } from "vitest/config";
 
 import packageJson from "./package.json";
+
+const tsconfig = getTsconfig(__dirname);
 
 export default defineConfig({
   build: {
@@ -18,34 +23,49 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        interop: "auto", // transforms default import into require('xxx').default;
+        interop: "compat", // transforms default import into require('xxx').default;
       },
-      external: [
-        ...Object.keys(packageJson.dependencies),
-        ...Object.keys(packageJson.peerDependencies),
-      ],
     },
   },
+  resolve: {
+    preserveSymlinks: true,
+  },
   plugins: [
-    react({
-      babel: {
-        presets: [
-          [
-            "@babel/preset-env",
-            {
-              modules: false, // false will preserve ES modules
-              targets: "last 2 versions, > 0.2%, not dead",
-              loose: true,
-            },
-          ],
-          "@babel/preset-typescript",
+    {
+      enforce: "pre",
+      ...nodeExternals({
+        exclude: [
+          "intl-format-cache", // invalid cjs / esm module -> just bundle it
         ],
-        plugins: [
-          "babel-plugin-transform-typescript-metadata",
-          ["@babel/plugin-proposal-decorators", { legacy: true }],
-          ["@babel/plugin-proposal-class-properties", { loose: true }],
-        ],
+      }),
+    },
+    swc.vite({
+      tsconfigFile: false,
+      env: {
+        targets: packageJson.browserslist,
       },
+      jsc: {
+        loose: true,
+        keepClassNames:
+          tsconfig!.config.compilerOptions!.experimentalDecorators,
+        parser: {
+          syntax: "typescript",
+          tsx: true,
+          decorators: tsconfig!.config.compilerOptions!.experimentalDecorators,
+        },
+        transform: {
+          react: {
+            runtime: "automatic",
+            pragma: tsconfig!.config.compilerOptions!.jsxFactory,
+            pragmaFrag: tsconfig!.config.compilerOptions!.jsxFragmentFactory,
+            importSource: tsconfig!.config.compilerOptions!.jsxImportSource,
+          },
+          legacyDecorator:
+            tsconfig!.config.compilerOptions!.experimentalDecorators,
+          decoratorMetadata:
+            tsconfig!.config.compilerOptions!.emitDecoratorMetadata,
+        },
+      } as JscConfig,
     }),
     dts({
       rollupTypes: true,

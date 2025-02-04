@@ -10,7 +10,7 @@ describe("react", () => {
       const testValue = "hello-world";
       const testKey = "testKey";
 
-      class TestComponent extends Component {
+      class TestComponent extends Component<{}, {}> {
         @inject(testKey)
         private testValue!: string;
 

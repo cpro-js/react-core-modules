@@ -1,6 +1,7 @@
 import { service } from "@cpro-js/react-di";
 import { lightFormat, parse } from "date-fns";
-import { getTimezoneOffset, utcToZonedTime } from "date-fns-tz";
+import getTimezoneOffset from "date-fns-tz/getTimezoneOffset/index.js"; // cjs module
+import utcToZonedTime from "date-fns-tz/utcToZonedTime/index.js"; // cjs module
 import Duration from "duration-relativetimeformat";
 import memoizeFormatConstructor from "intl-format-cache";
 

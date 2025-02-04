@@ -1,6 +1,7 @@
 {
   "name": "@cpro-js/react-core-modules",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "yarn workspaces foreach --all --topological-dev --interlaced run build",
     "test": "vitest",
