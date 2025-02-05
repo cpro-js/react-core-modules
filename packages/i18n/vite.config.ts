@@ -21,11 +21,6 @@ export default defineConfig({
       formats: ["es"],
       fileName: (format) => `index.${format}.js`,
     },
-    rollupOptions: {
-      output: {
-        interop: "auto", // transforms default import into require('xxx').default;
-      },
-    },
   },
   resolve: {
     conditions: ["cpro-js-source"],
