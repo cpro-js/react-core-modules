@@ -28,14 +28,21 @@ export default defineConfig({
     },
   },
   resolve: {
-    preserveSymlinks: true,
+    conditions: ["cpro-js-source"],
+  },
+  environments: {
+    ssr: {
+      resolve: {
+        conditions: ["cpro-js-source"], // fixes https://github.com/vitest-dev/vitest/issues/6992
+      },
+    },
   },
   plugins: [
     {
       enforce: "pre",
       ...nodeExternals({
         exclude: [
-          "intl-format-cache", // invalid cjs / esm module -> just bundle it
+          "intl-format-cache", // invalid cjs / esm module -> just include it into bundle
         ],
       }),
     },

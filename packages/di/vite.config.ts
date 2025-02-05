@@ -28,7 +28,14 @@ export default defineConfig({
     },
   },
   resolve: {
-    preserveSymlinks: true,
+    conditions: ["cpro-js-source"],
+  },
+  environments: {
+    ssr: {
+      resolve: {
+        conditions: ["cpro-js-source"], // fixes https://github.com/vitest-dev/vitest/issues/6992
+      },
+    },
   },
   plugins: [
     {
