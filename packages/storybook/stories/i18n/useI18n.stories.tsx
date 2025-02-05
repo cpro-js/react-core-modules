@@ -28,7 +28,7 @@ export const t: StoryObj<{}> = {
       <dl>
         <dt>Message Bundle 'hello.world'</dt>
         <dd>
-          <Observer render={() => t("hello.world")}/>
+          <Observer render={() => <>{t("hello.world")}</>}/>
         </dd>
       </dl>
     );
@@ -51,7 +51,7 @@ export const formatNumber: StoryObj<{}> = {
       <dl>
         <dt>Formatted Number ('0.3999' - maximum 2 fraction digits)</dt>
         <dd>
-          <Observer render={() => formatNumber(0.3999, { maximumFractionDigits: 2 })}/>
+          <Observer render={() => <>{formatNumber(0.3999, { maximumFractionDigits: 2 })}</>}/>
         </dd>
       </dl>
     );
@@ -76,7 +76,7 @@ export const formatPercent: StoryObj<{}> = {
           Formatted Number as percent ('50.8888' - maximum 2 fraction digits)
         </dt>
         <dd>
-          <Observer render={() => formatPercent(50.8888, { maximumFractionDigits: 2 })}/>
+          <Observer render={() => <>{formatPercent(50.8888, { maximumFractionDigits: 2 })}</>}/>
         </dd>
       </dl>
     );
@@ -99,7 +99,7 @@ export const formatFileSize: StoryObj<{}> = {
       <dl>
         <dt>Formatted file size (4096 Bytes)</dt>
         <dd>
-          <Observer render={() => formatFileSize(4096)}/>
+          <Observer render={() => <>{formatFileSize(4096)}</>}/>
         </dd>
       </dl>
     );
@@ -122,7 +122,7 @@ export const formatCurrency: StoryObj<{}> = {
       <dl>
         <dt>Formatted currency (4096 EUR)</dt>
         <dd>
-          <Observer render={() => formatCurrency(4096, "EUR")}/>
+          <Observer render={() => <>{formatCurrency(4096, "EUR")}</>}/>
         </dd>
       </dl>
     );
@@ -145,7 +145,7 @@ export const formatDateByPattern: StoryObj<{}> = {
       <dl>
         <dt>Formatted date by pattern 'yyyy-MM-dd'</dt>
         <dd>
-          <Observer render={() => formatDateByPattern(new Date(), "yyyy-MM-dd")}/>
+          <Observer render={() => <>{formatDateByPattern(new Date(), "yyyy-MM-dd")}</>}/>
         </dd>
       </dl>
     );
@@ -168,7 +168,7 @@ export const formatDate: StoryObj<{}> = {
       <dl>
         <dt>Formatted date</dt>
         <dd>
-          <Observer render={() => formatDate(new Date())}/>
+          <Observer render={() => <>{formatDate(new Date())}</>}/>
         </dd>
       </dl>
     );
@@ -191,7 +191,7 @@ export const formatDateTime: StoryObj<{}> = {
       <dl>
         <dt>Formatted date-time</dt>
         <dd>
-          <Observer render={() => formatDateTime(new Date())}/>
+          <Observer render={() => <>{formatDateTime(new Date())}</>}/>
         </dd>
       </dl>
     );
@@ -215,11 +215,10 @@ export const formatTime: StoryObj<{}> = {
       <dl>
         <dt>Formatted time</dt>
         <dd>
-          <Observer render={() => formatTime(new Date())}/>
+          <Observer render={() => <>{formatTime(new Date())}</>}/>
         </dd>
       </dl>
-    )
-      ;
+    );
   }
 };
 
@@ -240,11 +239,11 @@ export const formatDateRelative: StoryObj<{}> = {
       <dl>
         <dt>Formatted date relative (now)</dt>
         <dd>
-          <Observer render={() => formatDateRelative(new Date())}/>
+          <Observer render={() => <>{formatDateRelative(new Date())}</>}/>
         </dd>
         <dt>Formatted date relative (yesterday)</dt>
         <dd>
-          <Observer render={() => formatDateRelative(new Date(Date.now() - 24 * 60 * 60 * 1000))}></Observer>
+          <Observer render={() => <>{formatDateRelative(new Date(Date.now() - 24 * 60 * 60 * 1000))}</>}></Observer>
         </dd>
       </dl>
     );
