@@ -78,7 +78,7 @@ export default {
   decorators: [
     // react on language changes
     (Story, { globals }) => {
-      const { language } = globals;
+      const { language = "de-DE" } = globals;
       const { useLocale, useFormattingLocale, getFormattingLocale, getTranslationLocale } =
         useInjection<I18nService>(I18nService);
 
