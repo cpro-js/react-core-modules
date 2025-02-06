@@ -50,7 +50,6 @@
     "@cpro-js/tooling": "*",
     "@types/node": "^20.17.16",
     "@types/react": "^18.0.10",
-    "@types/react-test-renderer": "^17.0.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "reflect-metadata": "^0.2.2",
