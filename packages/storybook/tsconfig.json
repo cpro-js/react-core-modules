@@ -1,3 +1,5 @@
 {
-  "extends": "@cpro-js/tooling/tsconfig"
+  "extends": "@cpro-js/tooling/tsconfig",
+  "include": [".storybook/**/**/*", "**/*"],
+  "exclude": ["node_modules"]
 }
