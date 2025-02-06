@@ -13,16 +13,16 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        node: [20]
-        script: ["build", "typecheck", "test"]
         react: ["^18.x", "^19.x"]
+        script: ["build", "typecheck", "test"]
+    name: "React@${{ matrix.react }}: ${{ matrix.script }}"
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 20
           cache: yarn
       - name: Install packages
         run: yarn --immutable
