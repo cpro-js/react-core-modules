@@ -470,6 +470,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@cpro-js/react-core-modules@workspace:."
   dependencies:
+    "@cpro-js/tooling": "npm:*"
     import-sort-style-module: "npm:^6.0.0"
     prettier: "npm:^2.3.2"
     prettier-plugin-import-sort: "npm:^0.0.7"
