@@ -1,1 +1,3 @@
-export { useInjection } from "inversify-react";
+import * as inversifyReact from "inversify-react";
+
+export const useInjection = inversifyReact.useInjection;

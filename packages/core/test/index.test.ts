@@ -1,6 +1,7 @@
-import AppStateModules from "@cpro-js/react-app-state";
-import DiModules from "@cpro-js/react-di";
-import I18nModules from "@cpro-js/react-i18n";
+import * as AppStateModules from "@cpro-js/react-app-state";
+import * as DiModules from "@cpro-js/react-di";
+import * as I18nModules from "@cpro-js/react-i18n";
+import { describe, expect, test } from "vitest";
 
 import * as ExportedModules from "../src/index";
 

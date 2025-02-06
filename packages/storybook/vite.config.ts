@@ -1,16 +1,6 @@
-import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import { createViteConfig } from "@cpro-js/tooling/vite";
+import { defineConfig, mergeConfig } from "vitest/config";
 
-export default defineConfig({
-  plugins: [
-    react({
-      babel: {
-        plugins: [
-          "babel-plugin-transform-typescript-metadata",
-          ["@babel/plugin-proposal-decorators", { legacy: true }],
-          ["@babel/plugin-proposal-class-properties", { loose: true }],
-        ],
-      },
-    }),
-  ],
+export default defineConfig(() => {
+  return mergeConfig(createViteConfig(__dirname), {});
 });

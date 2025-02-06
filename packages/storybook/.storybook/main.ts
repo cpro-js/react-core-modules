@@ -2,16 +2,15 @@ import { dirname, join } from "path";
 
 import { StorybookConfig } from "@storybook/react-vite";
 
-function getAbsolutePath(value) {
+function getAbsolutePath(value: string) {
   return dirname(require.resolve(join(value, "package.json")));
 }
 
 const config: StorybookConfig = {
-  stories: ["../stories/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: ["../docs/**/*.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-essentials"),
-    getAbsolutePath("@storybook/addon-docs"),
   ],
 
   framework: {
@@ -27,7 +26,7 @@ const config: StorybookConfig = {
   },
 
   typescript: {
-    reactDocgen: "react-docgen",
+    reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
     },

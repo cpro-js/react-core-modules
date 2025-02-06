@@ -1,4 +1,5 @@
 import { injectable } from "inversify";
+import { describe, expect, test, vi } from "vitest";
 
 import { Container } from "../../src";
 
@@ -6,7 +7,7 @@ import { Container } from "../../src";
 class TestClass {}
 
 describe("Container", () => {
-  it("allows to chain binding declarations", () => {
+  test("allows to chain binding declarations", () => {
     const container: Container = new Container()
       .bindConstant("value", 1)
       .bindDynamic("dynamic", () => Math.random())
@@ -17,13 +18,13 @@ describe("Container", () => {
   });
 
   describe("binding", () => {
-    it("constant value", () => {
+    test("constant value", () => {
       const container: Container = new Container().bindConstant("value", 6);
       expect(container.get("value")).toBe(6);
     });
 
-    it("dynamic value", () => {
-      const func = jest.fn(() => 6);
+    test("dynamic value", () => {
+      const func = vi.fn(() => 6);
 
       const container: Container = new Container().bindDynamic("dynamic", func);
       expect(container.get("dynamic")).toBe(6);
@@ -31,7 +32,7 @@ describe("Container", () => {
       expect(func).toReturnWith(6);
     });
 
-    it("singleton instance", () => {
+    test("singleton instance", () => {
       const container: Container = new Container().bindSingleton(
         "singleton",
         TestClass
@@ -40,13 +41,13 @@ describe("Container", () => {
       expect(container.get("singleton")).toBe(container.get("singleton"));
     });
 
-    it("singleton instance - omitting identifier", () => {
+    test("singleton instance - omitting identifier", () => {
       const container: Container = new Container().bindSingleton(TestClass);
       expect(container.get(TestClass)).toBeInstanceOf(TestClass);
       expect(container.get(TestClass)).toBe(container.get(TestClass));
     });
 
-    it("transient instance", () => {
+    test("transient instance", () => {
       const container: Container = new Container().bindTransient(
         "transient",
         TestClass
@@ -55,21 +56,21 @@ describe("Container", () => {
       expect(container.get("transient")).not.toBe(container.get("transient"));
     });
 
-    it("transient instance - omitting identifier", () => {
+    test("transient instance - omitting identifier", () => {
       const container: Container = new Container().bindTransient(TestClass);
       expect(container.get(TestClass)).toBeInstanceOf(TestClass);
       expect(container.get(TestClass)).not.toBe(container.get(TestClass));
     });
   });
 
-  it("getAll", () => {
+  test("getAll", () => {
     const container: Container = new Container()
       .bindConstant("value", 1)
       .bindConstant("value", 2);
     expect(container.getAll("value")).toEqual([1, 2]);
   });
 
-  it("associations", () => {
+  test("associations", () => {
     const container: Container = new Container();
 
     container.bindConstant("value", 1);

@@ -1,8 +1,10 @@
+import { describe, expect, test } from "vitest";
+
 import { Container, inject, service, store } from "../../src";
 
 describe("@inject()", () => {
   describe("constructor injection", () => {
-    it("allows to inject instances into services", () => {
+    test("allows to inject instances into services", () => {
       const value = `My random value: ${Math.random()}`;
 
       @service()
@@ -19,7 +21,7 @@ describe("@inject()", () => {
       expect(myService.value).toBe(value);
     });
 
-    it("allows to inject instances into stores", () => {
+    test("allows to inject instances into stores", () => {
       const value = `My random value: ${Math.random()}`;
 
       @store()
@@ -37,12 +39,14 @@ describe("@inject()", () => {
     });
 
     describe("optional", () => {
-      it("inject value into services", () => {
+      test("inject value into services", () => {
         const value = `My random value: ${Math.random()}`;
 
         @service()
         class MyService {
-          constructor(@inject.optional("value") public value?: string) {}
+          constructor(
+            @inject.optional("value") public value?: string
+          ) {}
         }
 
         const container = new Container();
@@ -54,7 +58,7 @@ describe("@inject()", () => {
         expect(myService.value).toBe(value);
       });
 
-      it("skip inject value into services when binding not found", () => {
+      test("skip inject value into services when binding not found", () => {
         @service()
         class MyService {
           constructor(@inject.optional("value") public value?: string) {}
@@ -71,7 +75,7 @@ describe("@inject()", () => {
   });
 
   describe("property injection", () => {
-    it("allows to inject instances into services", () => {
+    test("allows to inject instances into services", () => {
       const value = `My random value: ${Math.random()}`;
 
       @service()
@@ -88,7 +92,7 @@ describe("@inject()", () => {
       expect(myService.value).toBe(value);
     });
 
-    it("allows to inject instances into stores", () => {
+    test("allows to inject instances into stores", () => {
       const value = `My random value: ${Math.random()}`;
 
       @store()
@@ -106,7 +110,7 @@ describe("@inject()", () => {
     });
 
     describe("optional", () => {
-      it("inject value into services", () => {
+      test("inject value into services", () => {
         const value = `My random value: ${Math.random()}`;
 
         @service()
@@ -123,7 +127,7 @@ describe("@inject()", () => {
         expect(myService.value).toBe(value);
       });
 
-      it("skip inject value into services when binding not found", () => {
+      test("skip inject value into services when binding not found", () => {
         @service()
         class MyService {
           @inject.optional("value") value?: string;

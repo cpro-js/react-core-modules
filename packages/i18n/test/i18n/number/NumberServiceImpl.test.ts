@@ -1,3 +1,5 @@
+import { beforeEach, describe, expect, test } from "vitest";
+
 import { NumberService } from "../../../src/i18n/number/NumberService";
 import { NumberServiceImpl } from "../../../src/i18n/number/NumberServiceImpl";
 
@@ -10,7 +12,7 @@ describe("NumberServiceImpl", () => {
     });
 
     describe(".formatNumber()", () => {
-      it("default", () => {
+      test("default", () => {
         expect(numberService.formatNumber(0.333)).toBe("0,333");
         expect(numberService.formatNumber(3)).toBe("3");
         expect(numberService.formatNumber(3.33)).toBe("3,33");
@@ -19,7 +21,7 @@ describe("NumberServiceImpl", () => {
         expect(numberService.formatNumber(3333333)).toBe("3333333");
         expect(numberService.formatNumber(3333333.33)).toBe("3333333,33");
       });
-      it("integer", () => {
+      test("integer", () => {
         expect(
           numberService.formatNumber(0.333, { maximumFractionDigits: 0 })
         ).toBe("0");
@@ -42,7 +44,7 @@ describe("NumberServiceImpl", () => {
           numberService.formatNumber(3333333.33, { maximumFractionDigits: 0 })
         ).toBe("3333333");
       });
-      it("integer - thousand separator", () => {
+      test("integer - thousand separator", () => {
         expect(
           numberService.formatNumber(0.333, {
             maximumFractionDigits: 0,
@@ -86,7 +88,7 @@ describe("NumberServiceImpl", () => {
           })
         ).toBe("3.333.333");
       });
-      it("float", () => {
+      test("float", () => {
         expect(
           numberService.formatNumber(0.333, { maximumFractionDigits: 2 })
         ).toBe("0,33");
@@ -126,7 +128,7 @@ describe("NumberServiceImpl", () => {
         ).toBe("3333,330");
       });
 
-      it("float - thousand separator", () => {
+      test("float - thousand separator", () => {
         expect(
           numberService.formatNumber(0.333, {
             maximumFractionDigits: 2,
@@ -186,7 +188,7 @@ describe("NumberServiceImpl", () => {
     });
 
     describe(".formatPercent()", () => {
-      it("default", () => {
+      test("default", () => {
         expect(numberService.formatPercent(33)).toBe("33\xa0%");
         expect(numberService.formatPercent(33.3)).toBe("33,3\xa0%");
         expect(numberService.formatPercent(300)).toBe("300\xa0%");
@@ -195,7 +197,7 @@ describe("NumberServiceImpl", () => {
         expect(numberService.formatPercent(3333)).toBe("3333\xa0%");
         expect(numberService.formatPercent(3333.3)).toBe("3333,3\xa0%");
       });
-      it("integer", () => {
+      test("integer", () => {
         expect(
           numberService.formatPercent(33, { maximumFractionDigits: 0 })
         ).toBe("33\xa0%");
@@ -219,7 +221,7 @@ describe("NumberServiceImpl", () => {
         ).toBe("3333\xa0%");
       });
 
-      it("integer - thousand separator", () => {
+      test("integer - thousand separator", () => {
         expect(
           numberService.formatPercent(33, {
             maximumFractionDigits: 0,
@@ -263,7 +265,7 @@ describe("NumberServiceImpl", () => {
           })
         ).toBe("3.333\xa0%");
       });
-      it("float", () => {
+      test("float", () => {
         expect(
           numberService.formatPercent(33, { maximumFractionDigits: 1 })
         ).toBe("33\xa0%");
@@ -293,7 +295,7 @@ describe("NumberServiceImpl", () => {
         ).toBe("3333,30\xa0%");
       });
 
-      it("float - thousand separator", () => {
+      test("float - thousand separator", () => {
         expect(
           numberService.formatPercent(33, {
             maximumFractionDigits: 1,
@@ -347,7 +349,7 @@ describe("NumberServiceImpl", () => {
     });
 
     describe(".formatCurrency()", () => {
-      it("default", () => {
+      test("default", () => {
         expect(numberService.formatCurrency(0.333, "EUR")).toBe("0,333\xa0€");
         expect(numberService.formatCurrency(3, "EUR")).toBe("3\xa0€");
         expect(numberService.formatCurrency(3.33, "EUR")).toBe("3,33\xa0€");
@@ -365,7 +367,7 @@ describe("NumberServiceImpl", () => {
     });
 
     describe(".formatFileSize()", () => {
-      it("default", () => {
+      test("default", () => {
         expect(numberService.formatFileSize(334)).toBe("334 B");
         expect(numberService.formatFileSize(3843)).toBe("3,8 kB");
         expect(numberService.formatFileSize(28980)).toBe("29 kB");
@@ -375,7 +377,7 @@ describe("NumberServiceImpl", () => {
     });
 
     describe(".parseNumber()", () => {
-      it("default", () => {
+      test("default", () => {
         expect(numberService.parseNumber("0,333")).toBe(0.333);
         expect(numberService.parseNumber("3")).toBe(3);
         expect(numberService.parseNumber("3,33")).toBe(3.33);
@@ -389,7 +391,7 @@ describe("NumberServiceImpl", () => {
         expect(numberService.parseNumber("3.333.333,33")).toBe(3333333.33);
       });
 
-      it("percent", () => {
+      test("percent", () => {
         expect(numberService.parseNumber("33\xa0%")).toBe(33);
         expect(numberService.parseNumber("33,3\xa0%")).toBe(33.3);
         expect(numberService.parseNumber("333\xa0%")).toBe(333);
@@ -398,7 +400,7 @@ describe("NumberServiceImpl", () => {
         expect(numberService.parseNumber("3333,3\xa0%")).toBe(3333.3);
       });
 
-      it("currency", () => {
+      test("currency", () => {
         expect(numberService.parseNumber("0,333\xa0€")).toBe(0.333);
         expect(numberService.parseNumber("3\xa0€")).toBe(3);
         expect(numberService.parseNumber("3,33\xa0€")).toBe(3.33);
@@ -408,7 +410,7 @@ describe("NumberServiceImpl", () => {
         expect(numberService.parseNumber("3.333.333,33\xa0€")).toBe(3333333.33);
       });
 
-      it("file size (without converting to bytes)", () => {
+      test("file size (without converting to bytes)", () => {
         expect(numberService.parseNumber("334 B")).toBe(334);
         expect(numberService.parseNumber("3,8 kB")).toBe(3.8);
         expect(numberService.parseNumber("29 kB")).toBe(29);
@@ -422,7 +424,7 @@ describe("NumberServiceImpl", () => {
     });
 
     describe(".formatNumber()", () => {
-      it("default", () => {
+      test("default", () => {
         expect(numberService.formatNumber(0.333)).toBe("0.333");
         expect(numberService.formatNumber(3)).toBe("3");
         expect(numberService.formatNumber(3.33)).toBe("3.33");
@@ -431,7 +433,7 @@ describe("NumberServiceImpl", () => {
         expect(numberService.formatNumber(3333333)).toBe("3333333");
         expect(numberService.formatNumber(3333333.33)).toBe("3333333.33");
       });
-      it("integer", () => {
+      test("integer", () => {
         expect(
           numberService.formatNumber(0.333, { maximumFractionDigits: 0 })
         ).toBe("0");
@@ -454,7 +456,7 @@ describe("NumberServiceImpl", () => {
           numberService.formatNumber(3333333.33, { maximumFractionDigits: 0 })
         ).toBe("3333333");
       });
-      it("integer - thousand separator", () => {
+      test("integer - thousand separator", () => {
         expect(
           numberService.formatNumber(0.333, {
             maximumFractionDigits: 0,
@@ -498,7 +500,7 @@ describe("NumberServiceImpl", () => {
           })
         ).toBe("3,333,333");
       });
-      it("float", () => {
+      test("float", () => {
         expect(
           numberService.formatNumber(0.333, { maximumFractionDigits: 2 })
         ).toBe("0.33");
@@ -538,7 +540,7 @@ describe("NumberServiceImpl", () => {
         ).toBe("3333.330");
       });
 
-      it("float - thousand separator", () => {
+      test("float - thousand separator", () => {
         expect(
           numberService.formatNumber(0.333, {
             maximumFractionDigits: 2,
@@ -598,7 +600,7 @@ describe("NumberServiceImpl", () => {
     });
 
     describe(".formatPercent()", () => {
-      it("default", () => {
+      test("default", () => {
         expect(numberService.formatPercent(33)).toBe("33%");
         expect(numberService.formatPercent(33.3)).toBe("33.3%");
         expect(numberService.formatPercent(300)).toBe("300%");
@@ -607,7 +609,7 @@ describe("NumberServiceImpl", () => {
         expect(numberService.formatPercent(3333)).toBe("3333%");
         expect(numberService.formatPercent(3333.3)).toBe("3333.3%");
       });
-      it("integer", () => {
+      test("integer", () => {
         expect(
           numberService.formatPercent(33, { maximumFractionDigits: 0 })
         ).toBe("33%");
@@ -631,7 +633,7 @@ describe("NumberServiceImpl", () => {
         ).toBe("3333%");
       });
 
-      it("integer - thousand separator", () => {
+      test("integer - thousand separator", () => {
         expect(
           numberService.formatPercent(33, {
             maximumFractionDigits: 0,
@@ -675,7 +677,7 @@ describe("NumberServiceImpl", () => {
           })
         ).toBe("3,333%");
       });
-      it("float", () => {
+      test("float", () => {
         expect(
           numberService.formatPercent(33, { maximumFractionDigits: 1 })
         ).toBe("33%");
@@ -705,7 +707,7 @@ describe("NumberServiceImpl", () => {
         ).toBe("3333.30%");
       });
 
-      it("float - thousand separator", () => {
+      test("float - thousand separator", () => {
         expect(
           numberService.formatPercent(33, {
             maximumFractionDigits: 1,
@@ -759,7 +761,7 @@ describe("NumberServiceImpl", () => {
     });
 
     describe(".formatCurrency()", () => {
-      it("default", () => {
+      test("default", () => {
         expect(numberService.formatCurrency(0.333, "EUR")).toBe("€0.333");
         expect(numberService.formatCurrency(3, "EUR")).toBe("€3");
         expect(numberService.formatCurrency(3.33, "EUR")).toBe("€3.33");
@@ -773,7 +775,7 @@ describe("NumberServiceImpl", () => {
     });
 
     describe(".formatFileSize()", () => {
-      it("default", () => {
+      test("default", () => {
         expect(numberService.formatFileSize(334)).toBe("334 B");
         expect(numberService.formatFileSize(3843)).toBe("3.8 kB");
         expect(numberService.formatFileSize(28980)).toBe("29 kB");
@@ -783,7 +785,7 @@ describe("NumberServiceImpl", () => {
     });
 
     describe(".parseNumber()", () => {
-      it("default", () => {
+      test("default", () => {
         expect(numberService.parseNumber("0.333")).toBe(0.333);
         expect(numberService.parseNumber("-0.333")).toBe(-0.333);
         expect(numberService.parseNumber("3")).toBe(3);
@@ -808,7 +810,7 @@ describe("NumberServiceImpl", () => {
         expect(numberService.parseNumber("-3,333,333.33")).toBe(-3333333.33);
       });
 
-      it("percent", () => {
+      test("percent", () => {
         expect(numberService.parseNumber("33%")).toBe(33);
         expect(numberService.parseNumber("-33%")).toBe(-33);
         expect(numberService.parseNumber("33.3%")).toBe(33.3);
@@ -823,7 +825,7 @@ describe("NumberServiceImpl", () => {
         expect(numberService.parseNumber("-3333.3%")).toBe(-3333.3);
       });
 
-      it("currency", () => {
+      test("currency", () => {
         expect(numberService.parseNumber("€0.333")).toBe(0.333);
         expect(numberService.parseNumber("€-0.333")).toBe(-0.333);
         expect(numberService.parseNumber("€3")).toBe(3);
@@ -840,7 +842,7 @@ describe("NumberServiceImpl", () => {
         expect(numberService.parseNumber("€-3,333,333.33")).toBe(-3333333.33);
       });
 
-      it("file size (without converting to bytes)", () => {
+      test("file size (without converting to bytes)", () => {
         expect(numberService.parseNumber("334 B")).toBe(334);
         expect(numberService.parseNumber("-334 B")).toBe(-334);
         expect(numberService.parseNumber("3.8 kB")).toBe(3.8);

@@ -1,3 +1,5 @@
+import { describe, expect, test } from "vitest";
+
 import {
   computed,
   makeObservable,
@@ -8,7 +10,7 @@ import {
 } from "../../src";
 
 describe("decorator", () => {
-  it("simple property", async () => {
+  test("simple property", async () => {
     class Store {
       @observable
       stringProperty: string = "";
@@ -46,7 +48,7 @@ describe("decorator", () => {
     expect(store.stringProperty).toBe("hello world");
   });
 
-  it("array property", async () => {
+  test("array property", async () => {
     class Store {
       @observable.shallow
       arrayProperty: Array<{ id: number }> = [];
@@ -73,7 +75,7 @@ describe("decorator", () => {
     expect(store.arrayProperty).toEqual([{ id: 1 }]);
   });
 
-  it("objectProperty property", async () => {
+  test("objectProperty property", async () => {
     class Store {
       @observable
       objectProperty: { id: number } = { id: 0 };
