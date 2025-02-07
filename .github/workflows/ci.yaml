@@ -5,7 +5,7 @@ on:
     branches:
       - main
   pull_request:
-    types: [assigned, opened, synchronize, reopened]
+    types: [ assigned, opened, synchronize, reopened ]
 
 jobs:
   test:
@@ -13,8 +13,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        react: ["^18.x", "^19.x"]
-        script: ["build", "typecheck", "test"]
+        react: [ "^18.x", "^19.x" ]
+        script: [ "build", "typecheck", "test" ]
     name: "React@${{ matrix.react }}: ${{ matrix.script }}"
     steps:
       - name: Checkout repo
@@ -27,6 +27,8 @@ jobs:
       - name: Install packages
         run: yarn --immutable
       - name: Setup react
-        run: yarn up react@${{ matrix.react }} react-dom@${{ matrix.react }} @types/react@${{ matrix.react }} @types/react-dom@${{ matrix.react }}
+        run: |
+          yarn up react@${{ matrix.react }} react-dom@${{ matrix.react }} @types/react@${{ matrix.react }} @types/react-dom@${{ matrix.react }}
+          yarn info --all --name-only react react-dom @types/react @types/react-dom
       - name: Run script
         run: yarn ${{ matrix.script }}
