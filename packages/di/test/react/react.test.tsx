@@ -1,5 +1,9 @@
+/**
+ * @vitest-environment happy-dom
+ */
+
+import { render } from "@testing-library/react";
 import { Component, FC } from "react";
-import renderer from "react-test-renderer";
 import { describe, expect, test } from "vitest";
 
 import { Container, ContainerProvider, inject, useInjection } from "../../src";
@@ -22,15 +26,13 @@ describe("react", () => {
       const container = new Container();
       container.bindConstant<string>(testKey, testValue);
 
-      const tree = renderer
-        .create(
-          <ContainerProvider container={container}>
-            <TestComponent />
-          </ContainerProvider>
-        )
-        .toJSON();
+      const { asFragment } = render(
+        <ContainerProvider container={container}>
+          <TestComponent />
+        </ContainerProvider>
+      );
 
-      expect(tree).toBe(testValue);
+      expect(asFragment().textContent).toBe(testValue);
     });
   });
 
@@ -46,15 +48,13 @@ describe("react", () => {
       const container = new Container();
       container.bindConstant<string>(testKey, testValue);
 
-      const tree = renderer
-        .create(
-          <ContainerProvider container={container}>
-            <TestComponent />
-          </ContainerProvider>
-        )
-        .toJSON();
+      const { asFragment } = render(
+        <ContainerProvider container={container}>
+          <TestComponent />
+        </ContainerProvider>
+      );
 
-      expect(tree).toBe(testValue);
+      expect(asFragment().textContent).toBe(testValue);
     });
   });
 });

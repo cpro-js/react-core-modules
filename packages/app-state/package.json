@@ -25,8 +25,13 @@
     "src"
   ],
   "peerDependencies": {
-    "@types/react": "^17.0.0 || ^18.0.0 || ^19.0.0",
-    "react": "^17.0.0 || ^18.0.0 || ^19.0.0"
+    "@types/react": "^18.0.0 || ^19.0.0",
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
   },
   "dependencies": {
     "mobx": "^6.13.6",
@@ -36,13 +41,9 @@
   "devDependencies": {
     "@cpro-js/tooling": "*",
     "@types/node": "^20.17.16",
-    "@types/react": "^18.0.10",
-    "@types/react-test-renderer": "^18.0.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-test-renderer": "^18.1.0",
+    "@types/react": "^19.0.8",
+    "react": "^19.0.0",
     "reflect-metadata": "^0.2.2",
-    "rimraf": "^3.0.2",
     "typescript": "^5.7.3",
     "vite": "^6.0.11",
     "vitest": "^3.0.5"
