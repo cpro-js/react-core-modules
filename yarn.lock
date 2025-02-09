@@ -546,11 +546,11 @@ __metadata:
     "@cpro-js/react-app-state": "npm:0.3.0"
     "@cpro-js/react-di": "npm:0.3.0"
     "@cpro-js/tooling": "npm:*"
+    "@date-fns/tz": "npm:^1.2.0"
     "@types/node": "npm:^20.17.16"
     "@types/react": "npm:^19.0.8"
-    date-fns: "npm:2.16.1"
-    date-fns-tz: "npm:^1.1.6"
-    duration-relativetimeformat: "npm:2.0.4"
+    date-fns: "npm:^4.1.0"
+    duration-relativetimeformat: "npm:^2.0.4"
     i18next: "npm:^21.8.8"
     i18next-browser-languagedetector: "npm:^6.1.4"
     intl-format-cache: "npm:^4.3.1"
@@ -610,6 +610,13 @@ __metadata:
     vitest: "npm:^3.0.5"
   languageName: unknown
   linkType: soft
+
+"@date-fns/tz@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@date-fns/tz@npm:1.2.0"
+  checksum: 10c0/411e9d4303b10951f6fd0189d18fb845f0d934a575df2176bc10daf664282c765fb6b057a977e446bbb1229151d89e7788978600a019f1fc24b5c75276d496bd
+  languageName: node
+  linkType: hard
 
 "@esbuild/aix-ppc64@npm:0.24.2":
   version: 0.24.2
@@ -2672,19 +2679,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns-tz@npm:^1.1.6":
-  version: 1.1.6
-  resolution: "date-fns-tz@npm:1.1.6"
-  peerDependencies:
-    date-fns: ">=2.0.0-alpha.13"
-  checksum: 10c0/8e1f9ed0f1a97d61a49548c42ad54e554236d51d386e5454923b90b51ccfa228bcf7618002682fc0ec40ffc82e66ae97837261b1688f00f31de31201d71ee859
-  languageName: node
-  linkType: hard
-
-"date-fns@npm:2.16.1":
-  version: 2.16.1
-  resolution: "date-fns@npm:2.16.1"
-  checksum: 10c0/6c07ca1b7354e6f1ccea7832a3d0c66ea5fc9c03350307b84779b72094c399816e54a5b3758f1f2383cc27087d787a642fc3b4ed5fc8515225d64d21e4c81f87
+"date-fns@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "date-fns@npm:4.1.0"
+  checksum: 10c0/b79ff32830e6b7faa009590af6ae0fb8c3fd9ffad46d930548fbb5acf473773b4712ae887e156ba91a7b3dc30591ce0f517d69fd83bd9c38650fdc03b4e0bac8
   languageName: node
   linkType: hard
 
@@ -2799,7 +2797,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"duration-relativetimeformat@npm:2.0.4":
+"duration-relativetimeformat@npm:^2.0.4":
   version: 2.0.4
   resolution: "duration-relativetimeformat@npm:2.0.4"
   checksum: 10c0/ca57b0b88c312c1fa77d8758e8fb56940539794d8817e26d2e67b6dbc116504e7c56be1e71e4190e0ca2007bdcba2a80239dbf8d268c773227ec935637a65bbb
