@@ -1,6 +1,6 @@
 {
   "name": "@cpro-js/react-i18n",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "publishConfig": {
     "access": "public"
   },
@@ -25,8 +25,8 @@
     "src"
   ],
   "peerDependencies": {
-    "@cpro-js/react-app-state": "*",
-    "@cpro-js/react-di": "*",
+    "@cpro-js/react-app-state": "0.4.0",
+    "@cpro-js/react-di": "0.4.0",
     "@types/react": "^18.0.0 || ^19.0.0",
     "react": "^18.0.0 || ^19.0.0"
   },
@@ -45,8 +45,8 @@
     "pretty-bytes": "^6.1.1"
   },
   "devDependencies": {
-    "@cpro-js/react-app-state": "0.3.0",
-    "@cpro-js/react-di": "0.3.0",
+    "@cpro-js/react-app-state": "0.4.0",
+    "@cpro-js/react-di": "0.4.0",
     "@cpro-js/tooling": "*",
     "@types/node": "^20.17.16",
     "@types/react": "^19.0.8",

@@ -1,9 +1,51 @@
-# Change Log
+# Changelog
+
+## [0.4.0](https://github.com/cpro-js/react-core-modules/compare/@cpro-js/react-i18n-v0.3.0...@cpro-js/react-i18n-v0.4.0) (2025-02-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop support for React v17
+* package uses vite as build system
+* package is now pure ESM (it cannot be require()'d from CommonJS)
+
+### Features
+
+* support React v19 ([bda0e41](https://github.com/cpro-js/react-core-modules/commit/bda0e411babba731f53789a1801b638bf31fd139))
+
+
+### Bug Fixes
+
+* fixes require is not defined in ES module scope ([#25](https://github.com/cpro-js/react-core-modules/issues/25)) ([be4a41f](https://github.com/cpro-js/react-core-modules/commit/be4a41fb7f9e0aafd6caa04a85837b28d2e4493a))
+
+
+### Miscellaneous Chores
+
+* drop support for React v17 ([bda0e41](https://github.com/cpro-js/react-core-modules/commit/bda0e411babba731f53789a1801b638bf31fd139))
+* package uses vite as build system ([1fe44fa](https://github.com/cpro-js/react-core-modules/commit/1fe44faeb9bdbd2edd359d873c4a6cdbcc0c0103))
+
+
+### Code Refactoring
+
+* package is now pure ESM (it cannot be require()'d from CommonJS) ([1fe44fa](https://github.com/cpro-js/react-core-modules/commit/1fe44faeb9bdbd2edd359d873c4a6cdbcc0c0103))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @cpro-js/react-app-state bumped from 0.3.0 to 0.4.0
+    * @cpro-js/react-di bumped from 0.3.0 to 0.4.0
+  * peerDependencies
+    * @cpro-js/react-app-state bumped from * to 0.4.0
+    * @cpro-js/react-di bumped from * to 0.4.0
+
+## Change Log
 
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [0.3.0](https://github.com/cpro-js/react-core-modules/compare/v0.2.0...v0.3.0) (2022-06-07)
+## [0.3.0](https://github.com/cpro-js/react-core-modules/compare/v0.2.0...v0.3.0) (2022-06-07)
 
 ### Bug Fixes
 
@@ -26,13 +68,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   I18nService interface changes regarding split into formattingLocale & translationLocale.
 - **react-i18n:** different pluralization rules; see https://www.i18next.com/misc/migration-guide
 
-# [0.2.0](https://github.com/cpro-js/react-core-modules/compare/v0.1.0...v0.2.0) (2022-06-02)
+## [0.2.0](https://github.com/cpro-js/react-core-modules/compare/v0.1.0...v0.2.0) (2022-06-02)
 
 ### Features
 
 - upgrade to react 18 ([#21](https://github.com/cpro-js/react-core-modules/issues/21)) ([b9a0088](https://github.com/cpro-js/react-core-modules/commit/b9a0088b6c7d5a55d125e7137c46654f03f305ab))
 
-# 0.1.0 (2021-09-10)
+## 0.1.0 (2021-09-10)
 
 ### Bug Fixes
 
