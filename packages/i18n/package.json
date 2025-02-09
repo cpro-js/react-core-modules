@@ -42,7 +42,7 @@
     "duration-relativetimeformat": "^2.0.4",
     "i18next": "^21.8.8",
     "i18next-browser-languagedetector": "^6.1.4",
-    "pretty-bytes": "^5.6.0"
+    "pretty-bytes": "^6.1.1"
   },
   "devDependencies": {
     "@cpro-js/react-app-state": "0.3.0",
