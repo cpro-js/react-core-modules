@@ -17,7 +17,7 @@
     "vitest": "^3.0.5"
   },
   "resolutions": {
-    "@storybook/react-vite@npm:8.5.3/@joshwooding/vite-plugin-react-docgen-typescript": "0.5.0"
+    "@storybook/react-vite@npm:8.6.0-alpha.4/@joshwooding/vite-plugin-react-docgen-typescript": "0.5.0"
   },
   "importSort": {
     ".js, .jsx, .ts, .tsx": {
