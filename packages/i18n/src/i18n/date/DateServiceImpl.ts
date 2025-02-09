@@ -1,8 +1,8 @@
 import { service } from "@cpro-js/react-di";
 import { TZDate, tz } from "@date-fns/tz";
+import { memoize } from "@formatjs/fast-memoize";
 import { lightFormat, parse } from "date-fns";
 import Duration from "duration-relativetimeformat";
-import memoizeFormatConstructor from "intl-format-cache";
 
 import {
   DateFormatOptions,
@@ -13,8 +13,18 @@ import {
   TimezoneOptions,
 } from "./DateService";
 
-const getDateTimeFormat = memoizeFormatConstructor(Intl.DateTimeFormat);
-const getRelativeTimeFormat = memoizeFormatConstructor(Duration);
+type IntlDateTimeFormatOptions = ConstructorParameters<
+  typeof Intl.DateTimeFormat
+>[1];
+const getDateTimeFormat = memoize(
+  (locale: string, options: IntlDateTimeFormatOptions) =>
+    new Intl.DateTimeFormat(locale, options)
+);
+
+type DurationOptions = ConstructorParameters<typeof Duration>[1];
+const getRelativeTimeFormat = memoize(
+  (locale: string, options: DurationOptions) => new Duration(locale, options)
+);
 
 @service()
 export class DateServiceImpl extends DateService {

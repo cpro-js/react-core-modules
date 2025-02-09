@@ -547,13 +547,13 @@ __metadata:
     "@cpro-js/react-di": "npm:0.3.0"
     "@cpro-js/tooling": "npm:*"
     "@date-fns/tz": "npm:^1.2.0"
+    "@formatjs/fast-memoize": "npm:^2.2.6"
     "@types/node": "npm:^20.17.16"
     "@types/react": "npm:^19.0.8"
     date-fns: "npm:^4.1.0"
     duration-relativetimeformat: "npm:^2.0.4"
     i18next: "npm:^21.8.8"
     i18next-browser-languagedetector: "npm:^6.1.4"
-    intl-format-cache: "npm:^4.3.1"
     pretty-bytes: "npm:^5.6.0"
     react: "npm:^19.0.0"
     reflect-metadata: "npm:^0.2.2"
@@ -790,6 +790,15 @@ __metadata:
   version: 0.24.2
   resolution: "@esbuild/win32-x64@npm:0.24.2"
   conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@formatjs/fast-memoize@npm:^2.2.6":
+  version: 2.2.6
+  resolution: "@formatjs/fast-memoize@npm:2.2.6"
+  dependencies:
+    tslib: "npm:2"
+  checksum: 10c0/dccdc21105af673e58ec7b04eb17cd6fde1fb1a7e7a446273ca43f7ab97c26d5c0fcc2b9e80d5b54bf9b80354f9e1e681273c0ed26633ec72f0adc2d116dfd7f
   languageName: node
   linkType: hard
 
@@ -3536,13 +3545,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"intl-format-cache@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "intl-format-cache@npm:4.3.1"
-  checksum: 10c0/791b285630fbc0b41fb8251fc8a3baf4bb0d1e9cd9bbe0a93f9166f15adcd969b6319f57893e325a3214ec0db5e596f398b0efc8bdfac8495022cf50d55aa23f
-  languageName: node
-  linkType: hard
-
 "inversify-react@npm:^1.2.0":
   version: 1.2.0
   resolution: "inversify-react@npm:1.2.0"
@@ -5307,7 +5309,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.1":
+"tslib@npm:2, tslib@npm:^2.0.1":
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: 10c0/9c4759110a19c53f992d9aae23aac5ced636e99887b51b9e61def52611732872ff7668757d4e4c61f19691e36f4da981cd9485e869b4a7408d689f6bf1f14e62
