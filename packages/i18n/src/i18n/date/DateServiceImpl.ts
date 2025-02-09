@@ -1,9 +1,8 @@
 import { service } from "@cpro-js/react-di";
+import { TZDate, tz } from "@date-fns/tz";
+import { memoize } from "@formatjs/fast-memoize";
 import { lightFormat, parse } from "date-fns";
-import getTimezoneOffset from "date-fns-tz/getTimezoneOffset/index.js"; // cjs module
-import utcToZonedTime from "date-fns-tz/utcToZonedTime/index.js"; // cjs module
 import Duration from "duration-relativetimeformat";
-import memoizeFormatConstructor from "intl-format-cache";
 
 import {
   DateFormatOptions,
@@ -14,8 +13,18 @@ import {
   TimezoneOptions,
 } from "./DateService";
 
-const getDateTimeFormat = memoizeFormatConstructor(Intl.DateTimeFormat);
-const getRelativeTimeFormat = memoizeFormatConstructor(Duration);
+type IntlDateTimeFormatOptions = ConstructorParameters<
+  typeof Intl.DateTimeFormat
+>[1];
+const getDateTimeFormat = memoize(
+  (locale: string, options: IntlDateTimeFormatOptions) =>
+    new Intl.DateTimeFormat(locale, options)
+);
+
+type DurationOptions = ConstructorParameters<typeof Duration>[1];
+const getRelativeTimeFormat = memoize(
+  (locale: string, options: DurationOptions) => new Duration(locale, options)
+);
 
 @service()
 export class DateServiceImpl extends DateService {
@@ -25,10 +34,7 @@ export class DateServiceImpl extends DateService {
     options: TimezoneOptions
   ): string {
     const formatStringFixed = DateServiceImpl.replaceBrackets(formatString);
-    const transformedDate = this.applyTimeZoneToLocalDate(
-      date,
-      options.timezone
-    );
+    const transformedDate = new TZDate(date, options.timezone);
 
     return lightFormat(transformedDate, formatStringFixed);
   }
@@ -37,27 +43,18 @@ export class DateServiceImpl extends DateService {
     date: Date,
     options: LocaleOptions & TimezoneOptions & DateFormatOptions
   ): string {
-    const transformedDate = this.applyTimeZoneToLocalDate(
-      date,
-      options.timezone
-    );
-
     return getDateTimeFormat(options.locale, {
       year: options.year,
       month: options.month,
       day: options.day,
-    }).format(transformedDate);
+      timeZone: options.timezone,
+    }).format(date);
   }
 
   formatDateTime(
     date: Date,
     options: LocaleOptions & TimezoneOptions & DateTimeFormatOptions
   ): string {
-    const transformedDate = this.applyTimeZoneToLocalDate(
-      date,
-      options.timezone
-    );
-
     return getDateTimeFormat(options.locale, {
       year: options.year,
       month: options.month,
@@ -65,23 +62,20 @@ export class DateServiceImpl extends DateService {
       hour: options.hour,
       minute: options.minute,
       second: options.second,
-    }).format(transformedDate);
+      timeZone: options.timezone,
+    }).format(date);
   }
 
   formatTime(
     date: Date,
     options: LocaleOptions & TimezoneOptions & TimeFormatOptions
   ): string {
-    const transformedDate = this.applyTimeZoneToLocalDate(
-      date,
-      options.timezone
-    );
-
     return getDateTimeFormat(options.locale, {
       hour: options.hour,
       minute: options.minute,
       second: options.second,
-    }).format(transformedDate);
+      timeZone: options.timezone,
+    }).format(date);
   }
 
   formatRelative(date: Date, options: LocaleOptions): string {
@@ -99,21 +93,12 @@ export class DateServiceImpl extends DateService {
     options: TimezoneOptions
   ): Date {
     const formatStringFixed = DateServiceImpl.replaceBrackets(formatString);
-    const parsedDateLocal = parse(dateString, formatStringFixed, new Date());
+    const parsedDateInTz = parse(dateString, formatStringFixed, new Date(), {
+      in: tz(options.timezone),
+    });
 
-    // date is in local time, positive offset means that local timezone is behind UTC and negative if it is ahead
-    const offset = parsedDateLocal.getTimezoneOffset() * 60 * 1000;
-    const normalizedUtcDate = new Date(parsedDateLocal.getTime() - offset);
-
-    return new Date(
-      normalizedUtcDate.getTime() -
-        getTimezoneOffset(options.timezone, normalizedUtcDate)
-    );
-  }
-
-  applyTimeZoneToLocalDate(date: Date, timezone: string) {
-    // shift locale javascript date to zoned time date
-    return utcToZonedTime(date, timezone);
+    // transform to system date
+    return new Date(parsedDateInTz);
   }
 
   private static replaceBrackets(formatString: string): string {

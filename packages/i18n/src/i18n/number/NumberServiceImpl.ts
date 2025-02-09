@@ -1,9 +1,15 @@
-import memoizeFormatConstructor from "intl-format-cache";
+import { memoize } from "@formatjs/fast-memoize";
 import prettyBytes from "pretty-bytes";
 
 import { NumberService } from "./NumberService";
 
-const getNumberFormat = memoizeFormatConstructor(Intl.NumberFormat);
+type IntlNumberFormatOptions = ConstructorParameters<
+  typeof Intl.NumberFormat
+>[1];
+const getNumberFormat = memoize(
+  (locale: string, options: IntlNumberFormatOptions) =>
+    new Intl.NumberFormat(locale, options)
+);
 
 const countDecimals = (value: number) => {
   if (Math.floor(value) !== value)
