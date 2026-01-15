@@ -185,6 +185,15 @@ describe("NumberServiceImpl", () => {
           })
         ).toBe("3.333,330");
       });
+
+      test("minumumFractionDigits regression test", () => {
+        expect(
+          numberService.formatNumber(1.2000000000000002, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 3,
+          })
+        ).toBe("1.2");
+      });
     });
 
     describe(".formatPercent()", () => {
