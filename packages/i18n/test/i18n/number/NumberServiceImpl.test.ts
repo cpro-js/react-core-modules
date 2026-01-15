@@ -192,7 +192,7 @@ describe("NumberServiceImpl", () => {
             minimumFractionDigits: 0,
             maximumFractionDigits: 3,
           })
-        ).toBe("1.2");
+        ).toBe("1,2");
       });
     });
 
