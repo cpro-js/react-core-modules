@@ -122,9 +122,9 @@ export class NumberServiceImpl extends NumberService {
     const minimumFractionDigits =
       options?.minimumFractionDigits ??
       (options?.maximumFractionDigits != null &&
-        fallbackMinimumDigits > options?.maximumFractionDigits)
+      fallbackMinimumDigits > options?.maximumFractionDigits
         ? options?.maximumFractionDigits
-        : fallbackMinimumDigits;
+        : fallbackMinimumDigits);
 
     return {
       ...options,
