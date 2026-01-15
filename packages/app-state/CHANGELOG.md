@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/cpro-js/react-core-modules/compare/@cpro-js/react-app-state-v0.4.0...@cpro-js/react-app-state-v0.4.1) (2026-01-15)
+
+
+### Miscellaneous Chores
+
+* **@cpro-js/react-app-state:** Synchronize Packages versions
+
 ## [0.4.0](https://github.com/cpro-js/react-core-modules/compare/@cpro-js/react-app-state-v0.3.0...@cpro-js/react-app-state-v0.4.0) (2025-02-09)
 
 

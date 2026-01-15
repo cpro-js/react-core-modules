@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.4.1](https://github.com/cpro-js/react-core-modules/compare/@cpro-js/react-core-v0.4.0...@cpro-js/react-core-v0.4.1) (2026-01-15)
+
+
+### Miscellaneous Chores
+
+* **@cpro-js/react-core:** Synchronize Packages versions
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @cpro-js/react-app-state bumped from 0.4.0 to 0.4.1
+    * @cpro-js/react-di bumped from 0.4.0 to 0.4.1
+    * @cpro-js/react-i18n bumped from 0.4.0 to 0.4.1
+
 ## [0.4.0](https://github.com/cpro-js/react-core-modules/compare/@cpro-js/react-core-v0.3.0...@cpro-js/react-core-v0.4.0) (2025-02-09)
 
 

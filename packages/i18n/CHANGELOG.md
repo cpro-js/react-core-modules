@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.4.1](https://github.com/cpro-js/react-core-modules/compare/@cpro-js/react-i18n-v0.4.0...@cpro-js/react-i18n-v0.4.1) (2026-01-15)
+
+
+### Bug Fixes
+
+* **i18n:** use provided value for minimumFractionDigits instead of calculated fallback ([#34](https://github.com/cpro-js/react-core-modules/issues/34)) ([d51a7b9](https://github.com/cpro-js/react-core-modules/commit/d51a7b9692a65d8fec37443ff6993d1d77ac18df))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @cpro-js/react-app-state bumped from 0.4.0 to 0.4.1
+    * @cpro-js/react-di bumped from 0.4.0 to 0.4.1
+  * peerDependencies
+    * @cpro-js/react-app-state bumped from 0.4.0 to 0.4.1
+    * @cpro-js/react-di bumped from 0.4.0 to 0.4.1
+
 ## [0.4.0](https://github.com/cpro-js/react-core-modules/compare/@cpro-js/react-i18n-v0.3.0...@cpro-js/react-i18n-v0.4.0) (2025-02-09)
 
 
